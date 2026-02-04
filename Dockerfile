@@ -44,4 +44,4 @@ ENV HOSTNAME="0.0.0.0"
 ENV PORT=3000
 
 # Use the correct path to server.js
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
