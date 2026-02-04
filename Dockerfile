@@ -22,7 +22,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Build the website
-RUN bun run --filter website build
+RUN bun run build
 
 # Run the app
 FROM node:alpine3.22 AS runner
