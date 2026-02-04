@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+:root {
+  --background: rgb(12, 10, 9);
+  --foreground: hsl(60 9.1% 97.8%);
+  --card: hsl(40, 8%, 7%);
+  --chart-card: hsl(40, 8%, 5.5%);
+  --card-foreground: hsl(60 9.1% 97.8%);
+  --popover: hsl(20 14.3% 4.1%);
+  --popover-foreground: hsl(60 9.1% 97.8%);
+  --primary: oklch(70% 0.28 285);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(12 6.5% 9.5%);
+  --secondary-foreground: hsl(60 9.1% 97.8%);
+  --muted: hsl(0 0% 20%);
+  --muted-foreground: hsl(24 5.4% 63.9%);
+  --accent: hsl(12 4% 16%);
+  --accent-foreground: hsl(60 9.1% 97.8%);
+  --accent-deep: hsl(20, 5%, 13%);
+  --accent-deep-foreground: hsl(60 9.1% 97.8%);
+  --accent-secondary: oklch(70% 0.3 285);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(60 9.1% 97.8%);
+  --border: hsl(12 6.5% 15.1%);
+  --input: hsl(12 6.5% 45.1%);
+  --ring: hsl(24 5.7% 82.9%);
+  
+  /* Border Radius Scale */
+  --radius: 0.5rem;
+  --radius-xs: 0.125rem; /* 2px */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-full: 9999px;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem; /* 4px - very tight spacing */
+  --spacing-sm: 0.5rem; /* 8px - tight spacing */
+  --spacing-md: 0.75rem; /* 12px - compact */
+  --spacing-lg: 1rem; /* 16px - standard */
+  --spacing-xl: 1.5rem; /* 24px - comfortable */
+  --spacing-2xl: 2rem; /* 32px - spacious */
+  --spacing-3xl: 3rem; /* 48px - very spacious */
+
+  /* Scrollbar Colors */
+  --scrollbar-track: hsl(12 6.5% 9.5%);
+  --scrollbar-thumb: hsl(12 6.5% 20%);
+  --scrollbar-thumb-hover: hsl(12 6.5% 25%);
+}
+
+@theme inline {
+  --breakpoint-*: initial;
+  --breakpoint-xxs: 320px;
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-background: var(--background);
+
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-chart-card: var(--chart-card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-deep-foreground: var(--accent-deep-foreground);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --animate-shiny-text: shiny-text 8s infinite;
+  --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
+  --animate-spin-slow: spin 2s linear infinite;
+  --animate-gradient: gradient 6s ease-in-out infinite;
+  --animate-gradient-slow: gradient-slow 8s ease-in-out infinite;
+}
+
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* Hide browser's default search input clear button */
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Custom Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+}
