@@ -31,9 +31,9 @@ WORKDIR /app
 RUN apk add --no-cache curl
 
 COPY --from=depends /app/node_modules ./node_modules
-
-# Copy the built filesf
 COPY --from=depends /app/public ./public
+COPY --from=depends /app/.next ./.next
+COPY --from=depends /app/package.json ./package.json
 
 # Verify the build output
 RUN ls -la
