@@ -23,7 +23,6 @@ export default function PlayerCapes({ player }: { player: Player }) {
         unoptimized
         className="object-cover rounded-lg"
       />
-      {vanillaCape.textureUrl}
     </Card>
   );
 }
