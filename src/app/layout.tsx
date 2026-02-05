@@ -34,7 +34,7 @@ export default function RootLayout({
             <Navbar />
             <Toaster />
             <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 px-2 pt-2">
-              <div className="m-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col pt-4">
+              <div className="m-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col">
                 {children}
               </div>
             </div>

@@ -16,9 +16,11 @@ export default function DetailRow({
       "rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-sm text-amber-600 dark:text-amber-400",
   };
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 py-1">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <span className={variantClasses[variant]}>{value}</span>
+    <div className="flex flex-col gap-1.5 py-1.5 xs:flex-row xs:flex-wrap xs:items-center xs:justify-between xs:gap-2">
+      <span className="shrink-0 text-sm text-muted-foreground">{label}</span>
+      <span className={`min-w-0 break-all ${variantClasses[variant]}`}>
+        {value}
+      </span>
     </div>
   );
 }

@@ -48,32 +48,30 @@ export default async function ServerPage({ params }: Props) {
   const javaServer = server as JavaServer;
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
-      <div className="flex w-full max-w-3xl flex-col gap-6">
-        {/* Server info (top) */}
-        <Card className="flex min-w-0 flex-1 flex-col gap-6 p-6 sm:p-8">
-          <ServerDetails server={server} edition={edition} />
+    <div className="flex flex-col md:flex-row gap-2 justify-center">
+      {/* Server info (top) */}
+      <Card className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[50%]">
+        <ServerDetails server={server} edition={edition} />
 
-          {/* DNS records (collapsible) */}
-          {server.records && server.records.length > 0 && (
-            <ServerDnsRecords records={server.records} />
-          )}
-        </Card>
-
-        {/* MOTD preview (below info, Java only) */}
-        {edition === "java" && javaServer.motd?.preview && (
-          <Card className="items-center overflow-hidden p-0">
-            <Image
-              src={javaServer.motd.preview}
-              alt={`${server.hostname} MOTD preview`}
-              width={768}
-              height={128}
-              unoptimized
-              className="object-contain p-4"
-            />
-          </Card>
+        {/* DNS records (collapsible) */}
+        {server.records && server.records.length > 0 && (
+          <ServerDnsRecords records={server.records} />
         )}
-      </div>
+      </Card>
+
+      {/* MOTD preview (below info, Java only) */}
+      {edition === "java" && javaServer.motd?.preview && (
+        <Card className="items-center overflow-hidden p-0 h-fit">
+          <Image
+            src={javaServer.motd.preview}
+            alt={`${server.hostname} MOTD preview`}
+            width={768}
+            height={128}
+            unoptimized
+            className="object-contain p-4"
+          />
+        </Card>
+      )}
     </div>
   );
 }
