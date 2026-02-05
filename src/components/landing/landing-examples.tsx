@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Card from "../ui/card";
+import SimpleLink from "../simple-link";
 
 const playerExamples = ["ImFascinated", "Notch", "jeb_", "Technoblade"];
 const serverExamples: { name: string; ip: string }[] = [
@@ -84,7 +85,7 @@ function LandingExample({
   href: string;
 }) {
   return (
-    <Link
+    <SimpleLink
       href={href}
       className="block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
     >
@@ -94,7 +95,7 @@ function LandingExample({
           {name}
         </p>
       </Card>
-    </Link>
+    </SimpleLink>
   );
 }
 
