@@ -1,11 +1,16 @@
 "use client";
 
 import { cn, isIpOrDomain } from "@/app/common/utils";
-import { Input } from "@/components/ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 import { useRouter } from "next/navigation";
 import { SubmitEvent, useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Check, Loader2, Search } from "lucide-react";
+import { Check, Loader2, Search, X } from "lucide-react";
 import ServerEditionDialog from "./server-edition-dialog";
 import { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { useIsMobile } from "../context/viewport-context";
@@ -97,36 +102,42 @@ export default function QuerySearch({
       onSubmit={handleSubmit}
       className="flex items-center flex-col gap-2 md:flex-row md:gap-0"
     >
-      <div className="relative flex w-full">
-        {loading ? (
-          <Loader2 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground animate-spin" />
-        ) : debouncedSearch.length <= 0 || invalidQuery ? (
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        ) : (
-          <Check className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-green-500" />
-        )}
-
-        <Input
-          className={cn(
-            landingPage ? "md:rounded-r-none" : "",
-            "pl-9 w-full",
-            invalidQuery
-              ? "border-destructive/50 focus-visible:ring-destructive/50 hover:border-destructive/50"
-              : "",
-            className,
-          )}
+      <InputGroup className={cn("w-full", className)}>
+        <InputGroupInput
           type="text"
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          aria-invalid={invalidQuery}
         />
-      </div>
+
+        <InputGroupAddon>
+          {loading ? (
+            <Loader2 className="size-4 animate-spin text-muted-foreground" />
+          ) : debouncedSearch.length <= 0 || invalidQuery ? (
+            <Search className="size-4 text-muted-foreground" />
+          ) : (
+            <Check className="size-4 text-green-500" />
+          )}
+        </InputGroupAddon>
+
+        <InputGroupAddon align="inline-end">
+          {search.length > 0 && (
+            <InputGroupButton
+              type="button"
+              size="icon-xs"
+              variant="ghost"
+              aria-label="Clear"
+              onClick={() => setSearch("")}
+            >
+              <X className="size-4" />
+            </InputGroupButton>
+          )}
+        </InputGroupAddon>
+      </InputGroup>
 
       {landingPage && (
-        <Button className="md:rounded-l-none">
-          <Search className="h-4 w-4 mr-2" />
-          Search
-        </Button>
+        <Button className="block md:hidden w-full">Search</Button>
       )}
 
       <ServerEditionDialog
