@@ -1,59 +1,61 @@
 "use client";
 
-import { cn } from "@/app/common/utils";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
-import { BsPerson, BsPersonFillExclamation } from "react-icons/bs";
 import SimpleLink from "../simple-link";
-import { ServerIcon } from "lucide-react";
+import QuerySearch from "../query-search";
+import { usePathname } from "next/navigation";
+import { cn } from "@/app/common/utils";
+import { PlaneIcon } from "lucide-react";
 
 const links: ReactElement<any>[] = [
-  <SimpleNavLink
-    key="server"
-    name="Server"
-    href="/server"
-    icon={<ServerIcon className="size-4" />}
-  />,
-  <SimpleNavLink
-    key="player"
-    name="Player"
-    href="/player"
-    icon={<BsPerson className="size-4" />}
+  <NavLink
+    key="capes"
+    name="Capes"
+    icon={<PlaneIcon className="size-5" />}
+    href="/capes"
   />,
 ];
 
 export default function Navbar() {
+  const path = usePathname();
+
   return (
-    <nav
-      className={cn(
-        "border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8",
-      )}
-    >
-      {/* Left */}
-      <div className="flex items-center gap-(--spacing-sm) md:gap-3">
-        {/* Branding */}
-        <SimpleLink
-          className="flex items-center gap-(--spacing-sm) hover:opacity-80 md:gap-2"
-          href="/"
-          draggable={false}
-        >
-          <h1 className="text-primary hidden text-base font-bold md:flex md:text-lg">
-            MC Utils
-          </h1>
-        </SimpleLink>
+    <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8 ">
+      <div className="w-5xl flex justify-between">
+        <div className="flex items-center gap-(--spacing-md) md:gap-6">
+          {/* Branding */}
+          <SimpleLink
+            className="flex items-center gap-(--spacing-sm) hover:opacity-80 md:gap-2.5"
+            href="/"
+            draggable={false}
+          >
+            <Image
+              width={24}
+              height={24}
+              className="size-5 md:size-6"
+              src="/logo.png"
+              alt="MC Utils Logo"
+            />
+
+            <h1 className="text-primary hidden text-base font-bold md:flex md:text-lg">
+              MC Utils
+            </h1>
+          </SimpleLink>
+
+          {path !== "/" && <QuerySearch />}
+        </div>
 
         {/* Links */}
         <div className="flex items-center gap-0.5 md:gap-1">
           {links.map((link) => link)}
         </div>
       </div>
-      <div></div>
     </nav>
   );
 }
 
-function SimpleNavLink({
+function NavLink({
   name,
   icon,
   href,

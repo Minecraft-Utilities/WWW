@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 body {
   color: var(--foreground);
@@ -29,7 +30,7 @@ body {
   --border: hsl(12 6.5% 15.1%);
   --input: hsl(12 6.5% 45.1%);
   --ring: hsl(24 5.7% 82.9%);
-  
+
   /* Border Radius Scale */
   --radius: 0.5rem;
   --radius-xs: 0.125rem; /* 2px */
@@ -102,7 +103,6 @@ body {
   --animate-gradient: gradient 6s ease-in-out infinite;
   --animate-gradient-slow: gradient-slow 8s ease-in-out infinite;
 }
-
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,

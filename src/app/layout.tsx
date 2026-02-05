@@ -4,6 +4,7 @@ import { QueryProvider } from "../providers/query-provider";
 import Navbar from "../components/navbar/navbar";
 import localFont from "next/font/local";
 import Background from "@/components/background";
+import { ViewportProvider } from "@/components/context/viewport-context";
 
 const siteFont = localFont({
   src: "./fonts/JetBrainsMono.ttf",
@@ -12,7 +13,8 @@ const siteFont = localFont({
 
 export const metadata: Metadata = {
   title: "MC Utils",
-  description: "API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and previews."
+  description:
+    "API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and previews.",
 };
 
 export default function RootLayout({
@@ -23,17 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <QueryProvider>
-        <body
-          className={`${siteFont.className} h-full w-full antialiased`}
-        >
-          <Background />
-          <Navbar />
-          <div className="z-1 flex w-full grow flex-col gap-2 px-2 pt-2">
-            <div className="m-auto max-w-[1600px]">
-              {children}
+        <ViewportProvider>
+          <body className={`${siteFont.className} h-full w-full antialiased`}>
+            <Background />
+            <Navbar />
+            <div className="z-1 flex w-full grow flex-col gap-2 px-2 pt-2">
+              <div className="m-auto max-w-[1600px] mt-12">{children}</div>
             </div>
-          </div>
-        </body>
+          </body>
+        </ViewportProvider>
       </QueryProvider>
     </html>
   );
