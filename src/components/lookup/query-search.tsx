@@ -4,7 +4,8 @@ import { cn, isIpOrDomain } from "@/app/common/utils";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { Search } from "lucide-react";
 
 export default function QuerySearch({
   landingPage,
@@ -36,15 +37,27 @@ export default function QuerySearch({
 
   return (
     <form onSubmit={handleRedirect} className="flex flex-row items-center">
-      <Input
-        className={cn(landingPage ? "rounded-r-none" : "", "w-64", className)}
-        type="text"
-        placeholder="Server or player search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="relative flex-1">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          className={cn(
+            landingPage ? "rounded-r-none" : "",
+            "w-68 pl-9",
+            className,
+          )}
+          type="text"
+          placeholder="Player / Server Lookup..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-      {landingPage && <Button className="rounded-l-none">Search</Button>}
+      {landingPage && (
+        <Button className="rounded-l-none">
+          <Search className="h-4 w-4 mr-2" />
+          Search
+        </Button>
+      )}
     </form>
   );
 }

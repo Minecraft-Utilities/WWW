@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ReactElement } from "react";
 import SimpleLink from "../simple-link";
-import QuerySearch from "../query-search";
+import QuerySearch from "../lookup/query-search";
 import { usePathname } from "next/navigation";
 import { cn } from "@/app/common/utils";
 import { PlaneIcon } from "lucide-react";
