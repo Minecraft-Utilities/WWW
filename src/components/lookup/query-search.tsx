@@ -36,13 +36,16 @@ export default function QuerySearch({
   }
 
   return (
-    <form onSubmit={handleRedirect} className="flex flex-row items-center">
-      <div className="relative flex-1">
+    <form
+      onSubmit={handleRedirect}
+      className="flex items-center flex-col gap-2 md:flex-row md:gap-0"
+    >
+      <div className="relative flex w-full">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           className={cn(
-            landingPage ? "rounded-r-none" : "",
-            "w-68 pl-9",
+            landingPage ? "md:rounded-r-none" : "",
+            "pl-9 w-full",
             className,
           )}
           type="text"
@@ -53,7 +56,7 @@ export default function QuerySearch({
       </div>
 
       {landingPage && (
-        <Button className="rounded-l-none">
+        <Button className="md:rounded-l-none">
           <Search className="h-4 w-4 mr-2" />
           Search
         </Button>

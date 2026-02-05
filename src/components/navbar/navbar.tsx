@@ -33,21 +33,21 @@ export default function Navbar() {
             <Image
               width={24}
               height={24}
-              className="size-5 md:size-6"
+              className="size-6"
               src="/logo.png"
               alt="MC Utils Logo"
             />
 
-            <h1 className="text-primary hidden text-base font-bold md:flex md:text-lg">
+            <h1 className="text-primary hidden text-base font-bold sm:flex sm:text-lg">
               MC Utils
             </h1>
           </SimpleLink>
 
-          {path !== "/" && <QuerySearch />}
+          {path !== "/" && <QuerySearch className="w-68" />}
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-0.5 md:gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1">
           {links.map((link) => link)}
         </div>
       </div>
@@ -85,7 +85,7 @@ function NavLink({
       draggable={false}
     >
       {icon}
-      <span className="hidden 2xl:flex">{name}</span>
+      <span className="hidden sm:flex">{name}</span>
 
       {/* Active indicator */}
       {isActive && (

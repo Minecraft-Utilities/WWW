@@ -30,7 +30,9 @@ export default function RootLayout({
             <Background />
             <Navbar />
             <div className="z-1 flex w-full grow flex-col gap-2 px-2 pt-2">
-              <div className="m-auto max-w-[1600px] mt-12">{children}</div>
+              <div className="m-auto w-full max-w-[1600px] mt-12">
+                {children}
+              </div>
             </div>
           </body>
         </ViewportProvider>

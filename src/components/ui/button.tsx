@@ -4,28 +4,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-(--radius-md) text-sm font-medium transition-colors duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-(--radius-xl) text-sm font-medium transition-colors duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
           "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-sm",
         default:
-          "border border-primary bg-background/95 relative before:absolute before:inset-0 before:bg-primary/10 before:rounded-(--radius-md) text-primary hover:before:bg-primary/20 hover:shadow-sm",
+          "border border-primary bg-background/95 relative before:absolute before:inset-0 before:bg-primary/10 before:rounded-(--radius-xl) text-primary hover:before:bg-primary/20 hover:shadow-sm",
         destructive:
           "bg-destructive/10 border border-destructive/50 text-destructive hover:bg-destructive/20 hover:border-destructive hover:shadow-sm",
         outline:
           "border border-border bg-background/95 text-foreground hover:text-accent-foreground hover:border-primary/50 hover:shadow-xs",
         secondary:
-          "border border-border bg-background/95 relative before:absolute before:inset-0 before:bg-secondary/10 before:rounded-(--radius-md) text-secondary-foreground hover:before:bg-secondary/20 hover:border-primary/50 hover:shadow-xs",
+          "border border-border bg-background/95 relative before:absolute before:inset-0 before:bg-secondary/10 before:rounded-(--radius-xl) text-secondary-foreground hover:before:bg-secondary/20 hover:border-primary/50 hover:shadow-xs",
         ghost:
           "border border-border bg-background/95 text-foreground hover:text-accent-foreground hover:border-primary/50",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-9 px-(--spacing-xl) py-(--spacing-sm)",
-        sm: "h-8 rounded-(--radius-md) px-(--spacing-lg) text-xs",
-        lg: "h-10 rounded-(--radius-md) px-(--spacing-3xl)",
+        sm: "h-8 rounded-(--radius-xl) px-(--spacing-lg) text-xs",
+        lg: "h-10 rounded-(--radius-xl) px-(--spacing-3xl)",
         icon: "h-9 w-9",
       },
     },
