@@ -40,9 +40,9 @@ export default function Navbar() {
             draggable={false}
           >
             <Image
-              width={24}
-              height={24}
-              className="size-6"
+              width={28}
+              height={28}
+              className="size-7"
               src="/logo.png"
               alt="MC Utils Logo"
             />
