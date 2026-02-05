@@ -65,15 +65,10 @@ export function ViewportProvider({ children }: { children: ReactNode }) {
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+// Always use a fixed initial value so server and first client render match (avoids hydration errors).
+// Real dimensions are set in useLayoutEffect after mount.
 function getInitialViewport(): ViewportContextType {
-  if (typeof window === "undefined") {
-    return { width: 0, height: 0 };
-  }
-  const { innerWidth, innerHeight } = window;
-  return {
-    width: innerWidth,
-    height: innerHeight,
-  };
+  return { width: 0, height: 0 };
 }
 
 function getWindowDimensions() {

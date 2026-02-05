@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/app/common/utils";
 import { FlameIcon, PlaneIcon, ServerIcon } from "lucide-react";
 import { ComputerDesktopIcon } from "@heroicons/react/16/solid";
+import { useIsMobile } from "../context/viewport-context";
 
 const links: ReactElement<any>[] = [
   <NavLink
@@ -26,6 +27,7 @@ const links: ReactElement<any>[] = [
 
 export default function Navbar() {
   const path = usePathname();
+  const isMobile = useIsMobile();
 
   return (
     <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8 ">
@@ -56,7 +58,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {path !== "/" && <QuerySearch className="w-75" />}
+        {path !== "/" && (
+          <QuerySearch className={cn(isMobile ? "w-56" : "w-75")} />
+        )}
       </div>
     </nav>
   );

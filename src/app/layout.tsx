@@ -23,14 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <QueryProvider>
         <ViewportProvider>
-          <body className={`${siteFont.className} h-full w-full antialiased`}>
+          <body
+            className={`${siteFont.className} flex h-full w-full flex-col antialiased`}
+          >
             <Background />
             <Navbar />
-            <div className="z-1 flex w-full grow flex-col gap-2 px-2 pt-2">
-              <div className="m-auto w-full max-w-[1600px] mt-12">
+            <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 px-2 pt-2">
+              <div className="m-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col pt-4">
                 {children}
               </div>
             </div>

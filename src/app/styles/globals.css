@@ -25,7 +25,7 @@ body {
   --accent-deep: hsl(20, 5%, 13%);
   --accent-deep-foreground: hsl(60 9.1% 97.8%);
   --accent-secondary: oklch(70% 0.3 285);
-  --destructive: hsl(0 62.8% 30.6%);
+  --destructive: hsl(0, 63%, 47%);
   --destructive-foreground: hsl(60 9.1% 97.8%);
   --border: hsl(12 6.5% 15.1%);
   --input: hsl(12 6.5% 45.1%);

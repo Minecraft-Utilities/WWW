@@ -12,7 +12,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "lucide-react": "^0.563.0",
-        "mcutils-js-api": "^2.0.16",
+        "mcutils-js-api": "^2.0.17",
         "next": "^16.1.6",
         "prettier-plugin-organize-imports": "^4.3.0",
         "prettier-plugin-tailwindcss": "^0.7.2",
@@ -26,7 +26,7 @@
       "devDependencies": {
         "@tailwindcss/postcss": "^4.1.18",
         "@types/node": "^25.2.0",
-        "@types/react": "^19.2.11",
+        "@types/react": "^19.2.13",
         "@types/react-dom": "^19.2.3",
         "eslint": "^9.39.2",
         "eslint-config-next": "16.1.6",
