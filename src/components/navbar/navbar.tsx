@@ -58,9 +58,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {path !== "/" && (
-          <QuerySearch className={cn(isMobile ? "w-56" : "w-75")} />
-        )}
+        {path !== "/" && <QuerySearch className={"w-56 md:w-75"} />}
       </div>
     </nav>
   );

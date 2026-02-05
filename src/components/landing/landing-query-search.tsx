@@ -17,7 +17,7 @@ export default function LandingQuerySearch() {
           <p className="text-destructive">Player not found or invalid query</p>
         ) : (
           <p className="text-muted-foreground">
-            Enter a Username / UUID / IP / Domain to get started.
+            Enter a Username / UUID / Domain to get started.
           </p>
         )}
       </Card>
