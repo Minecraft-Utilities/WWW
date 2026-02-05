@@ -12,12 +12,12 @@ export default async function CapsPage() {
   }
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-wrap gap-4">
+    <div className="flex justify-center px-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {capes.map((cape) => (
-          <div>
-            <Card className="rounded-b-none bg-secondary/70 py-2 items-center">
-              <p className="text-md text-muted-foreground">{cape.name}</p>
+          <div key={cape.textureId}>
+            <Card className="rounded-b-none border-b-0 bg-secondary/70 py-2 items-center">
+              <p className="text-sm text-muted-foreground">{cape.name}</p>
             </Card>
             <Card className="rounded-t-none bg-secondary/90 text-sm items-center">
               <Image

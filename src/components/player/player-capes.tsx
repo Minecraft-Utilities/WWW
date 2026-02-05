@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export default function PlayerCapes({ player }: { player: Player }) {
   const hasCape = player.cape !== undefined;
+  const vanillaCape = player.cape!;
 
   if (!hasCape) {
     return null;
@@ -15,13 +16,14 @@ export default function PlayerCapes({ player }: { player: Player }) {
         Cape
       </p>
       <Image
-        src={player.cape!.parts.FRONT}
+        src={vanillaCape.parts.FRONT}
         alt={`${player.username} cape`}
         width={48}
         height={48}
         unoptimized
         className="object-cover rounded-lg"
       />
+      {vanillaCape.textureUrl}
     </Card>
   );
 }
