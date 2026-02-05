@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { isNumberObject } from "util/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -56,4 +57,17 @@ export function isIpOrDomain(query: string): boolean {
   }
 
   return false;
+}
+
+/**
+ * Formats a number with commas.
+ *
+ * @param number the number to format
+ * @returns the formatted number
+ */
+export function formatNumberWithCommas(number: number | string): string {
+  if (typeof number === "number") {
+    return number.toLocaleString();
+  }
+  return Number(number).toLocaleString();
 }

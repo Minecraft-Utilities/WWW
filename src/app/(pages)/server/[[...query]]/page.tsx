@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
+import { formatNumberWithCommas } from "@/app/common/utils";
 
 type Props = {
   params: Promise<{
@@ -111,7 +112,8 @@ export default async function ServerPage({ params }: Props) {
                 Players
               </p>
               <p className="text-sm text-foreground">
-                {server.players.online} / {server.players.max} online
+                {formatNumberWithCommas(server.players.online)} /{" "}
+                {formatNumberWithCommas(server.players.max)} online
               </p>
             </div>
 
