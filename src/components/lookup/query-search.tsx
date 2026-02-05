@@ -97,6 +97,11 @@ export default function QuerySearch({
     setServerDialogOpen(false);
   }
 
+  const showSearchIcon =
+    debouncedSearch.length <= 0 ||
+    invalidQuery ||
+    isIpOrDomain(debouncedSearch);
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -114,7 +119,7 @@ export default function QuerySearch({
         <InputGroupAddon>
           {loading ? (
             <Loader2 className="size-4 animate-spin text-muted-foreground" />
-          ) : debouncedSearch.length <= 0 || invalidQuery ? (
+          ) : showSearchIcon ? (
             <Search className="size-4 text-muted-foreground" />
           ) : (
             <Check className="size-4 text-green-500" />
