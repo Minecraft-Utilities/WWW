@@ -6,14 +6,21 @@ import SimpleLink from "../simple-link";
 import QuerySearch from "../lookup/query-search";
 import { usePathname } from "next/navigation";
 import { cn } from "@/app/common/utils";
-import { PlaneIcon } from "lucide-react";
+import { FlameIcon, PlaneIcon, ServerIcon } from "lucide-react";
+import { ComputerDesktopIcon } from "@heroicons/react/16/solid";
 
 const links: ReactElement<any>[] = [
   <NavLink
     key="capes"
     name="Capes"
-    icon={<PlaneIcon className="size-5" />}
+    icon={<FlameIcon className="size-5" />}
     href="/capes"
+  />,
+  <NavLink
+    key="servers"
+    name="Servers"
+    icon={<ComputerDesktopIcon className="size-5" />}
+    href="/servers"
   />,
 ];
 
@@ -43,13 +50,13 @@ export default function Navbar() {
             </h1>
           </SimpleLink>
 
-          {path !== "/" && <QuerySearch className="w-68" />}
+          {/* Links */}
+          <div className="flex items-center gap-0.5 sm:gap-1">
+            {links.map((link) => link)}
+          </div>
         </div>
 
-        {/* Links */}
-        <div className="flex items-center gap-0.5 sm:gap-1">
-          {links.map((link) => link)}
-        </div>
+        {path !== "/" && <QuerySearch className="w-75" />}
       </div>
     </nav>
   );

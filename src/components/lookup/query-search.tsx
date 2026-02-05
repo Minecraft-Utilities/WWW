@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
 import { Button } from "../ui/button";
 import { Search } from "lucide-react";
+import ServerEditionDialog from "./server-edition-dialog";
+import { ServerType } from "mcutils-js-api/dist/types/server/server";
 
 export default function QuerySearch({
   landingPage,
@@ -15,6 +17,8 @@ export default function QuerySearch({
   className?: string;
 }) {
   const [search, setSearch] = useState("");
+  const [serverDialogOpen, setServerDialogOpen] = useState(false);
+  const [pendingServer, setPendingServer] = useState("");
   const router = useRouter();
 
   function handleRedirect(event: SubmitEvent<HTMLFormElement>) {
@@ -25,14 +29,25 @@ export default function QuerySearch({
       return;
     }
 
-    // redirect the user to the correct page
-    if (isIpOrDomain(search)) {
-      router.push(`/server/${search}`);
-    } else {
-      router.push(`/player/${search}`);
-    }
+    const trimmed = search.trim();
 
+    if (isIpOrDomain(trimmed)) {
+      setPendingServer(trimmed);
+      setServerDialogOpen(true);
+    } else {
+      router.push(`/player/${trimmed}`);
+      setSearch("");
+    }
+  }
+
+  function handleServerEdition(edition: ServerType) {
+    if (!pendingServer) {
+      return;
+    }
+    router.push(`/server/${edition}/${pendingServer}`);
     setSearch("");
+    setPendingServer("");
+    setServerDialogOpen(false);
   }
 
   return (
@@ -49,7 +64,11 @@ export default function QuerySearch({
             className,
           )}
           type="text"
-          placeholder="Player / Server Lookup..."
+          placeholder={
+            landingPage
+              ? "Player / Server Lookup..."
+              : "Search for a player or server"
+          }
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -61,6 +80,13 @@ export default function QuerySearch({
           Search
         </Button>
       )}
+
+      <ServerEditionDialog
+        open={serverDialogOpen}
+        onOpenChange={setServerDialogOpen}
+        serverAddress={pendingServer}
+        onSelectEdition={handleServerEdition}
+      />
     </form>
   );
 }
