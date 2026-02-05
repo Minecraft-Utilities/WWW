@@ -9,7 +9,7 @@ export default function LandingQuerySearch() {
 
   return (
     <div className="flex flex-col">
-      <Card className="rounded-b-none bg-secondary/70">
+      <Card className="rounded-b-none border-b-0 bg-secondary/70">
         <QuerySearch landingPage setQueryError={setQueryError} />
       </Card>
       <Card className="rounded-t-none bg-secondary/90 text-sm">
