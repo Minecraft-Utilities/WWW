@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Checks if the given query is an IP or a Domain
+ * Checks if the given query is an IP or a Domain (optionally with :port).
  *
  * @param query the query to check
  * @returns true if ip or domain
@@ -16,7 +16,17 @@ export function isIpOrDomain(query: string): boolean {
     return false;
   }
 
-  const trimmed = query.trim();
+  let trimmed = query.trim();
+
+  // Strip optional :port so "play.atmworld.nl:25570" validates the host part
+  const withPort = trimmed.match(/^(.+):(\d{1,5})$/);
+  if (
+    withPort &&
+    !withPort[1].endsWith(":") &&
+    parseInt(withPort[2], 10) <= 65535
+  ) {
+    trimmed = withPort[1];
+  }
 
   // Check for IPv4 (e.g., 192.168.1.1)
   const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;

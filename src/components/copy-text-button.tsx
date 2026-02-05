@@ -2,6 +2,7 @@
 
 import { CopyIcon } from "lucide-react";
 import SimpleTooltip from "./simple-tooltip";
+import { toast } from "sonner";
 
 export default function CopyTextButton({
   text,
@@ -15,6 +16,7 @@ export default function CopyTextButton({
       <button
         onClick={() => {
           navigator.clipboard.writeText(text);
+          toast.success(`Copied ${text} to clipboard`);
         }}
       >
         <CopyIcon className="text-input size-4 cursor-pointer" />

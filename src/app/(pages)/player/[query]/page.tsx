@@ -2,6 +2,7 @@ import { mcUtilsApi } from "@/app/common/mc-utils";
 import CopyTextButton from "@/components/copy-text-button";
 import Card from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -11,51 +12,75 @@ type Props = {
 
 export default async function PlayerPage({ params }: Props) {
   const { query } = await params;
-  const response = await mcUtilsApi.fetchPlayer(query);
-  const player = response.player;
-  const error = response.error;
+  const { player, error } = await mcUtilsApi.fetchPlayer(query);
 
   return (
-    <div className="flex flex-col gap-2 items-center w-full">
-      {error && <div>Error: {error.message}</div>}
+    <div className="flex w-full flex-col items-center gap-6">
+      {error && (
+        <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
+          <p className="font-medium text-destructive">Error</p>
+          <p className="text-sm text-muted-foreground">{error.message}</p>
+        </Card>
+      )}
 
       {player && (
-        <div className="flex flex-row items-stretch">
-          <div className="flex flex-col gap-4">
-            <Card>
+        <div className="flex w-full max-w-3xl flex-col-reverse gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {/* Skin and Cape */}
+          <div className="flex shrink-0 flex-col gap-4">
+            <Card className="items-center overflow-hidden p-0">
               <Image
                 src={player.skin.parts.FULLBODY_FRONT}
-                alt="Player Full Body Front"
+                alt={`${player.username} skin - front`}
                 width={256}
                 height={256}
                 unoptimized
+                className="object-cover p-4"
               />
             </Card>
 
-            <Card className="flex flex-col gap-4">
-              <p className="text-muted-foreground">Cape</p>
-
+            <Card className="flex flex-col gap-3">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Cape
+              </p>
               <Image
                 src={player.skin.parts.FULLBODY_FRONT}
-                alt="Player Full Body Front"
+                alt={`${player.username} cape`}
                 width={64}
                 height={64}
                 unoptimized
+                className="object-cover"
               />
             </Card>
           </div>
 
-          <div className="flex flex-col p-8">
-            <p className="text-4xl font-semibold">{player.username}</p>
-            <div className="text-lg flex gap-2 items-center">
-              <span className="text-muted-foreground">UUID</span>{" "}
-              {player.uniqueId}
-              <CopyTextButton
-                text={player.uniqueId}
-                tooltip={`Copy ${player.username}'s UUID to your clipboard`}
-              />
+          {/* Player Info */}
+          <Card className="flex min-w-0 flex-1 flex-col gap-6 p-6 sm:p-8">
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              {player.username}
+            </h1>
+
+            <div className="flex flex-col gap-2">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                UUID
+              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 font-mono text-sm">
+                <span className="break-all text-foreground">
+                  {player.uniqueId}
+                </span>
+                <CopyTextButton
+                  text={player.uniqueId}
+                  tooltip={`Copy ${player.username}'s UUID`}
+                />
+              </div>
             </div>
-          </div>
+
+            <Link
+              href="/"
+              className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:underline"
+            >
+              ← Look up another player or server
+            </Link>
+          </Card>
         </div>
       )}
     </div>

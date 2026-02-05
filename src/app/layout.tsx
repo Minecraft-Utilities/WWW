@@ -5,6 +5,7 @@ import Navbar from "../components/navbar/navbar";
 import localFont from "next/font/local";
 import Background from "@/components/background";
 import { ViewportProvider } from "@/components/context/viewport-context";
+import { Toaster } from "@/components/ui/toaster";
 
 const siteFont = localFont({
   src: "./fonts/JetBrainsMono.ttf",
@@ -31,6 +32,7 @@ export default function RootLayout({
           >
             <Background />
             <Navbar />
+            <Toaster />
             <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 px-2 pt-2">
               <div className="m-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col pt-4">
                 {children}
