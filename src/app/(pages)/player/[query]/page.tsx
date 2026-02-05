@@ -73,13 +73,6 @@ export default async function PlayerPage({ params }: Props) {
                 />
               </div>
             </div>
-
-            <Link
-              href="/"
-              className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:underline"
-            >
-              ← Look up another player or server
-            </Link>
           </Card>
         </div>
       )}

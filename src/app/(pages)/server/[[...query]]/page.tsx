@@ -6,7 +6,14 @@ import Link from "next/link";
 import type { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
+import type { DnsRecord } from "mcutils-js-api/dist/types/dns/dns-record";
+import type { SRVRecord } from "mcutils-js-api/dist/types/dns/impl/srv-record";
 import { formatNumberWithCommas } from "@/app/common/utils";
+import DetailRow from "@/components/detail-row";
+
+function isSrvRecord(r: DnsRecord): r is SRVRecord {
+  return r.type === "SRV";
+}
 
 type Props = {
   params: Promise<{
@@ -45,12 +52,6 @@ export default async function ServerPage({ params }: Props) {
             </code>
           </p>
         </Card>
-        <Link
-          href="/"
-          className="inline-flex items-center text-sm font-medium text-primary hover:underline"
-        >
-          ← Look up another player or server
-        </Link>
       </div>
     );
   }
@@ -94,21 +95,6 @@ export default async function ServerPage({ params }: Props) {
 
             <div className="flex flex-col gap-2">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Address
-              </p>
-              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 font-mono text-sm">
-                <span className="break-all text-foreground">
-                  {server.ip}:{server.port}
-                </span>
-                <CopyTextButton
-                  text={`${server.ip}:${server.port}`}
-                  tooltip="Copy server address"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Players
               </p>
               <p className="text-sm text-foreground">
@@ -116,30 +102,6 @@ export default async function ServerPage({ params }: Props) {
                 {formatNumberWithCommas(server.players.max)} online
               </p>
             </div>
-
-            {edition === "java" && (
-              <>
-                <div className="flex flex-col gap-2">
-                  <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Version
-                  </p>
-                  <p className="text-sm text-foreground">
-                    {javaServer.version?.name ?? "—"}
-                  </p>
-                </div>
-                {javaServer.isModded && (
-                  <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-foreground">
-                    Modded server
-                    {(javaServer.forgeData?.mods?.length ?? 0) > 0 && (
-                      <span className="text-muted-foreground">
-                        {" "}
-                        ({javaServer.forgeData?.mods?.length} mods)
-                      </span>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
 
             {edition === "bedrock" && (
               <div className="flex flex-col gap-2">
@@ -154,12 +116,94 @@ export default async function ServerPage({ params }: Props) {
               </div>
             )}
 
-            <Link
-              href="/"
-              className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:underline"
-            >
-              ← Look up another player or server
-            </Link>
+            {/* Server details (key-value) */}
+            <div className="flex flex-col gap-0 border-t border-border pt-4">
+              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Details
+              </p>
+              <DetailRow label="Hostname" value={server.hostname} />
+              <DetailRow label="IP address" value={server.ip} />
+              <DetailRow label="Port" value={String(server.port)} />
+              {edition === "java" && javaServer.version && (
+                <DetailRow
+                  label="Protocol version"
+                  value={`${javaServer.version.protocolName ?? javaServer.version.name} (${javaServer.version.protocol})`}
+                />
+              )}
+              {server.location?.country && (
+                <DetailRow
+                  label="Location"
+                  variant="warning"
+                  value={server.location.country}
+                />
+              )}
+              {edition === "java" && (
+                <DetailRow
+                  label="Blocked by Mojang"
+                  value={javaServer.mojangBlocked ? "Yes" : "No"}
+                  variant={javaServer.mojangBlocked ? "warning" : "success"}
+                />
+              )}
+              {edition === "java" && javaServer.isModded && (
+                <DetailRow
+                  label="Modded server"
+                  value={`${javaServer.forgeData?.mods?.length ?? 0} mods`}
+                  variant="warning"
+                />
+              )}
+              <DetailRow
+                label="SRV record"
+                value={
+                  server.records?.some((r) => r.type === "SRV") ? "Yes" : "No"
+                }
+                variant="success"
+              />
+            </div>
+
+            {/* DNS records (collapsible) */}
+            {server.records && server.records.length > 0 && (
+              <div className="flex flex-col gap-2 border-t border-border pt-4">
+                <div className="mt-3 overflow-x-auto rounded-lg border border-border">
+                  <table className="w-full min-w-[320px] text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/30">
+                        <th className="px-3 py-2 font-medium text-muted-foreground">
+                          Hostname
+                        </th>
+                        <th className="px-3 py-2 font-medium text-muted-foreground">
+                          Type
+                        </th>
+                        <th className="px-3 py-2 font-medium text-muted-foreground">
+                          Data
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {server.records.map((record, i) => (
+                        <tr
+                          key={i}
+                          className="border-b border-border/50 last:border-0"
+                        >
+                          <td className="break-all px-3 py-2 font-mono text-foreground">
+                            {isSrvRecord(record)
+                              ? record.name
+                              : (record.name ?? "—")}
+                          </td>
+                          <td className="px-3 py-2 font-mono text-foreground">
+                            {record.type}
+                          </td>
+                          <td className="break-all px-3 py-2 font-mono text-muted-foreground">
+                            {isSrvRecord(record)
+                              ? `${record.priority} ${record.weight} ${record.port} ${record.target}`
+                              : (record.address ?? "—")}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </Card>
 
           {/* MOTD preview (below info, Java only) */}
