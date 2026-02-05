@@ -1,8 +1,8 @@
 import { mcUtilsApi } from "@/app/common/mc-utils";
 import CopyTextButton from "@/components/copy-text-button";
+import PlayerCapes from "@/components/player/player-capes";
 import Card from "@/components/ui/card";
 import Image from "next/image";
-import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -38,19 +38,7 @@ export default async function PlayerPage({ params }: Props) {
               />
             </Card>
 
-            <Card className="flex flex-col gap-3">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Cape
-              </p>
-              <Image
-                src={player.skin.parts.FULLBODY_FRONT}
-                alt={`${player.username} cape`}
-                width={64}
-                height={64}
-                unoptimized
-                className="object-cover"
-              />
-            </Card>
+            <PlayerCapes player={player} />
           </div>
 
           {/* Player Info */}
