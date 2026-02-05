@@ -1,8 +1,28 @@
+import Image from "next/image";
 import Link from "next/link";
 import Card from "../ui/card";
-import Image from "next/image";
 
-export default function LandingExamples() {
+const playerExamples = ["ImFascinated", "Notch", "jeb_", "Technoblade"];
+const serverExamples: { name: string; ip: string }[] = [
+  {
+    name: "WildNetwork",
+    ip: "wildnetwork.net",
+  },
+  {
+    name: "Hypixel",
+    ip: "mc.hypixel.net",
+  },
+  {
+    name: "CubeCraft",
+    ip: "play.cubecraft.net",
+  },
+  {
+    name: "Mineplex",
+    ip: "mineplex.com",
+  },
+];
+
+export default async function LandingExamples() {
   return (
     <>
       {/* Player Examples */}
@@ -11,46 +31,19 @@ export default function LandingExamples() {
           Player Examples
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/skin/ImFascinated/FACE.png"
-                size={44}
-              />
-            }
-            name="ImFascinated"
-            href="/player/ImFascinated"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/skin/Notch/FACE.png"
-                size={44}
-              />
-            }
-            name="Notch"
-            href="/player/Notch"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/skin/jeb_/FACE.png"
-                size={44}
-              />
-            }
-            name="jeb_"
-            href="/player/jeb_"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/skin/Technoblade/FACE.png"
-                size={44}
-              />
-            }
-            name="Technoblade"
-            href="/player/Technoblade"
-          />
+          {playerExamples.map((player) => (
+            <LandingExample
+              key={player}
+              icon={
+                <LandingExampleImage
+                  url={`https://mc.fascinated.cc/api/skins/${player}/face.png`}
+                  size={44}
+                />
+              }
+              name={player}
+              href={`/player/${player}`}
+            />
+          ))}
         </div>
       </Card>
 
@@ -60,46 +53,21 @@ export default function LandingExamples() {
           Server Examples
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/server/wildnetwork.net/icon.png"
-                size={44}
+          {serverExamples
+            .filter((server) => server !== null)
+            .map((server) => (
+              <LandingExample
+                key={server.ip}
+                icon={
+                  <LandingExampleImage
+                    url={`https://mc.fascinated.cc/api/servers/${server.ip}/icon.png`}
+                    size={44}
+                  />
+                }
+                name={server.name}
+                href={`/server/java/${server.ip}`}
               />
-            }
-            name="WildNetwork"
-            href="/server/java/wildnetwork.net"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/server/hypixel.net/icon.png"
-                size={44}
-              />
-            }
-            name="Hypixel"
-            href="/server/java/mc.hypixel.net"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/server/play.cubecraft.net/icon.png"
-                size={44}
-              />
-            }
-            name="CubeCraft"
-            href="/server/java/play.cubecraft.net"
-          />
-          <LandingExample
-            icon={
-              <LandingExampleImage
-                url="https://mc.fascinated.cc/api/server/mineplex.com/icon.png"
-                size={44}
-              />
-            }
-            name="Mineplex"
-            href="/server/java/mineplex.com"
-          />
+            ))}
         </div>
       </Card>
     </>
