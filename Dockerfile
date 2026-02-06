@@ -24,21 +24,19 @@ COPY . .
 # Build the website
 RUN bun run build
 
-# Run the app
+# Run the app (standalone output)
 FROM node:alpine3.22 AS runner
 WORKDIR /app
 
 RUN apk add --no-cache curl
 
-COPY --from=depends /app/node_modules ./node_modules
+COPY --from=depends /app/.next/standalone ./
+COPY --from=depends /app/.next/static ./.next/static
 COPY --from=depends /app/public ./public
-COPY --from=depends /app/.next ./.next
-COPY --from=depends /app/package.json ./package.json
 
 # Expose the app port
 EXPOSE 3000
 ENV HOSTNAME="0.0.0.0"
 ENV PORT=3000
 
-# Use the correct path to server.js
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
