@@ -1,5 +1,4 @@
 import { env } from "@/common/env";
-import Background from "@/components/background";
 import { ViewportProvider } from "@/components/context/viewport-context";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar/navbar";
@@ -50,7 +49,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ViewportProvider>
           <body className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}>
             <Navbar />
-            <Background />
             <main id="main-content" className="relative flex min-h-0 w-full flex-1 flex-col" tabIndex={-1}>
               <Toaster />
               <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">

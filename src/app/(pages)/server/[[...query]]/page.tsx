@@ -1,5 +1,6 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { capitalize, formatNumberWithCommas } from "@/common/utils";
+import Background from "@/components/background";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
@@ -67,81 +68,84 @@ export default async function ServerPage({ params }: ServerPageProps) {
   const { server, error, edition } = await getServer(query);
 
   return (
-    <div className="mt-24 flex w-full flex-col items-center gap-6">
-      {(error || !server) && (
-        <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
-          <CardHeader variant="destructive">Error</CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid lookup parameters"}</p>
-          </CardContent>
-        </Card>
-      )}
+    <>
+      <Background url="https://cdn.fascinated.cc/wjLURHpJ.jpg" />
+      <div className="mt-24 flex w-full flex-col items-center gap-6">
+        {(error || !server) && (
+          <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
+            <CardHeader variant="destructive">Error</CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid lookup parameters"}</p>
+            </CardContent>
+          </Card>
+        )}
 
-      {server && (
-        <div className="flex w-full max-w-3xl flex-col gap-24">
-          {/* Header */}
-          <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-            <div className="flex items-center gap-4">
-              {edition === "java" && (server as JavaServer).favicon?.base64 && (
-                <Image
-                  src={(server as JavaServer).favicon!.base64!}
-                  alt={`${server.hostname} favicon`}
-                  width={64}
-                  height={64}
-                  className="rounded-md"
-                  unoptimized
-                />
+        {server && (
+          <div className="flex w-full max-w-3xl flex-col gap-24">
+            {/* Header */}
+            <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
+              <div className="flex items-center gap-4">
+                {edition === "java" && (server as JavaServer).favicon?.base64 && (
+                  <Image
+                    src={(server as JavaServer).favicon!.base64!}
+                    alt={`${server.hostname} favicon`}
+                    width={64}
+                    height={64}
+                    className="rounded-md"
+                    unoptimized
+                  />
+                )}
+
+                <h1 className="text-foreground min-w-0 text-center text-4xl font-bold tracking-tight wrap-break-word">
+                  {server.hostname}
+                </h1>
+              </div>
+            </header>
+
+            <div className="flex flex-col gap-4">
+              {/* MOTD preview (Java only) */}
+              {edition === "java" && (server as JavaServer).motd?.preview && (
+                <section className="flex flex-col gap-4">
+                  <Card className="h-fit items-center overflow-hidden p-0">
+                    <CardContent className="flex items-center justify-center">
+                      <Image
+                        src={(server as JavaServer).motd!.preview!}
+                        alt={`${server.hostname} MOTD preview`}
+                        width={768}
+                        height={128}
+                        unoptimized
+                        className="object-contain"
+                      />
+                    </CardContent>
+                  </Card>
+                </section>
               )}
 
-              <h1 className="text-foreground min-w-0 text-center text-4xl font-bold tracking-tight wrap-break-word">
-                {server.hostname}
-              </h1>
-            </div>
-          </header>
-
-          <div className="flex flex-col gap-4">
-            {/* MOTD preview (Java only) */}
-            {edition === "java" && (server as JavaServer).motd?.preview && (
-              <section className="flex flex-col gap-4">
-                <Card className="h-fit items-center overflow-hidden p-0">
-                  <CardContent className="flex items-center justify-center">
-                    <Image
-                      src={(server as JavaServer).motd!.preview!}
-                      alt={`${server.hostname} MOTD preview`}
-                      width={768}
-                      height={128}
-                      unoptimized
-                      className="object-contain"
-                    />
-                  </CardContent>
-                </Card>
-              </section>
-            )}
-
-            {/* Details */}
-            <section className="flex flex-col gap-4">
-              <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
-                <CardHeader>Details</CardHeader>
-                <CardContent>
-                  <ServerDetails server={server} edition={edition} />
-                </CardContent>
-              </Card>
-            </section>
-
-            {/* DNS records (collapsible) */}
-            {server.records && server.records.length > 0 && (
+              {/* Details */}
               <section className="flex flex-col gap-4">
                 <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
-                  <CardHeader>DNS Records</CardHeader>
+                  <CardHeader>Details</CardHeader>
                   <CardContent>
-                    <ServerDnsRecords records={server.records} />
+                    <ServerDetails server={server} edition={edition} />
                   </CardContent>
                 </Card>
               </section>
-            )}
+
+              {/* DNS records (collapsible) */}
+              {server.records && server.records.length > 0 && (
+                <section className="flex flex-col gap-4">
+                  <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+                    <CardHeader>DNS Records</CardHeader>
+                    <CardContent>
+                      <ServerDnsRecords records={server.records} />
+                    </CardContent>
+                  </Card>
+                </section>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
