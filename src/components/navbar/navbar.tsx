@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import QuerySearch from "../lookup/query-search";
 import SimpleLink from "../simple-link";
+
 const links: ReactElement<any>[] = [
   <NavLink
     key="capes"

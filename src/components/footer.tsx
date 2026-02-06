@@ -11,7 +11,6 @@ import GithubLogo from "./logos/logos/github-logo";
 type FooterLink = {
   name: string;
   href: string;
-  shortName?: string;
 };
 
 type SocialLinkType = {
@@ -21,16 +20,14 @@ type SocialLinkType = {
 };
 
 const links: { [category: string]: FooterLink[] } = {
-  App: [
-    { name: "Player Lookup", shortName: "Player", href: "/" },
-    { name: "Capes", href: "/capes" },
-    { name: "Servers", href: "/servers" },
-  ],
   Resources: [
     {
       name: "Source Code",
-      shortName: "Source",
       href: "https://github.com",
+    },
+    {
+      name: "Swagger API",
+      href: "https://mc.fascinated.cc/api/swagger-ui/index.html",
     },
   ],
 };
@@ -109,14 +106,7 @@ export default function Footer() {
                       rel={external ? "noopener noreferrer" : undefined}
                       draggable={false}
                     >
-                      {link.shortName ? (
-                        <>
-                          <span className="hidden sm:inline">{link.name}</span>
-                          <span className="sm:hidden">{link.shortName}</span>
-                        </>
-                      ) : (
-                        <span>{link.name}</span>
-                      )}
+                      <span>{link.name}</span>
                       {external && (
                         <ExternalLink className="size-3.5 h-3.5 w-3.5" />
                       )}
