@@ -1,3 +1,5 @@
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
+
 export default function CapesLoading() {
   return (
     <div
@@ -11,7 +13,14 @@ export default function CapesLoading() {
       </header>
       <div className="flex max-w-6xl flex-wrap justify-center gap-2">
         {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="bg-muted/30 h-44 w-52 animate-pulse rounded-2xl" />
+          <Card key={i} className="w-52 shrink-0">
+            <CardHeader>
+              <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
+            </CardHeader>
+            <CardContent className="flex items-center justify-center">
+              <div className="bg-muted/30 size-24 animate-pulse rounded-md" />
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
