@@ -75,3 +75,19 @@ export function formatNumberWithCommas(number: number | string): string {
 export function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/**
+ * Returns a random subset of the given array (Fisher–Yates shuffle, then slice).
+ *
+ * @param array the source array
+ * @param count max number of entries to return
+ * @returns up to `count` random entries
+ */
+export function getRandomEntries<T>(array: T[], count: number): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}

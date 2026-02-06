@@ -1,10 +1,21 @@
+import { getRandomEntries } from "@/common/utils";
 import Image from "next/image";
 import SimpleLink from "../simple-link";
 import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardFooter, CardHeader } from "../ui/card";
 
-const playerExamples = ["ImFascinated", "Notch", "jeb_", "Technoblade", "NoneTaken", "Dinnerbone"];
-const serverExamples = [
+const playerExamples: string[] = [
+  "ImFascinated",
+  "Notch",
+  "jeb_",
+  "Technoblade",
+  "NoneTaken",
+  "Dinnerbone",
+  "Fit",
+  "Steve",
+  "DanTDM",
+];
+const serverExamples: { name: string; ip: string }[] = [
   {
     name: "WildNetwork",
     ip: "wildnetwork.net",
@@ -29,16 +40,35 @@ const serverExamples = [
     name: "Wynncraft",
     ip: "wynncraft.com",
   },
+  {
+    name: "2B2T",
+    ip: "2b2t.org",
+  },
+  {
+    name: "Hoplite",
+    ip: "hoplite.gg",
+  },
+  {
+    name: "Minemen Club",
+    ip: "minemen.club",
+  },
+  {
+    name: "OG-Network",
+    ip: "og-network.net",
+  },
 ];
 
 export default async function LandingExamples() {
+  const players = getRandomEntries(playerExamples, 7);
+  const servers = getRandomEntries(serverExamples, 7);
+
   return (
     <div className="mt-20 flex w-full flex-col gap-4">
       {/* Player Examples */}
       <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
         <CardHeader>Player Examples</CardHeader>
         <CardContent className="flex flex-wrap justify-center gap-3">
-          {playerExamples.map(player => (
+          {players.map(player => (
             <LandingExample
               key={player}
               url={`https://mc.fascinated.cc/api/skins/${player}/face.png`}
@@ -58,7 +88,7 @@ export default async function LandingExamples() {
       <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
         <CardHeader>Server Examples</CardHeader>
         <CardContent className="flex flex-wrap justify-center gap-3">
-          {serverExamples.map(server => (
+          {servers.map(server => (
             <LandingExample
               key={server.ip}
               url={`https://mc.fascinated.cc/api/servers/${server.ip}/icon.png`}
