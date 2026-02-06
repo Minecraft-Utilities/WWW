@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import Background from "@/components/background";
 import { ViewportProvider } from "@/components/context/viewport-context";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/footer";
 
 const siteFont = localFont({
   src: "./fonts/JetBrainsMono.ttf",
@@ -33,12 +34,13 @@ export default function RootLayout({
           <body
             className={`${siteFont.className} flex h-full w-full flex-col antialiased`}
           >
-            <Background />
             <Navbar />
+            <Background />
             <Toaster />
-            <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 px-2 pt-2">
-              <div className="m-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col">
-                {children}
+            <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 pt-2">
+              <div className="m-auto flex min-h-0 w-full flex-1 flex-col">
+                <div className="max-w-[1600px] m-auto w-full">{children}</div>
+                <Footer />
               </div>
             </div>
           </body>
