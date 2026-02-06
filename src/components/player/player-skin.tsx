@@ -55,7 +55,7 @@ export default function PlayerSkin({ skin, username }: Props) {
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   "size-14",
                   selectedPart === key
-                    ? "border-primary ring-2 ring-primary/30"
+                    ? "border-primary"
                     : "border-border/60 hover:border-border",
                 )}
               >

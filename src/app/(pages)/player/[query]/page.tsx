@@ -43,7 +43,7 @@ export default async function PlayerPage({ params }: Props) {
   const { player, error } = await mcUtilsApi.fetchPlayer(query);
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6 pt-2">
       {error && (
         <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
           <p className="font-medium text-destructive">Error</p>
@@ -52,9 +52,9 @@ export default async function PlayerPage({ params }: Props) {
       )}
 
       {player && (
-        <div className="flex flex-col w-full max-w-3xl gap-12 mt-12">
+        <div className="flex flex-col w-full max-w-3xl gap-12 mt-10">
           {/* Player Info */}
-          <section className="flex min-w-0 flex-1 flex-col gap-2 items-center">
+          <section className="flex min-w-0 flex-1 flex-col gap-4 items-center">
             <h1 className="text-4xl font-bold tracking-tight text-foreground text-center">
               {player.username}
             </h1>
@@ -72,10 +72,8 @@ export default async function PlayerPage({ params }: Props) {
 
           {/* Skin and Cape */}
           <section className="flex flex-col gap-4">
-            <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
-              <PlayerSkin skin={player.skin} username={player.username} />
-              <PlayerCapes player={player} />
-            </div>
+            <PlayerSkin skin={player.skin} username={player.username} />
+            <PlayerCapes player={player} />
           </section>
         </div>
       )}

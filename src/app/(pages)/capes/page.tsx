@@ -16,7 +16,7 @@ export default async function CapsPage() {
   }
 
   return (
-    <div className="flex justify-center px-4">
+    <div className="flex justify-center px-4 pt-2">
       <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {capes.map((cape) => (
           <div key={cape.textureId}>
