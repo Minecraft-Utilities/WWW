@@ -5,7 +5,7 @@ import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
 import { useState } from "react";
 import Card from "../ui/card";
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 
 const SKIN_PARTS: SkinPart[] = [
   "HEAD",

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 import { ComputerDesktopIcon } from "@heroicons/react/16/solid";
 import { FlameIcon } from "lucide-react";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import QuerySearch from "../lookup/query-search";
 import SimpleLink from "../simple-link";
+import { env } from "@/common/env";
 
 const links: ReactElement<any>[] = [
   <NavLink
@@ -41,7 +42,7 @@ export default function Navbar() {
               width={28}
               height={28}
               className="size-7"
-              src="/logo.png"
+              src={`${env.NEXT_PUBLIC_BASE_URL}/media/logo.png`}
               alt="MC Utils Logo"
             />
 

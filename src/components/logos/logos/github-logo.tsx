@@ -1,4 +1,4 @@
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 import LogoBase from "@/components/logos/logo-base";
 import { LogoProps } from "@/components/logos/logo-props";
 

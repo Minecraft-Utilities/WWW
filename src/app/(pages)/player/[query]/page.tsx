@@ -1,4 +1,4 @@
-import { mcUtilsApi } from "@/app/common/mc-utils";
+import { mcUtilsApi } from "@/common/mc-utils";
 import CopyTextButton from "@/components/copy-text-button";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerSkin from "@/components/player/player-skin";

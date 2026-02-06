@@ -4,7 +4,7 @@ import * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useIsMobile } from "../context/viewport-context";
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 
 // Shared portal container for all tooltips
 const createPortalContainer = () => {

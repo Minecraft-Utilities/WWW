@@ -1,4 +1,4 @@
-import { mcUtilsApi } from "@/app/common/mc-utils";
+import { mcUtilsApi } from "@/common/mc-utils";
 import Card from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";

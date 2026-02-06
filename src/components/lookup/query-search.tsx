@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, isIpOrDomain } from "@/app/common/utils";
+import { cn, isIpOrDomain } from "@/common/utils";
 import {
   InputGroup,
   InputGroupAddon,
@@ -14,7 +14,7 @@ import { Check, Loader2, Search, X } from "lucide-react";
 import ServerEditionDialog from "./server-edition-dialog";
 import { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { useIsMobile } from "../context/viewport-context";
-import { mcUtilsApi } from "@/app/common/mc-utils";
+import { mcUtilsApi } from "@/common/mc-utils";
 import { useDebounce } from "@uidotdev/usehooks";
 
 export default function QuerySearch({

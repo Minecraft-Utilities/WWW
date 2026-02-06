@@ -12,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "@t3-oss/env-core": "^0.13.10",
     "@tanstack/react-query": "^5.90.20",
     "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.1",

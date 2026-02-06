@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { Coffee, Layers } from "lucide-react";
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 
 type Props = {
   open: boolean;

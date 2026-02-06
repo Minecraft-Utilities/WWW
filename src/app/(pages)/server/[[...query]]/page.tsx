@@ -1,5 +1,5 @@
-import { mcUtilsApi } from "@/app/common/mc-utils";
-import { capitalize, formatNumberWithCommas } from "@/app/common/utils";
+import { mcUtilsApi } from "@/common/mc-utils";
+import { capitalize, formatNumberWithCommas } from "@/common/utils";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card from "@/components/ui/card";

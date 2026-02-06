@@ -2,7 +2,7 @@ import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
 import DetailRow from "../detail-row";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
-import { formatNumberWithCommas } from "@/app/common/utils";
+import { formatNumberWithCommas } from "@/common/utils";
 
 export function ServerDetails({
   server,

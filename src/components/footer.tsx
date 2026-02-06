@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/common/utils";
+import { cn } from "@/common/utils";
 import SimpleLink from "@/components/simple-link";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
