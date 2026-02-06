@@ -29,8 +29,8 @@ export default function PlayerLoading() {
             </Card>
             <Card className="flex h-fit min-w-48 flex-col overflow-hidden p-0">
               <CardHeader>Cape</CardHeader>
-              <CardContent className="flex flex-col justify-center">
-                <div className="bg-muted/30 size-16 animate-pulse rounded-lg" />
+              <CardContent className="flex h-full items-center justify-center">
+                <div className="bg-muted/30 h-[105px] w-full max-w-[280px] animate-pulse rounded-xl" />
               </CardContent>
             </Card>
           </section>
