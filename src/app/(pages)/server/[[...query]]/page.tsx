@@ -54,7 +54,7 @@ export default async function ServerPage({ params }: Props) {
   const javaServer = server as JavaServer;
 
   return (
-    <div className="flex flex-col md:flex-row gap-2 justify-center pt-2">
+    <div className="flex flex-col md:flex-row gap-2 justify-center">
       {/* Server info (top) */}
       <Card className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[50%]">
         <ServerDetails server={server} edition={edition} />
