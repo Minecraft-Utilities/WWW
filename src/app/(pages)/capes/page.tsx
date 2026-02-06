@@ -26,7 +26,7 @@ export default async function CapsPage() {
 
       <div className="flex max-w-6xl flex-wrap justify-center gap-2">
         {capes.map(cape => (
-          <Card key={cape.textureId} className="w-48 shrink-0">
+          <Card key={cape.textureId} className="w-52 shrink-0">
             <CardHeader>{cape.name}</CardHeader>
             <CardContent className="flex items-center justify-center">
               <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
