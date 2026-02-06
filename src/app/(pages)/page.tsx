@@ -9,7 +9,8 @@ export default function HomePage() {
           Minecraft Player & Server Lookup
         </h1>
         <p className="text-sm text-muted-foreground sm:text-base">
-          Look up players by username or find server info by IP or domain.
+          Look up any player by Username / UUID or inspect any server by
+          hostname.
         </p>
       </header>
 
