@@ -55,32 +55,32 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
 
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-6">
-        {error && (
-          <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
-            <CardHeader variant="destructive">Error</CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">{error.message}</p>
-            </CardContent>
-          </Card>
-        )}
+      {error && (
+        <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
+          <CardHeader variant="destructive">Error</CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">{error.message}</p>
+          </CardContent>
+        </Card>
+      )}
 
-        {player && (
-          <div className="flex w-full flex-col items-center gap-24">
-            {/* Player Header */}
-            <PlayerHeader player={player} />
+      {player && (
+        <div className="flex w-full flex-col items-center gap-24">
+          {/* Player Header */}
+          <PlayerHeader player={player} />
 
-            <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
-              {/* Skin and Cape */}
-              <section className="flex w-full flex-col gap-4 md:max-w-88">
-                <PlayerSkin skin={player.skin} username={player.username} />
-                <PlayerCapes player={player} />
-              </section>
+          <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
+            {/* Skin and Cape */}
+            <section className="flex w-full flex-col gap-4 md:max-w-88">
+              <PlayerSkin skin={player.skin} username={player.username} />
+              <PlayerCapes player={player} />
+            </section>
 
-              {/* Player Details */}
-              <PlayerDetails player={player} />
-            </div>
+            {/* Player Details */}
+            <PlayerDetails player={player} />
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
   );
 }

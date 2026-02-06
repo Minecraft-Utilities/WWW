@@ -2,11 +2,7 @@ import Card, { CardContent, CardHeader } from "@/components/ui/card";
 
 export default function ServerLoading() {
   return (
-    <div
-      className="mt-24 flex w-full flex-col items-center gap-6"
-      aria-live="polite"
-      aria-busy="true"
-    >
+    <div className="mt-24 flex w-full flex-col items-center gap-6" aria-live="polite" aria-busy="true">
       <div className="flex w-full max-w-3xl flex-col gap-24">
         <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
           <div className="flex items-center gap-4">
@@ -25,10 +21,7 @@ export default function ServerLoading() {
             <CardContent>
               <div className="flex flex-col gap-2">
                 {Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-muted/30 h-5 w-full max-w-sm animate-pulse rounded-md"
-                  />
+                  <div key={i} className="bg-muted/30 h-5 w-full max-w-sm animate-pulse rounded-md" />
                 ))}
               </div>
             </CardContent>

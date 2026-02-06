@@ -68,80 +68,80 @@ export default async function ServerPage({ params }: ServerPageProps) {
 
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-6">
-        {(error || !server) && (
-          <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
-            <CardHeader variant="destructive">Error</CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid lookup parameters"}</p>
-            </CardContent>
-          </Card>
-        )}
+      {(error || !server) && (
+        <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
+          <CardHeader variant="destructive">Error</CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid lookup parameters"}</p>
+          </CardContent>
+        </Card>
+      )}
 
-        {server && (
-          <div className="flex w-full max-w-3xl flex-col gap-24">
-            {/* Header */}
-            <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-              <div className="flex items-center gap-4">
-                {edition === "java" && (server as JavaServer).favicon?.base64 && (
-                  <Image
-                    src={(server as JavaServer).favicon!.base64!}
-                    alt={`${server.hostname} favicon`}
-                    width={64}
-                    height={64}
-                    className="rounded-md"
-                    unoptimized
-                  />
-                )}
-
-                <h1 className="text-foreground min-w-0 text-center text-4xl font-bold tracking-tight wrap-break-word">
-                  {server.hostname}
-                </h1>
-              </div>
-            </header>
-
-            <div className="flex flex-col gap-4">
-              {/* MOTD preview (Java only) */}
-              {edition === "java" && (server as JavaServer).motd?.preview && (
-                <section className="flex flex-col gap-4">
-                  <Card className="h-fit items-center overflow-hidden p-0">
-                    <CardContent className="flex items-center justify-center">
-                      <Image
-                        src={(server as JavaServer).motd!.preview!}
-                        alt={`${server.hostname} MOTD preview`}
-                        width={768}
-                        height={128}
-                        className="object-contain"
-                        unoptimized
-                      />
-                    </CardContent>
-                  </Card>
-                </section>
+      {server && (
+        <div className="flex w-full max-w-3xl flex-col gap-24">
+          {/* Header */}
+          <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
+            <div className="flex items-center gap-4">
+              {edition === "java" && (server as JavaServer).favicon?.base64 && (
+                <Image
+                  src={(server as JavaServer).favicon!.base64!}
+                  alt={`${server.hostname} favicon`}
+                  width={64}
+                  height={64}
+                  className="rounded-md"
+                  unoptimized
+                />
               )}
 
-              {/* Details */}
+              <h1 className="text-foreground min-w-0 text-center text-4xl font-bold tracking-tight wrap-break-word">
+                {server.hostname}
+              </h1>
+            </div>
+          </header>
+
+          <div className="flex flex-col gap-4">
+            {/* MOTD preview (Java only) */}
+            {edition === "java" && (server as JavaServer).motd?.preview && (
               <section className="flex flex-col gap-4">
-                <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
-                  <CardHeader>Details</CardHeader>
-                  <CardContent>
-                    <ServerDetails server={server} edition={edition} />
+                <Card className="h-fit items-center overflow-hidden p-0">
+                  <CardContent className="flex items-center justify-center">
+                    <Image
+                      src={(server as JavaServer).motd!.preview!}
+                      alt={`${server.hostname} MOTD preview`}
+                      width={768}
+                      height={128}
+                      className="object-contain"
+                      unoptimized
+                    />
                   </CardContent>
                 </Card>
               </section>
+            )}
 
-              {/* DNS records (collapsible) */}
-              {server.records && server.records.length > 0 && (
-                <section className="flex flex-col gap-4">
-                  <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
-                    <CardHeader>DNS Records</CardHeader>
-                    <CardContent>
-                      <ServerDnsRecords records={server.records} />
-                    </CardContent>
-                  </Card>
-                </section>
-              )}
-            </div>
+            {/* Details */}
+            <section className="flex flex-col gap-4">
+              <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+                <CardHeader>Details</CardHeader>
+                <CardContent>
+                  <ServerDetails server={server} edition={edition} />
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* DNS records (collapsible) */}
+            {server.records && server.records.length > 0 && (
+              <section className="flex flex-col gap-4">
+                <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+                  <CardHeader>DNS Records</CardHeader>
+                  <CardContent>
+                    <ServerDnsRecords records={server.records} />
+                  </CardContent>
+                </Card>
+              </section>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
   );
 }

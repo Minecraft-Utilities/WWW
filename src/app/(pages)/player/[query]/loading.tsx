@@ -2,11 +2,7 @@ import Card, { CardContent, CardHeader } from "@/components/ui/card";
 
 export default function PlayerLoading() {
   return (
-    <div
-      className="mt-24 flex w-full flex-col items-center gap-6"
-      aria-live="polite"
-      aria-busy="true"
-    >
+    <div className="mt-24 flex w-full flex-col items-center gap-6" aria-live="polite" aria-busy="true">
       <div className="flex w-full flex-col items-center gap-24">
         <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
           <div className="flex items-center gap-4">
@@ -14,7 +10,7 @@ export default function PlayerLoading() {
             <div className="bg-muted/30 h-9 w-48 animate-pulse rounded-md" />
           </div>
           <div className="border-border bg-muted/30 flex w-full min-w-0 items-center justify-between gap-4 rounded-lg border px-3 py-1.5">
-            <div className="bg-muted/30 h-5 min-w-0 flex-1 max-w-xs animate-pulse rounded" />
+            <div className="bg-muted/30 h-5 max-w-xs min-w-0 flex-1 animate-pulse rounded" />
             <div className="bg-muted/30 size-6 shrink-0 animate-pulse rounded-md" />
           </div>
         </header>
@@ -26,10 +22,7 @@ export default function PlayerLoading() {
                 <div className="bg-muted/30 ring-border/50 h-72 w-full max-w-[280px] animate-pulse rounded-xl ring-1" />
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="bg-muted/30 size-14 animate-pulse rounded-lg"
-                    />
+                    <div key={i} className="bg-muted/30 size-14 animate-pulse rounded-lg" />
                   ))}
                 </div>
               </CardContent>
@@ -45,10 +38,7 @@ export default function PlayerLoading() {
             <CardHeader>Details</CardHeader>
             <CardContent className="flex flex-col gap-2">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-muted/30 h-6 w-full max-w-xs animate-pulse rounded-md"
-                />
+                <div key={i} className="bg-muted/30 h-6 w-full max-w-xs animate-pulse rounded-md" />
               ))}
             </CardContent>
           </Card>

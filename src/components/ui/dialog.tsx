@@ -40,12 +40,7 @@ export interface DialogContentProps extends React.ComponentProps<typeof DialogPr
   showCloseButton?: boolean;
 }
 
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}: DialogContentProps) {
+function DialogContent({ className, children, showCloseButton = true, ...props }: DialogContentProps) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -86,12 +81,7 @@ export interface DialogFooterProps extends React.ComponentProps<"div"> {
   showCloseButton?: boolean;
 }
 
-function DialogFooter({
-  className,
-  showCloseButton = false,
-  children,
-  ...props
-}: DialogFooterProps) {
+function DialogFooter({ className, showCloseButton = false, children, ...props }: DialogFooterProps) {
   return (
     <div
       data-slot="dialog-footer"
