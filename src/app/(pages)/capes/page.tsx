@@ -40,7 +40,7 @@ export default async function CapsPage() {
               <Card key={cape.textureId} className="w-52 shrink-0">
                 <CardHeader>{cape.name}</CardHeader>
                 <CardContent className="flex items-center justify-center">
-                  <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} />
+                  <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
                 </CardContent>
               </Card>
             ))}

@@ -92,6 +92,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     width={64}
                     height={64}
                     className="rounded-md"
+                    unoptimized
                   />
                 )}
 
@@ -113,6 +114,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         width={768}
                         height={128}
                         className="object-contain"
+                        unoptimized
                       />
                     </CardContent>
                   </Card>

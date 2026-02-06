@@ -28,6 +28,7 @@ export default function PlayerSkin({ skin, username }: PlayerSkinProps) {
             width={256}
             height={256}
             className="max-h-full max-w-full object-contain p-4"
+            unoptimized
           />
         </div>
 
@@ -51,6 +52,7 @@ export default function PlayerSkin({ skin, username }: PlayerSkinProps) {
                   width={56}
                   height={56}
                   className="h-full w-full object-contain object-center p-1"
+                  unoptimized
                 />
               </button>
             );

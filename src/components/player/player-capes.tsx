@@ -22,6 +22,7 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
           width={64}
           height={64}
           className="rounded-lg object-cover"
+          unoptimized
         />
       </CardContent>
     </Card>
