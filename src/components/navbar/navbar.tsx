@@ -8,8 +8,6 @@ import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import QuerySearch from "../lookup/query-search";
 import SimpleLink from "../simple-link";
-import { env } from "@/common/env";
-
 const links: ReactElement<any>[] = [
   <NavLink
     key="capes"
@@ -42,7 +40,7 @@ export default function Navbar() {
               width={28}
               height={28}
               className="size-7"
-              src={`${env.NEXT_PUBLIC_BASE_URL}/media/logo.png`}
+              src="/media/logo.png"
               alt="MC Utils Logo"
             />
 

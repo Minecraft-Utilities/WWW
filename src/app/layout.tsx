@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "MC Utils",
     images: [
       {
-        url: `${env.NEXT_PUBLIC_BASE_URL}/media/logo.png`,
+        url: "/media/logo.png",
         width: 128,
         height: 128,
       },
