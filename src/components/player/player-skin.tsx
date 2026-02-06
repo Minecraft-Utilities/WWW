@@ -27,7 +27,6 @@ export default function PlayerSkin({ skin, username }: PlayerSkinProps) {
             alt={`${username} skin - ${selectedPart}`}
             width={256}
             height={256}
-            unoptimized
             className="max-h-full max-w-full object-contain p-4"
           />
         </div>
@@ -51,7 +50,6 @@ export default function PlayerSkin({ skin, username }: PlayerSkinProps) {
                   alt={key}
                   width={56}
                   height={56}
-                  unoptimized
                   className="h-full w-full object-contain object-center p-1"
                 />
               </button>

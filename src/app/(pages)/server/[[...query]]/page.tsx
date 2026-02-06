@@ -92,7 +92,6 @@ export default async function ServerPage({ params }: ServerPageProps) {
                     width={64}
                     height={64}
                     className="rounded-md"
-                    unoptimized
                   />
                 )}
 
@@ -113,7 +112,6 @@ export default async function ServerPage({ params }: ServerPageProps) {
                         alt={`${server.hostname} MOTD preview`}
                         width={768}
                         height={128}
-                        unoptimized
                         className="object-contain"
                       />
                     </CardContent>

@@ -21,7 +21,6 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
           alt={`${player.username} cape`}
           width={64}
           height={64}
-          unoptimized
           className="rounded-lg object-cover"
         />
       </CardContent>

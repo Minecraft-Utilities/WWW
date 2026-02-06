@@ -18,7 +18,6 @@ export default function Background({ url }: BackgroundProps) {
         width={1920}
         height={height}
         fetchPriority="high"
-        unoptimized
         className="h-full w-full object-cover blur-[10px]"
       />
       <div

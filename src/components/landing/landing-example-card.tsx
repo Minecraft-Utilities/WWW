@@ -19,14 +19,7 @@ export function LandingExampleCard({ href, url, tooltip, name }: LandingExampleC
       >
         <Card className="flex size-34 flex-col p-0">
           <CardContent className="flex flex-1 items-center justify-center p-0">
-            <Image
-              alt={name}
-              src={url}
-              width={64}
-              height={64}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
+            <Image alt={name} src={url} width={64} height={64} className="rounded-lg object-cover" />
           </CardContent>
           <CardFooter>
             <p className="text-muted-foreground text-center text-sm">{name}</p>

@@ -6,8 +6,13 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   poweredByHeader: false,
   images: {
-    unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "cdn.fascinated.cc", pathname: "/**" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.fascinated.cc", port: "", pathname: "/**" },
+      { protocol: "https", hostname: "mc.fascinated.cc", port: "", pathname: "/**" },
+    ],
+    qualities: [80, 100],
+    formats: ["image/webp"],
+    dangerouslyAllowLocalIP: true,
   },
 };
 
