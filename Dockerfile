@@ -21,6 +21,9 @@ RUN bun install --frozen-lockfile
 # Copy source code after dependencies are installed
 COPY . .
 
+# Build the website
+RUN bun run build
+
 # Run the app
 FROM node:alpine3.22 AS runner
 WORKDIR /app
@@ -30,9 +33,6 @@ RUN apk add --no-cache curl
 COPY --from=depends /app/node_modules ./node_modules
 COPY --from=depends /app/public ./public
 COPY --from=depends /app/package.json ./package.json
-
-# Build the website
-RUN bun run build
 
 # Expose the app port
 EXPOSE 3000
