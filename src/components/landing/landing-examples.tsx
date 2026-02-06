@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Card from "../ui/card";
+import Card, { CardHeader } from "../ui/card";
 import SimpleLink from "../simple-link";
 
 const playerExamples = ["ImFascinated", "Notch", "jeb_", "Technoblade"];
@@ -27,11 +27,9 @@ export default async function LandingExamples() {
   return (
     <>
       {/* Player Examples */}
-      <Card className="flex flex-col gap-4 border-border/80">
-        <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-          Player Examples
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <Card className="flex flex-col border-border/80 p-0 overflow-hidden">
+        <CardHeader>Player Examples</CardHeader>
+        <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
           {playerExamples.map((player) => (
             <LandingExample
               key={player}
@@ -49,11 +47,9 @@ export default async function LandingExamples() {
       </Card>
 
       {/* Server Examples */}
-      <Card className="flex flex-col gap-4 border-border/80">
-        <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-          Server Examples
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <Card className="flex flex-col border-border/80 p-0 overflow-hidden">
+        <CardHeader>Server Examples</CardHeader>
+        <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
           {serverExamples
             .filter((server) => server !== null)
             .map((server) => (

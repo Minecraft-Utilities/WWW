@@ -11,9 +11,6 @@ export default function ServerDnsRecords({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        DNS Records
-      </p>
       <div className="min-w-0 overflow-x-auto rounded-lg border border-border [-webkit-overflow-scrolling:touch]">
         <table className="w-full min-w-[320px] text-left text-sm">
           <thead>

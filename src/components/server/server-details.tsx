@@ -3,6 +3,7 @@ import DetailRow from "../detail-row";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import { formatNumberWithCommas } from "@/common/utils";
+import { formatDuration, formatTime, timeAgo } from "@/common/time-utils";
 
 export function ServerDetails({
   server,
@@ -15,59 +16,58 @@ export function ServerDetails({
   const bedrockServer = server as BedrockServer;
 
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        Details
-      </p>
-      <div className="flex flex-col gap-0">
-        <DetailRow label="Hostname" value={server.hostname} />
-        <DetailRow label="IP address" value={server.ip} />
-        <DetailRow label="Port" value={String(server.port)} />
-        {edition === "java" && (
-          <>
-            {javaServer.version && (
-              <DetailRow
-                label="Protocol version"
-                value={`${javaServer.version.protocolName ?? javaServer.version.name} (${javaServer.version.protocol})`}
-              />
-            )}
+    <div className="flex flex-col gap-0">
+      <DetailRow
+        label="Cached"
+          value={server.cached ? timeAgo(new Date(server.cachedTime)) : "No"}
+      />
+      <DetailRow label="Hostname" value={server.hostname} />
+      <DetailRow label="IP address" value={server.ip} />
+      <DetailRow label="Port" value={String(server.port)} />
+      {edition === "java" && (
+        <>
+          {javaServer.version && (
             <DetailRow
-              label="Blocked by Mojang"
-              value={javaServer.mojangBlocked ? "Yes" : "No"}
-              variant={javaServer.mojangBlocked ? "warning" : "success"}
+              label="Protocol version"
+              value={`${javaServer.version.protocolName ?? javaServer.version.name} (${javaServer.version.protocol})`}
             />
-            {javaServer.isModded && (
-              <DetailRow
-                label="Modded server"
-                value={`${javaServer.forgeData?.mods?.length ?? 0} mods`}
-                variant="warning"
-              />
-            )}
-          </>
-        )}
-        {edition === "bedrock" && (
-          <>
-            {bedrockServer.version?.name && (
-              <DetailRow label="Version" value={bedrockServer.version.name} />
-            )}
-            {bedrockServer.gamemode?.name && (
-              <DetailRow label="Gamemode" value={bedrockServer.gamemode.name} />
-            )}
-          </>
-        )}
-        <DetailRow
-          label="SRV record"
-          value={server.records?.some((r) => r.type === "SRV") ? "Yes" : "No"}
-          variant="success"
-        />
-        {server.location?.country && (
+          )}
           <DetailRow
-            label="Location"
-            variant="warning"
-            value={server.location.country}
+            label="Blocked by Mojang"
+            value={javaServer.mojangBlocked ? "Yes" : "No"}
+            variant={javaServer.mojangBlocked ? "warning" : "success"}
           />
-        )}
-      </div>
+          {javaServer.isModded && (
+            <DetailRow
+              label="Modded server"
+              value={`${javaServer.forgeData?.mods?.length ?? 0} mods`}
+              variant="warning"
+            />
+          )}
+        </>
+      )}
+      {edition === "bedrock" && (
+        <>
+          {bedrockServer.version?.name && (
+            <DetailRow label="Version" value={bedrockServer.version.name} />
+          )}
+          {bedrockServer.gamemode?.name && (
+            <DetailRow label="Gamemode" value={bedrockServer.gamemode.name} />
+          )}
+        </>
+      )}
+      <DetailRow
+        label="SRV record"
+        value={server.records?.some((r) => r.type === "SRV") ? "Yes" : "No"}
+        variant="success"
+      />
+      {server.location?.country && (
+        <DetailRow
+          label="Location"
+          variant="warning"
+          value={server.location.country}
+        />
+      )}
     </div>
   );
 }

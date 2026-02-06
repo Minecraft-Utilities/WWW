@@ -1,5 +1,6 @@
 "use client";
 
+import { mcUtilsApi } from "@/common/mc-utils";
 import { cn, isIpOrDomain } from "@/common/utils";
 import {
   InputGroup,
@@ -7,15 +8,14 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { useDebounce } from "@uidotdev/usehooks";
+import { Check, Loader2, Search, X } from "lucide-react";
+import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
+import { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
 import { SubmitEvent, useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Check, Loader2, Search, X } from "lucide-react";
 import ServerEditionDialog from "./server-edition-dialog";
-import { ServerType } from "mcutils-js-api/dist/types/server/server";
-import { useIsMobile } from "../context/viewport-context";
-import { mcUtilsApi } from "@/common/mc-utils";
-import { useDebounce } from "@uidotdev/usehooks";
 
 export default function QuerySearch({
   landingPage,
@@ -24,28 +24,25 @@ export default function QuerySearch({
 }: {
   landingPage?: boolean;
   className?: string;
-  setQueryError?: (invalid: boolean) => void;
+  setQueryError?: (invalid: ErrorResponse | undefined) => void;
 }) {
   const router = useRouter();
 
   const [serverDialogOpen, setServerDialogOpen] = useState(false);
   const [pendingServer, setPendingServer] = useState("");
   const [loading, setLoading] = useState(false);
-  const [invalidQuery, setInvalidQuery] = useState(false);
+  const [invalidQuery, setInvalidQuery] = useState<ErrorResponse | undefined>(
+    undefined,
+  );
 
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     const trimmed = debouncedSearch.trim();
-    if (!trimmed) {
+    if (!trimmed || isIpOrDomain(trimmed)) {
       setLoading(false);
-      setInvalidQuery(false);
-      return;
-    }
-    if (isIpOrDomain(trimmed)) {
-      setInvalidQuery(false);
-      setLoading(false);
+      setInvalidQuery(undefined);
       return;
     }
 
@@ -55,7 +52,7 @@ export default function QuerySearch({
       if (cancelled) {
         return;
       }
-      setInvalidQuery(!!player.error);
+      setInvalidQuery(player.error);
       setLoading(false);
     });
     return () => {
@@ -113,7 +110,7 @@ export default function QuerySearch({
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          aria-invalid={invalidQuery}
+          aria-invalid={!!invalidQuery}
         />
 
         <InputGroupAddon>
@@ -133,7 +130,10 @@ export default function QuerySearch({
               size="icon-xs"
               variant="ghost"
               aria-label="Clear"
-              onClick={() => setSearch("")}
+              onClick={() => {
+                setSearch("");
+                setInvalidQuery(undefined);
+              }}
             >
               <X className="size-4" />
             </InputGroupButton>

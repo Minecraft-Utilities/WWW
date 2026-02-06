@@ -1,11 +1,46 @@
 import clsx, { ClassValue } from "clsx";
 
-type Props = {
+type CardProps = {
   children: React.ReactNode;
   className?: ClassValue;
 };
 
-export default function Card({ children, className }: Props) {
+type CardHeaderProps = {
+  children: React.ReactNode;
+  className?: ClassValue;
+  variant?: "default" | "destructive";
+};
+
+export function CardHeader({
+  children,
+  className,
+  variant = "default",
+}: CardHeaderProps) {
+  return (
+    <div
+      className={clsx(
+        "border-b px-4 py-3",
+        variant === "default" &&
+          "border-border/60 bg-muted/20",
+        variant === "destructive" &&
+          "border-destructive/50 bg-destructive/10",
+        className,
+      )}
+    >
+      <p
+        className={clsx(
+          "text-xs font-medium uppercase tracking-wider",
+          variant === "default" && "text-muted-foreground",
+          variant === "destructive" && "text-destructive",
+        )}
+      >
+        {children}
+      </p>
+    </div>
+  );
+}
+
+export default function Card({ children, className }: CardProps) {
   return (
     <div
       className={clsx(

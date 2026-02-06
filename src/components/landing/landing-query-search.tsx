@@ -3,9 +3,12 @@
 import { useState } from "react";
 import QuerySearch from "../lookup/query-search";
 import Card from "../ui/card";
+import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 
 export default function LandingQuerySearch() {
-  const [queryError, setQueryError] = useState(false);
+  const [queryError, setQueryError] = useState<ErrorResponse | undefined>(
+    undefined,
+  );
 
   return (
     <div className="flex flex-col">
@@ -14,7 +17,7 @@ export default function LandingQuerySearch() {
       </Card>
       <Card className="rounded-t-none bg-secondary/90 text-sm">
         {queryError ? (
-          <p className="text-destructive">Player not found or invalid query</p>
+          <p className="text-destructive">{queryError.message}</p>
         ) : (
           <p className="text-muted-foreground">
             Enter a Username / UUID / Domain to get started.

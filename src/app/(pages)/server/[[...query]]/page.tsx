@@ -2,7 +2,7 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import { capitalize, formatNumberWithCommas } from "@/common/utils";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
-import Card from "@/components/ui/card";
+import Card, { CardHeader } from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
@@ -66,9 +66,9 @@ export default async function ServerPage({ params }: Props) {
   return (
     <div className="flex w-full flex-col items-center gap-6">
       {(error || !server) && (
-        <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
-          <p className="font-medium text-destructive">Error</p>
-          <p className="text-sm text-muted-foreground">
+        <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
+          <CardHeader variant="destructive">Error</CardHeader>
+          <p className="px-4 py-3 text-sm text-muted-foreground">
             {error?.message ?? "Invalid lookup parameters"}
           </p>
         </Card>
@@ -113,16 +113,22 @@ export default async function ServerPage({ params }: Props) {
 
             {/* Details */}
             <section className="flex flex-col gap-4">
-              <Card className="flex w-full min-w-0 flex-col gap-4">
-                <ServerDetails server={server} edition={edition} />
+              <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+                <CardHeader>Details</CardHeader>
+                <div className="p-4">
+                  <ServerDetails server={server} edition={edition} />
+                </div>
               </Card>
             </section>
 
             {/* DNS records (collapsible) */}
             {server.records && server.records.length > 0 && (
               <section className="flex flex-col gap-4">
-                <Card className="flex w-full min-w-0 flex-col gap-4">
-                  <ServerDnsRecords records={server.records} />
+                <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+                  <CardHeader>DNS Records</CardHeader>
+                  <div className="p-4">
+                    <ServerDnsRecords records={server.records} />
+                  </div>
                 </Card>
               </section>
             )}
@@ -136,9 +142,9 @@ export default async function ServerPage({ params }: Props) {
 function InvalidServer({ error }: { error?: ErrorResponse }) {
   return (
     <div className="flex w-full flex-col items-center gap-6">
-      <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
-        <p className="font-medium text-destructive">Error</p>
-        <p className="text-sm text-muted-foreground">
+      <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
+        <CardHeader variant="destructive">Error</CardHeader>
+        <p className="px-4 py-3 text-sm text-muted-foreground">
           {error?.message ?? "Invalid address"}
         </p>
       </Card>
