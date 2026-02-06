@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "A list of all known capes in Minecraft",
 };
 
-export default async function CapsPage() {
+export default async function CapesPage() {
   const response = await getCapes();
   const capes = response.capes ?? [];
   const isEmpty = capes.length === 0;
@@ -37,10 +37,17 @@ export default async function CapsPage() {
         ) : (
           <div className="flex max-w-6xl flex-wrap justify-center gap-2">
             {capes.map(cape => (
-              <Card key={cape.textureId} className="w-52 shrink-0">
-                <CardHeader>{cape.name}</CardHeader>
-                <CardContent className="flex items-center justify-center">
-                  <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
+              <Card key={cape.textureId} className="flex w-44 shrink-0 flex-col md:w-52">
+                <CardHeader className="shrink-0">{cape.name}</CardHeader>
+                <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
+                  <Image
+                    src={cape.parts.FRONT}
+                    alt={cape.name}
+                    width={96}
+                    height={96}
+                    unoptimized
+                    className="mx-auto"
+                  />
                 </CardContent>
               </Card>
             ))}
