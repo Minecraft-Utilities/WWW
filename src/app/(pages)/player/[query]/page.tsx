@@ -48,7 +48,7 @@ export default async function PlayerPage({ params }: Props) {
   const { player, error } = await mcUtilsApi.fetchPlayer(query);
 
   return (
-    <div className="flex w-full flex-col items-center gap-6 mt-24">
+    <div className="flex w-full flex-col items-center gap-6 mt-20">
       {error && (
         <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
           <CardHeader variant="destructive">Error</CardHeader>

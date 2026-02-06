@@ -56,7 +56,7 @@ export default function RootLayout({
             <main className="relative flex min-h-0 flex-1 flex-col w-full">
               <Toaster />
               <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">
-                <div className="max-w-[1600px] mx-auto w-full shrink-0">
+                <div className="max-w-[1600px] mx-auto w-full shrink-0 px-2">
                   {children}
                 </div>
                 <div className="min-h-0 flex-1" aria-hidden />
