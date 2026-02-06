@@ -47,6 +47,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
   }
   const favicon = "favicon" in server ? server.favicon?.url : undefined;
+  const players = server.players;
 
   return {
     title: `${server?.hostname} - ${capitalize(edition!)}`,
@@ -55,6 +56,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     },
     openGraph: {
       ...(favicon ? { images: [{ url: favicon }] } : {}),
+      description: `${players.online}/${players.max} players online`,
     },
   };
 }

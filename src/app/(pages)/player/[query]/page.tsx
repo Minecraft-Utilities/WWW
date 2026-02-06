@@ -31,6 +31,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: `${player.username}`,
     openGraph: {
       title: `${player.username}`,
+      description: `UUID: ${player.uniqueId}`,
       images: [
         {
           url: skullUrl,
