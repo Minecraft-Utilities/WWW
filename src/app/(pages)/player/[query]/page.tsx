@@ -4,9 +4,12 @@ import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
 import PlayerSkin from "@/components/player/player-skin";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
+import { cache } from "react";
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+const getPlayer = cache((query: string) => mcUtilsApi.fetchPlayer(query));
 
 type Props = {
   params: Promise<{
@@ -16,7 +19,7 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { query } = await props.params;
-  const { player } = await mcUtilsApi.fetchPlayer(query);
+  const { player } = await getPlayer(query);
 
   if (player === undefined) {
     return {
@@ -47,7 +50,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function PlayerPage({ params }: Props) {
   const { query } = await params;
-  const { player, error } = await mcUtilsApi.fetchPlayer(query);
+  const { player, error } = await getPlayer(query);
 
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-6">

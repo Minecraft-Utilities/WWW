@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Navbar from "../components/navbar/navbar";
+import Navbar from "@/components/navbar/navbar";
 import { QueryProvider } from "../providers/query-provider";
 import "./styles/globals.css";
 

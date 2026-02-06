@@ -12,10 +12,8 @@ export const metadata: Metadata = {
 
 export default async function CapsPage() {
   const response = await mcUtilsApi.fetchCapes();
-  const capes = response.capes;
-  if (!capes) {
-    return <div>No capes found</div>;
-  }
+  const capes = response.capes ?? [];
+  const isEmpty = capes.length === 0;
 
   return (
     <div className="mt-24 flex w-full flex-col items-center justify-center gap-24">
@@ -24,16 +22,24 @@ export default async function CapsPage() {
         <p className="text-muted-foreground text-center text-sm">A list of all known capes in Minecraft</p>
       </header>
 
-      <div className="flex max-w-6xl flex-wrap justify-center gap-2">
-        {capes.map(cape => (
-          <Card key={cape.textureId} className="w-52 shrink-0">
-            <CardHeader>{cape.name}</CardHeader>
-            <CardContent className="flex items-center justify-center">
-              <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {isEmpty ? (
+        <Card className="w-full max-w-md">
+          <CardContent className="py-8 text-center">
+            <p className="text-muted-foreground">No capes found.</p>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="flex max-w-6xl flex-wrap justify-center gap-2">
+          {capes.map(cape => (
+            <Card key={cape.textureId} className="w-52 shrink-0">
+              <CardHeader>{cape.name}</CardHeader>
+              <CardContent className="flex items-center justify-center">
+                <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

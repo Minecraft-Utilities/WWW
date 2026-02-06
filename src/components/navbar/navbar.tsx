@@ -11,7 +11,7 @@ import SimpleLink from "../simple-link";
 
 const links: ReactElement<any>[] = [
   <NavLink key="capes" name="Capes" icon={<FlameIcon className="size-5" />} href="/capes" />,
-  <NavLink key="servers" name="Servers" icon={<ComputerDesktopIcon className="size-5" />} href="/servers" />,
+  <NavLink key="servers" name="Servers" icon={<ComputerDesktopIcon className="size-5" />} href="/server" />,
 ];
 
 export default function Navbar() {
@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8">
-      <div className="flex w-6xl justify-between">
+      <div className="flex w-full max-w-6xl justify-between">
         <div className="flex items-center gap-(--spacing-md) md:gap-6">
           {/* Branding */}
           <SimpleLink

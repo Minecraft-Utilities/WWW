@@ -3,7 +3,7 @@
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import { useState } from "react";
 import QuerySearch from "../lookup/query-search";
-import Card, { CardContent, CardFooter } from "../ui/card";
+import Card, { CardContent, CardFooter } from "@/components/ui/card";
 
 export default function LandingQuerySearch() {
   const [queryError, setQueryError] = useState<ErrorResponse | undefined>(undefined);

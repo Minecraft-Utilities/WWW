@@ -17,7 +17,7 @@ export default function Background() {
         className="absolute inset-0"
         style={{
           background: `
-            linear-gradient(to bottom, transparent 40%, rgb(12, 10, 9) 100%),
+            linear-gradient(to bottom, transparent 40%, var(--background) 100%),
             linear-gradient(to bottom, transparent 0%, transparent 10%, rgba(0,0,0,0.5) 100%)
           `,
         }}

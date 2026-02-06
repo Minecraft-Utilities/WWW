@@ -3,13 +3,17 @@ import { capitalize, formatNumberWithCommas } from "@/common/utils";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
-import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { Metadata } from "next";
 import Image from "next/image";
+import { cache } from "react";
 
 export const dynamic = "force-dynamic";
+
+const fetchServerCached = cache((hostname: string, edition: ServerType) =>
+  mcUtilsApi.fetchServer(hostname, edition)
+);
 
 type Props = {
   params: Promise<{
@@ -25,8 +29,7 @@ async function getServer(query: string[] | undefined) {
     return { server: undefined, error: undefined };
   }
 
-  const { server, error } = await mcUtilsApi.fetchServer(decodeURIComponent(hostname), edition);
-
+  const { server, error } = await fetchServerCached(decodeURIComponent(hostname), edition);
   return { server, error, edition };
 }
 
@@ -139,19 +142,6 @@ export default async function ServerPage({ params }: Props) {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function InvalidServer({ error }: { error?: ErrorResponse }) {
-  return (
-    <div className="flex w-full flex-col items-center gap-6">
-      <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
-        <CardHeader variant="destructive">Error</CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid address"}</p>
-        </CardContent>
-      </Card>
     </div>
   );
 }
