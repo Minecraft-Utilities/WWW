@@ -7,6 +7,7 @@ import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 60 * 60 * 1; // 1 hour
 
 type Props = {
   params: Promise<{
