@@ -18,8 +18,12 @@ export const metadata: Metadata = {
     default: "MC Utils",
     template: "%s | MC Utils",
   },
-  description:
-    "API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and previews.",
+  openGraph: {
+    title: "MC Utils",
+    siteName: "MC Utils",
+    description:
+      "API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and previews.",
+  },
 };
 
 export default function RootLayout({

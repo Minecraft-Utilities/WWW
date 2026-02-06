@@ -14,7 +14,7 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { query } = await props.params;
-  const { player, error } = await mcUtilsApi.fetchPlayer(query);
+  const { player } = await mcUtilsApi.fetchPlayer(query);
 
   if (player === undefined) {
     return {
@@ -26,15 +26,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       },
     };
   }
-
+  const skullUrl = player.skin.parts.HEAD;
   return {
     title: `${player.username}`,
     openGraph: {
-      siteName: "MC Utils",
       title: `${player.username}`,
+      images: [
+        {
+          url: skullUrl,
+        },
+      ],
     },
-    twitter: {
-      card: "summary",
+    icons: {
+      icon: skullUrl,
     },
   };
 }

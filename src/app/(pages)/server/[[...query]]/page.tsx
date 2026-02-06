@@ -4,6 +4,7 @@ import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
+import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { Metadata } from "next";
@@ -15,31 +16,12 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { query } = await props.params;
+async function getServer(query: string[] | undefined) {
   const edition = query?.[0] as ServerType;
   const hostname = query?.[1];
 
-  return {
-    title: `${hostname} - ${capitalize(edition)}`,
-  };
-}
-
-export default async function ServerPage({ params }: Props) {
-  const { query } = await params;
-
-  const edition = query?.[0] as ServerType;
-  const hostname = query?.[1];
-
-  const invalidParams =
-    !query ||
-    query.length < 2 ||
-    !edition ||
-    !hostname ||
-    !["java", "bedrock"].includes(edition);
-
-  if (invalidParams) {
-    return <InvalidServer />;
+  if (!hostname) {
+    return { server: undefined, error: undefined };
   }
 
   const { server, error } = await mcUtilsApi.fetchServer(
@@ -47,12 +29,48 @@ export default async function ServerPage({ params }: Props) {
     edition,
   );
 
+  return { server, error, edition };
+}
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { query } = await props.params;
+  const { server, error, edition } = await getServer(query);
+
+  if (error || !server) {
+    return {
+      title: "Server not found",
+      description: "Server not found",
+      openGraph: {
+        title: "Server not found",
+        description: "Server not found",
+      },
+    };
+  }
+  const favicon = "favicon" in server ? server.favicon?.url : undefined;
+
+  return {
+    title: `${server?.hostname} - ${capitalize(edition!)}`,
+    icons: {
+      ...(favicon ? { icon: favicon } : {}),
+    },
+    openGraph: {
+      ...(favicon ? { images: [{ url: favicon }] } : {}),
+    },
+  };
+}
+
+export default async function ServerPage({ params }: Props) {
+  const { query } = await params;
+  const { server, error, edition } = await getServer(query);
+
   return (
     <div className="flex w-full flex-col items-center gap-6">
-      {error && (
+      {(error || !server) && (
         <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
           <p className="font-medium text-destructive">Error</p>
-          <p className="text-sm text-muted-foreground">{error.message}</p>
+          <p className="text-sm text-muted-foreground">
+            {error?.message ?? "Invalid lookup parameters"}
+          </p>
         </Card>
       )}
 
