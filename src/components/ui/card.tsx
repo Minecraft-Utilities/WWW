@@ -20,10 +20,8 @@ export function CardHeader({
     <div
       className={clsx(
         "border-b px-4 py-3",
-        variant === "default" &&
-          "border-border/60 bg-muted/20",
-        variant === "destructive" &&
-          "border-destructive/50 bg-destructive/10",
+        variant === "default" && "border-border/60 bg-muted/20",
+        variant === "destructive" && "border-destructive/50 bg-destructive/10",
         className,
       )}
     >

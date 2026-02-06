@@ -19,7 +19,7 @@ export function ServerDetails({
     <div className="flex flex-col gap-0">
       <DetailRow
         label="Cached"
-          value={server.cached ? timeAgo(new Date(server.cachedTime)) : "No"}
+        value={server.cached ? timeAgo(new Date(server.cachedTime)) : "No"}
       />
       <DetailRow label="Hostname" value={server.hostname} />
       <DetailRow label="IP address" value={server.ip} />

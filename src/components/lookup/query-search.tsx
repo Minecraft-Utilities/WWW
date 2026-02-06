@@ -8,6 +8,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Check, Loader2, Search, X } from "lucide-react";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
@@ -27,43 +28,26 @@ export default function QuerySearch({
   setQueryError?: (invalid: ErrorResponse | undefined) => void;
 }) {
   const router = useRouter();
-
   const [serverDialogOpen, setServerDialogOpen] = useState(false);
   const [pendingServer, setPendingServer] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [invalidQuery, setInvalidQuery] = useState<ErrorResponse | undefined>(
-    undefined,
-  );
-
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
 
-  useEffect(() => {
-    const trimmed = debouncedSearch.trim();
-    if (!trimmed || isIpOrDomain(trimmed)) {
-      setLoading(false);
-      setInvalidQuery(undefined);
-      return;
-    }
+  const trimmed = debouncedSearch.trim();
+  const shouldLookup =
+    trimmed.length > 0 && !isIpOrDomain(trimmed);
 
-    setLoading(true);
-    let cancelled = false;
-    mcUtilsApi.fetchPlayer(trimmed).then((player) => {
-      if (cancelled) {
-        return;
-      }
-      setInvalidQuery(player.error);
-      setLoading(false);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [debouncedSearch]);
+  const { data, isPending } = useQuery({
+    queryKey: ["player", "lookup", trimmed],
+    queryFn: () => mcUtilsApi.fetchPlayer(trimmed),
+    enabled: shouldLookup,
+    staleTime: 30_000,
+  });
+
+  const invalidQuery = shouldLookup ? data?.error : undefined;
 
   useEffect(() => {
-    if (setQueryError) {
-      setQueryError(invalidQuery);
-    }
+    setQueryError?.(invalidQuery);
   }, [invalidQuery, setQueryError]);
 
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
@@ -114,7 +98,7 @@ export default function QuerySearch({
         />
 
         <InputGroupAddon>
-          {loading ? (
+          {isPending ? (
             <Loader2 className="size-4 animate-spin text-muted-foreground" />
           ) : showSearchIcon ? (
             <Search className="size-4 text-muted-foreground" />
@@ -130,10 +114,7 @@ export default function QuerySearch({
               size="icon-xs"
               variant="ghost"
               aria-label="Clear"
-              onClick={() => {
-                setSearch("");
-                setInvalidQuery(undefined);
-              }}
+              onClick={() => setSearch("")}
             >
               <X className="size-4" />
             </InputGroupButton>
