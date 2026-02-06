@@ -61,7 +61,7 @@ export default function Footer() {
                 draggable={false}
               >
                 <Image
-                  src="/logo.png"
+                  src="/media/logo.png"
                   alt="MC Utils"
                   width={36}
                   height={36}
