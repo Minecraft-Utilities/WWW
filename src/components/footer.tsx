@@ -4,7 +4,6 @@ import { cn } from "@/common/utils";
 import SimpleLink from "@/components/simple-link";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import GithubLogo from "./logos/logos/github-logo";
 
@@ -44,7 +43,7 @@ export default function Footer() {
   return (
     <footer
       className={cn(
-        "border-border flex shrink-0 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0 bg-secondary/60 mt-5",
+        "border-border bg-secondary/60 mt-5 flex shrink-0 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0"
       )}
     >
       <div className="flex justify-center">
@@ -57,22 +56,16 @@ export default function Footer() {
                 href="/"
                 draggable={false}
               >
-                <Image
-                  src="/media/logo.png"
-                  alt="MC Utils"
-                  width={36}
-                  height={36}
-                  className="size-9"
-                />
+                <Image src="/media/logo.png" alt="MC Utils" width={36} height={36} className="size-9" />
                 <h1 className="text-primary text-xl font-bold">MC Utils</h1>
               </SimpleLink>
               <p className="max-w-md text-sm opacity-85">
-                API for Minecraft player data (skins, capes, profiles),
-                Java/Bedrock server status and previews.
+                API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and
+                previews.
               </p>
             </div>
             <div className="flex items-center justify-center gap-4 lg:justify-start">
-              {socialLinks.map((link) => (
+              {socialLinks.map(link => (
                 <SimpleLink
                   key={link.name}
                   className="transition-all hover:opacity-75"
@@ -92,10 +85,8 @@ export default function Footer() {
           <div className="flex gap-20 transition-all md:gap-32">
             {Object.entries(links).map(([title, linkList]) => (
               <div key={title} className="flex flex-col gap-0.5">
-                <h2 className="text-primary pb-0.5 text-lg font-semibold">
-                  {title}
-                </h2>
-                {linkList.map((link) => {
+                <h2 className="text-primary pb-0.5 text-lg font-semibold">{title}</h2>
+                {linkList.map(link => {
                   const external = !link.href.startsWith("/");
                   return (
                     <SimpleLink
@@ -107,9 +98,7 @@ export default function Footer() {
                       draggable={false}
                     >
                       <span>{link.name}</span>
-                      {external && (
-                        <ExternalLink className="size-3.5 h-3.5 w-3.5" />
-                      )}
+                      {external && <ExternalLink className="size-3.5 h-3.5 w-3.5" />}
                     </SimpleLink>
                   );
                 })}

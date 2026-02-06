@@ -1,19 +1,13 @@
 "use client";
 
+import { cn } from "@/common/utils";
 import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
 import { useState } from "react";
 import Card, { CardHeader } from "../ui/card";
-import { cn } from "@/common/utils";
 
-const SKIN_PARTS: SkinPart[] = [
-  "HEAD",
-  "FACE",
-  "BODY",
-  "FULLBODY_FRONT",
-  "FULLBODY_BACK",
-];
+const SKIN_PARTS: SkinPart[] = ["HEAD", "FACE", "BODY", "FULLBODY_FRONT", "FULLBODY_BACK"];
 
 type Props = {
   skin: Skin;
@@ -27,7 +21,7 @@ export default function PlayerSkin({ skin, username }: Props) {
     <Card className="flex flex-col overflow-hidden p-0">
       <CardHeader>Skin</CardHeader>
       <div className="flex flex-col items-center gap-4 p-4">
-        <div className="relative flex h-72 w-full max-w-[280px] items-center justify-center overflow-hidden rounded-xl bg-muted/40 ring-1 ring-border/50">
+        <div className="bg-muted/40 ring-border/50 relative flex h-72 w-full max-w-[280px] items-center justify-center overflow-hidden rounded-xl ring-1">
           <Image
             src={skin.parts[selectedPart]}
             alt={`${username} skin - ${selectedPart}`}
@@ -39,19 +33,17 @@ export default function PlayerSkin({ skin, username }: Props) {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2">
-          {SKIN_PARTS.map((key) => {
+          {SKIN_PARTS.map(key => {
             const partImgUrl = skin.parts[key];
             return (
               <button
                 key={key}
                 onClick={() => setSelectedPart(key)}
                 className={cn(
-                  "flex overflow-hidden rounded-lg border-2 bg-muted/30 transition-colors",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "bg-muted/30 flex overflow-hidden rounded-lg border-2 transition-colors",
+                  "focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none",
                   "size-14",
-                  selectedPart === key
-                    ? "border-primary"
-                    : "border-border/60 hover:border-border",
+                  selectedPart === key ? "border-primary" : "border-border/60 hover:border-border"
                 )}
               >
                 <Image

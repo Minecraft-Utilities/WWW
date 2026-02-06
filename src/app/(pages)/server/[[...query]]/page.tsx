@@ -4,7 +4,6 @@ import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card, { CardHeader } from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
-import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { Metadata } from "next";
@@ -24,10 +23,7 @@ async function getServer(query: string[] | undefined) {
     return { server: undefined, error: undefined };
   }
 
-  const { server, error } = await mcUtilsApi.fetchServer(
-    decodeURIComponent(hostname),
-    edition,
-  );
+  const { server, error } = await mcUtilsApi.fetchServer(decodeURIComponent(hostname), edition);
 
   return { server, error, edition };
 }
@@ -66,20 +62,20 @@ export default async function ServerPage({ params }: Props) {
   const { server, error, edition } = await getServer(query);
 
   return (
-    <div className="flex w-full flex-col items-center gap-6 mt-24">
+    <div className="mt-24 flex w-full flex-col items-center gap-6">
       {(error || !server) && (
-        <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
+        <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
           <CardHeader variant="destructive">Error</CardHeader>
-          <p className="px-4 py-3 text-sm text-muted-foreground">
+          <p className="text-muted-foreground px-4 py-3 text-sm">
             {error?.message ?? "Invalid lookup parameters"}
           </p>
         </Card>
       )}
 
       {server && (
-        <div className="flex flex-col w-full max-w-3xl gap-24">
+        <div className="flex w-full max-w-3xl flex-col gap-24">
           {/* Header */}
-          <header className="flex min-w-0 flex-1 flex-col gap-4 items-center">
+          <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
             <div className="flex items-center gap-4">
               {edition === "java" && (server as JavaServer).favicon?.base64 && (
                 <Image
@@ -91,7 +87,7 @@ export default async function ServerPage({ params }: Props) {
                 />
               )}
 
-              <h1 className="min-w-0 wrap-break-word text-4xl font-bold tracking-tight text-foreground text-center">
+              <h1 className="text-foreground min-w-0 text-center text-4xl font-bold tracking-tight wrap-break-word">
                 {server.hostname}
               </h1>
             </div>
@@ -101,7 +97,7 @@ export default async function ServerPage({ params }: Props) {
             {/* MOTD preview (Java only) */}
             {edition === "java" && (server as JavaServer).motd?.preview && (
               <section className="flex flex-col gap-4">
-                <Card className="items-center overflow-hidden p-0 h-fit">
+                <Card className="h-fit items-center overflow-hidden p-0">
                   <Image
                     src={(server as JavaServer).motd!.preview!}
                     alt={`${server.hostname} MOTD preview`}
@@ -145,11 +141,9 @@ export default async function ServerPage({ params }: Props) {
 function InvalidServer({ error }: { error?: ErrorResponse }) {
   return (
     <div className="flex w-full flex-col items-center gap-6">
-      <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
+      <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
         <CardHeader variant="destructive">Error</CardHeader>
-        <p className="px-4 py-3 text-sm text-muted-foreground">
-          {error?.message ?? "Invalid address"}
-        </p>
+        <p className="text-muted-foreground px-4 py-3 text-sm">{error?.message ?? "Invalid address"}</p>
       </Card>
     </div>
   );

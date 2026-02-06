@@ -1,10 +1,10 @@
 "use client";
 
+import { cn } from "@/common/utils";
 import * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useIsMobile } from "../context/viewport-context";
-import { cn } from "@/common/utils";
 
 // Shared portal container for all tooltips
 const createPortalContainer = () => {
@@ -73,7 +73,7 @@ export const Tooltip = React.memo(function Tooltip({
   const handleClick = useCallback(() => {
     if (isMobile) {
       setIsPositioned(false);
-      setIsOpen((prev) => !prev);
+      setIsOpen(prev => !prev);
     }
   }, [isMobile]);
 
@@ -140,29 +140,21 @@ export const Tooltip = React.memo(function Tooltip({
             case "top":
               return {
                 top: triggerRect.top - tooltipRect.height - 4,
-                left:
-                  triggerRect.left +
-                  (triggerRect.width - tooltipRect.width) / 2,
+                left: triggerRect.left + (triggerRect.width - tooltipRect.width) / 2,
               };
             case "bottom":
               return {
                 top: triggerRect.bottom + 4,
-                left:
-                  triggerRect.left +
-                  (triggerRect.width - tooltipRect.width) / 2,
+                left: triggerRect.left + (triggerRect.width - tooltipRect.width) / 2,
               };
             case "left":
               return {
-                top:
-                  triggerRect.top +
-                  (triggerRect.height - tooltipRect.height) / 2,
+                top: triggerRect.top + (triggerRect.height - tooltipRect.height) / 2,
                 left: triggerRect.left - tooltipRect.width - 4,
               };
             case "right":
               return {
-                top:
-                  triggerRect.top +
-                  (triggerRect.height - tooltipRect.height) / 2,
+                top: triggerRect.top + (triggerRect.height - tooltipRect.height) / 2,
                 left: triggerRect.right + 4,
               };
           }
@@ -293,9 +285,7 @@ export const Tooltip = React.memo(function Tooltip({
                   zIndex: 9999,
                   border: "1px solid hsl(12 6.5% 25.1%)",
                   opacity: isPositioned ? 1 : 0,
-                  transition: isMobile
-                    ? "none"
-                    : `opacity ${delayDuration}ms ease-in-out`,
+                  transition: isMobile ? "none" : `opacity ${delayDuration}ms ease-in-out`,
                   whiteSpace: "nowrap",
                 }}
                 className={cn(
@@ -308,14 +298,14 @@ export const Tooltip = React.memo(function Tooltip({
                     "data-[side=right]:slide-in-from-left-2": side === "right",
                     "data-[side=top]:slide-in-from-bottom-2": side === "top",
                   },
-                  className,
+                  className
                 )}
                 onMouseEnter={!isMobile ? handleMouseEnter : undefined}
                 onMouseLeave={!isMobile ? handleMouseLeave : undefined}
               >
                 {content}
               </div>,
-              container,
+              container
             )
           );
         })()}

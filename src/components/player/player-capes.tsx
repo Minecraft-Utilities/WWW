@@ -11,7 +11,7 @@ export default function PlayerCapes({ player }: { player: CachedPlayer }) {
   }
 
   return (
-    <Card className="flex h-fit flex-col overflow-hidden p-0 min-w-48">
+    <Card className="flex h-fit min-w-48 flex-col overflow-hidden p-0">
       <CardHeader>Cape</CardHeader>
       <div className="flex flex-col justify-center p-4">
         <Image
@@ -20,7 +20,7 @@ export default function PlayerCapes({ player }: { player: CachedPlayer }) {
           width={64}
           height={64}
           unoptimized
-          className="object-cover rounded-lg"
+          className="rounded-lg object-cover"
         />
       </div>
     </Card>

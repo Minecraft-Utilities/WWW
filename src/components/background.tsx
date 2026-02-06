@@ -1,7 +1,7 @@
 export default function Background() {
   return (
     <div
-      className="pointer-events-none absolute left-0 right-0 top-0 -z-50 h-[420px] select-none overflow-hidden"
+      className="pointer-events-none absolute top-0 right-0 left-0 -z-50 h-[420px] overflow-hidden select-none"
       aria-hidden
     >
       <img

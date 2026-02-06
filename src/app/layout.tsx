@@ -1,13 +1,13 @@
-import "./styles/globals.css";
-import type { Metadata, Viewport } from "next";
-import { QueryProvider } from "../providers/query-provider";
-import Navbar from "../components/navbar/navbar";
-import localFont from "next/font/local";
+import { env } from "@/common/env";
 import Background from "@/components/background";
 import { ViewportProvider } from "@/components/context/viewport-context";
-import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/footer";
-import { env } from "@/common/env";
+import { Toaster } from "@/components/ui/toaster";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import Navbar from "../components/navbar/navbar";
+import { QueryProvider } from "../providers/query-provider";
+import "./styles/globals.css";
 
 const siteFont = localFont({
   src: "./fonts/JetBrainsMono.ttf",
@@ -48,17 +48,13 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <QueryProvider>
         <ViewportProvider>
-          <body
-            className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}
-          >
+          <body className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}>
             <Navbar />
             <Background />
-            <main className="relative flex min-h-0 flex-1 flex-col w-full">
+            <main className="relative flex min-h-0 w-full flex-1 flex-col">
               <Toaster />
               <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">
-                <div className="max-w-[1600px] mx-auto w-full shrink-0 px-2">
-                  {children}
-                </div>
+                <div className="mx-auto w-full max-w-[1600px] shrink-0 px-2">{children}</div>
                 <div className="min-h-0 flex-1" aria-hidden />
                 <Footer />
               </div>

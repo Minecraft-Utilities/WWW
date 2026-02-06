@@ -2,12 +2,7 @@
 
 import { mcUtilsApi } from "@/common/mc-utils";
 import { cn, isIpOrDomain } from "@/common/utils";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Check, Loader2, Search, X } from "lucide-react";
@@ -77,30 +72,24 @@ export default function QuerySearch({
     setServerDialogOpen(false);
   }
 
-  const showSearchIcon =
-    debouncedSearch.length <= 0 ||
-    invalidQuery ||
-    isIpOrDomain(debouncedSearch);
+  const showSearchIcon = debouncedSearch.length <= 0 || invalidQuery || isIpOrDomain(debouncedSearch);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex items-center flex-col gap-2 md:flex-row md:gap-0"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2 md:flex-row md:gap-0">
       <InputGroup className={cn("w-full", className)}>
         <InputGroupInput
           type="text"
           placeholder="Search..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
           aria-invalid={!!invalidQuery}
         />
 
         <InputGroupAddon>
           {isFetching || isLoading ? (
-            <Loader2 className="size-4 animate-spin text-muted-foreground" />
+            <Loader2 className="text-muted-foreground size-4 animate-spin" />
           ) : showSearchIcon ? (
-            <Search className="size-4 text-muted-foreground" />
+            <Search className="text-muted-foreground size-4" />
           ) : (
             <Check className="size-4 text-green-500" />
           )}
@@ -121,9 +110,7 @@ export default function QuerySearch({
         </InputGroupAddon>
       </InputGroup>
 
-      {landingPage && (
-        <Button className="block md:hidden w-full">Search</Button>
-      )}
+      {landingPage && <Button className="block w-full md:hidden">Search</Button>}
 
       <ServerEditionDialog
         open={serverDialogOpen}

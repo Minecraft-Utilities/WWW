@@ -175,7 +175,7 @@ export function formatDate(
     | "Do MMMM, YYYY HH:mm"
     | "Do MM, YYYY HH:mm a"
     | "Do MMMM, YYYY HH:mm a"
-    | "Do MM, YYYY" = "MMMM YYYY",
+    | "Do MM, YYYY" = "MMMM YYYY"
 ) {
   const formatMap = {
     "MMMM YYYY": "MMMM YYYY",
@@ -195,11 +195,7 @@ export function formatDate(
     .utc()
     .format(formatMap[format] || "MMM D, YYYY");
 
-  if (
-    format === "Do MMMM, YYYY" ||
-    format === "Do MMMM, YYYY HH:mm" ||
-    format === "Do MMMM, YYYY HH:mm a"
-  ) {
+  if (format === "Do MMMM, YYYY" || format === "Do MMMM, YYYY HH:mm" || format === "Do MMMM, YYYY HH:mm a") {
     const day = dayjs(date).date();
     const suffix = getOrdinalSuffix(day);
     return formatted.replace(day.toString(), day + suffix);
@@ -281,9 +277,9 @@ export function formatDuration(ms: number, long: boolean = false): string {
   ];
 
   const result = units
-    .filter((u) => u.value > 0)
+    .filter(u => u.value > 0)
     .slice(0, 2)
-    .map((u) => `${u.value.toFixed(0)}${u.unit}`);
+    .map(u => `${u.value.toFixed(0)}${u.unit}`);
 
   return result.join(", ") || (long ? "0 Seconds" : "0s");
 }

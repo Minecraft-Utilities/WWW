@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from "react";
 
 // Tailwind breakpoints matching the project's theme
 export const Breakpoint = {
@@ -30,8 +23,7 @@ interface ViewportContextType {
 const ViewportContext = createContext<ViewportContextType | null>(null);
 
 export function ViewportProvider({ children }: { children: ReactNode }) {
-  const [viewport, setViewport] =
-    useState<ViewportContextType>(getInitialViewport);
+  const [viewport, setViewport] = useState<ViewportContextType>(getInitialViewport);
 
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {
@@ -55,15 +47,10 @@ export function ViewportProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  return (
-    <ViewportContext.Provider value={viewport}>
-      {children}
-    </ViewportContext.Provider>
-  );
+  return <ViewportContext.Provider value={viewport}>{children}</ViewportContext.Provider>;
 }
 
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 // Always use a fixed initial value so server and first client render match (avoids hydration errors).
 // Real dimensions are set in useLayoutEffect after mount.

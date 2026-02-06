@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { isNumberObject } from "util/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,11 +20,7 @@ export function isIpOrDomain(query: string): boolean {
 
   // Strip optional :port so "play.atmworld.nl:25570" validates the host part
   const withPort = trimmed.match(/^(.+):(\d{1,5})$/);
-  if (
-    withPort &&
-    !withPort[1].endsWith(":") &&
-    parseInt(withPort[2], 10) <= 65535
-  ) {
+  if (withPort && !withPort[1].endsWith(":") && parseInt(withPort[2], 10) <= 65535) {
     trimmed = withPort[1];
   }
 
@@ -34,7 +29,7 @@ export function isIpOrDomain(query: string): boolean {
   if (ipv4Regex.test(trimmed)) {
     // Validate that each octet is 0-255
     const octets = trimmed.split(".");
-    return octets.every((octet) => {
+    return octets.every(octet => {
       const num = parseInt(octet, 10);
       return num >= 0 && num <= 255;
     });
@@ -50,8 +45,7 @@ export function isIpOrDomain(query: string): boolean {
   // Check for domain name
   // Valid domains: letters, numbers, hyphens, dots
   // Must have at least one dot and valid TLD
-  const domainRegex =
-    /^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+  const domainRegex = /^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
   if (domainRegex.test(trimmed)) {
     return true;
   }

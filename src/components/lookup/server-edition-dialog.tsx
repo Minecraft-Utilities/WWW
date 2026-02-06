@@ -1,15 +1,9 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { ServerType } from "mcutils-js-api/dist/types/server/server";
-import { Coffee, Layers } from "lucide-react";
 import { cn } from "@/common/utils";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Coffee, Layers } from "lucide-react";
+import { ServerType } from "mcutils-js-api/dist/types/server/server";
 
 type Props = {
   open: boolean;
@@ -33,12 +27,7 @@ const editionOptions: {
   },
 ];
 
-export default function ServerEditionDialog({
-  open,
-  onOpenChange,
-  serverAddress,
-  onSelectEdition,
-}: Props) {
+export default function ServerEditionDialog({ open, onOpenChange, serverAddress, onSelectEdition }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton={true} className="sm:max-w-md">
@@ -46,7 +35,7 @@ export default function ServerEditionDialog({
           <DialogTitle className="text-xl">Choose server edition</DialogTitle>
           <DialogDescription className="text-muted-foreground text-sm leading-relaxed">
             Which edition is{" "}
-            <span className="font-mono font-medium text-foreground bg-accent/50 px-1.5 py-0.5 rounded border border-border">
+            <span className="text-foreground bg-accent/50 border-border rounded border px-1.5 py-0.5 font-mono font-medium">
               {serverAddress}
             </span>{" "}
             running?
@@ -59,18 +48,16 @@ export default function ServerEditionDialog({
               type="button"
               onClick={() => onSelectEdition(type)}
               className={cn(
-                "group flex flex-col items-center gap-2 rounded-lg border-2 border-border bg-card/50 p-4 transition-all text-center",
+                "group border-border bg-card/50 flex flex-col items-center gap-2 rounded-lg border-2 p-4 text-center transition-all",
                 "hover:border-primary/50 hover:bg-accent/30 hover:shadow-md",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                "focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               )}
             >
-              <span className="flex size-10 items-center justify-center rounded-lg bg-accent/50 text-muted-foreground transition-colors group-hover:bg-primary/20 group-hover:text-primary">
+              <span className="bg-accent/50 text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary flex size-10 items-center justify-center rounded-lg transition-colors">
                 <Icon className="size-5" strokeWidth={2} />
               </span>
-              <span className="font-semibold text-foreground">{label}</span>
-              <span className="text-xs text-muted-foreground">
-                {description}
-              </span>
+              <span className="text-foreground font-semibold">{label}</span>
+              <span className="text-muted-foreground text-xs">{description}</span>
             </button>
           ))}
         </div>

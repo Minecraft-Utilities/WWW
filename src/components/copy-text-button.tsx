@@ -1,16 +1,10 @@
 "use client";
 
 import { CopyIcon } from "lucide-react";
-import SimpleTooltip from "./simple-tooltip";
 import { toast } from "sonner";
+import SimpleTooltip from "./simple-tooltip";
 
-export default function CopyTextButton({
-  text,
-  tooltip,
-}: {
-  text: string;
-  tooltip: string;
-}) {
+export default function CopyTextButton({ text, tooltip }: { text: string; tooltip: string }) {
   return (
     <SimpleTooltip display={tooltip}>
       <button
