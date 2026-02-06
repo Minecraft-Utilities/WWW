@@ -1,6 +1,5 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { capitalize, formatNumberWithCommas } from "@/common/utils";
-import Background from "@/components/background";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
@@ -68,9 +67,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
   const { server, error, edition } = await getServer(query);
 
   return (
-    <>
-      <Background url="https://cdn.fascinated.cc/wjLURHpJ.jpg" />
-      <div className="mt-24 flex w-full flex-col items-center gap-6">
+    <div className="mt-24 flex w-full flex-col items-center gap-6">
         {(error || !server) && (
           <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
             <CardHeader variant="destructive">Error</CardHeader>
@@ -146,6 +143,5 @@ export default async function ServerPage({ params }: ServerPageProps) {
           </div>
         )}
       </div>
-    </>
   );
 }

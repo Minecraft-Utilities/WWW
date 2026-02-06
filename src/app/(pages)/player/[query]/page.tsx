@@ -1,5 +1,4 @@
 import { mcUtilsApi } from "@/common/mc-utils";
-import Background from "@/components/background";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
@@ -55,9 +54,7 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
   const { player, error } = await getPlayer(query);
 
   return (
-    <>
-      <Background url="https://cdn.fascinated.cc/kwSziDTE.jpg" />
-      <div className="mt-24 flex w-full flex-col items-center gap-6">
+    <div className="mt-24 flex w-full flex-col items-center gap-6">
         {error && (
           <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
             <CardHeader variant="destructive">Error</CardHeader>
@@ -85,6 +82,5 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
           </div>
         )}
       </div>
-    </>
   );
 }
