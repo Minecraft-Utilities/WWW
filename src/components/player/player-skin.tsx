@@ -5,7 +5,7 @@ import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
 import { useState } from "react";
-import Card, { CardHeader } from "../ui/card";
+import Card, { CardContent, CardHeader } from "../ui/card";
 
 const SKIN_PARTS: SkinPart[] = ["HEAD", "FACE", "BODY", "FULLBODY_FRONT", "FULLBODY_BACK"];
 
@@ -20,7 +20,7 @@ export default function PlayerSkin({ skin, username }: Props) {
   return (
     <Card className="flex flex-col overflow-hidden p-0">
       <CardHeader>Skin</CardHeader>
-      <div className="flex flex-col items-center gap-4 p-4">
+      <CardContent className="flex flex-col items-center gap-4">
         <div className="bg-muted/40 ring-border/50 relative flex h-72 w-full max-w-[280px] items-center justify-center overflow-hidden rounded-xl ring-1">
           <Image
             src={skin.parts[selectedPart]}
@@ -58,7 +58,7 @@ export default function PlayerSkin({ skin, username }: Props) {
             );
           })}
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 }

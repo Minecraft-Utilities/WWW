@@ -1,6 +1,6 @@
 import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
 import Image from "next/image";
-import Card, { CardHeader } from "../ui/card";
+import Card, { CardContent, CardHeader } from "../ui/card";
 
 export default function PlayerCapes({ player }: { player: CachedPlayer }) {
   const hasCape = player.cape !== undefined;
@@ -13,7 +13,7 @@ export default function PlayerCapes({ player }: { player: CachedPlayer }) {
   return (
     <Card className="flex h-fit min-w-48 flex-col overflow-hidden p-0">
       <CardHeader>Cape</CardHeader>
-      <div className="flex flex-col justify-center p-4">
+      <CardContent className="flex flex-col justify-center">
         <Image
           src={vanillaCape.parts.FRONT}
           alt={`${player.username} cape`}
@@ -22,7 +22,7 @@ export default function PlayerCapes({ player }: { player: CachedPlayer }) {
           unoptimized
           className="rounded-lg object-cover"
         />
-      </div>
+      </CardContent>
     </Card>
   );
 }

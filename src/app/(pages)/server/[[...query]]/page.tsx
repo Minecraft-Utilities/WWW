@@ -2,7 +2,7 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import { capitalize, formatNumberWithCommas } from "@/common/utils";
 import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
-import Card, { CardHeader } from "@/components/ui/card";
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
@@ -66,9 +66,9 @@ export default async function ServerPage({ params }: Props) {
       {(error || !server) && (
         <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
           <CardHeader variant="destructive">Error</CardHeader>
-          <p className="text-muted-foreground px-4 py-3 text-sm">
-            {error?.message ?? "Invalid lookup parameters"}
-          </p>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid lookup parameters"}</p>
+          </CardContent>
         </Card>
       )}
 
@@ -83,6 +83,7 @@ export default async function ServerPage({ params }: Props) {
                   alt={`${server.hostname} favicon`}
                   width={64}
                   height={64}
+                  className="rounded-md"
                   unoptimized
                 />
               )}
@@ -98,14 +99,16 @@ export default async function ServerPage({ params }: Props) {
             {edition === "java" && (server as JavaServer).motd?.preview && (
               <section className="flex flex-col gap-4">
                 <Card className="h-fit items-center overflow-hidden p-0">
-                  <Image
-                    src={(server as JavaServer).motd!.preview!}
-                    alt={`${server.hostname} MOTD preview`}
-                    width={768}
-                    height={128}
-                    unoptimized
-                    className="object-contain p-4"
-                  />
+                  <CardContent className="flex items-center justify-center">
+                    <Image
+                      src={(server as JavaServer).motd!.preview!}
+                      alt={`${server.hostname} MOTD preview`}
+                      width={768}
+                      height={128}
+                      unoptimized
+                      className="object-contain"
+                    />
+                  </CardContent>
                 </Card>
               </section>
             )}
@@ -114,9 +117,9 @@ export default async function ServerPage({ params }: Props) {
             <section className="flex flex-col gap-4">
               <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
                 <CardHeader>Details</CardHeader>
-                <div className="p-4">
+                <CardContent>
                   <ServerDetails server={server} edition={edition} />
-                </div>
+                </CardContent>
               </Card>
             </section>
 
@@ -125,9 +128,9 @@ export default async function ServerPage({ params }: Props) {
               <section className="flex flex-col gap-4">
                 <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
                   <CardHeader>DNS Records</CardHeader>
-                  <div className="p-4">
+                  <CardContent>
                     <ServerDnsRecords records={server.records} />
-                  </div>
+                  </CardContent>
                 </Card>
               </section>
             )}
@@ -143,7 +146,9 @@ function InvalidServer({ error }: { error?: ErrorResponse }) {
     <div className="flex w-full flex-col items-center gap-6">
       <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
         <CardHeader variant="destructive">Error</CardHeader>
-        <p className="text-muted-foreground px-4 py-3 text-sm">{error?.message ?? "Invalid address"}</p>
+        <CardContent>
+          <p className="text-muted-foreground text-sm">{error?.message ?? "Invalid address"}</p>
+        </CardContent>
       </Card>
     </div>
   );

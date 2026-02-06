@@ -15,33 +15,51 @@ export function CardHeader({ children, className, variant = "default" }: CardHea
   return (
     <div
       className={clsx(
-        "border-b px-4 py-3",
+        "rounded-t-2xl border-b px-4 py-3",
+        "text-xs font-medium tracking-wider uppercase",
+        variant === "default" && "border-border/60 bg-muted/20 text-muted-foreground",
+        variant === "destructive" && "border-destructive/50 bg-destructive/10 text-destructive",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+type CardContentProps = {
+  children: React.ReactNode;
+  className?: ClassValue;
+};
+
+export function CardContent({ children, className }: CardContentProps) {
+  return <div className={clsx("p-4", className)}>{children}</div>;
+}
+
+type CardFooterProps = {
+  children: React.ReactNode;
+  className?: ClassValue;
+  variant?: "default" | "destructive";
+};
+
+export function CardFooter({ children, className, variant = "default" }: CardFooterProps) {
+  return (
+    <div
+      className={clsx(
+        "mt-auto w-full rounded-b-2xl border-t px-4 py-2 text-sm",
         variant === "default" && "border-border/60 bg-muted/20",
         variant === "destructive" && "border-destructive/50 bg-destructive/10",
         className
       )}
     >
-      <p
-        className={clsx(
-          "text-xs font-medium tracking-wider uppercase",
-          variant === "default" && "text-muted-foreground",
-          variant === "destructive" && "text-destructive"
-        )}
-      >
-        {children}
-      </p>
+      {children}
     </div>
   );
 }
 
 export default function Card({ children, className }: CardProps) {
   return (
-    <div
-      className={clsx(
-        "bg-card/80 border-border flex flex-col rounded-2xl border p-(--spacing-lg)",
-        className
-      )}
-    >
+    <div className={clsx("bg-card/80 border-border flex flex-col rounded-2xl border", className)}>
       {children}
     </div>
   );

@@ -1,5 +1,5 @@
 import { mcUtilsApi } from "@/common/mc-utils";
-import Card from "@/components/ui/card";
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -22,16 +22,14 @@ export default async function CapsPage() {
         <p className="text-muted-foreground text-center text-sm">A list of all known capes in Minecraft</p>
       </header>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="flex flex-wrap justify-center gap-2">
         {capes.map(cape => (
-          <div key={cape.textureId}>
-            <Card className="bg-secondary/70 items-center rounded-b-none border-b-0 py-2">
-              <p className="text-muted-foreground text-sm">{cape.name}</p>
-            </Card>
-            <Card className="bg-secondary/90 items-center rounded-t-none text-sm">
+          <Card key={cape.textureId} className="w-full max-w-48">
+            <CardHeader>{cape.name}</CardHeader>
+            <CardContent className="flex items-center justify-center">
               <Image src={cape.parts.FRONT} alt={cape.name} width={96} height={96} unoptimized />
-            </Card>
-          </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

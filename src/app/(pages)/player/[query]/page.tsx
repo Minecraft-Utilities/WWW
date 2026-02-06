@@ -3,7 +3,7 @@ import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
 import PlayerSkin from "@/components/player/player-skin";
-import Card, { CardHeader } from "@/components/ui/card";
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 
 type Props = {
@@ -52,7 +52,9 @@ export default async function PlayerPage({ params }: Props) {
       {error && (
         <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
           <CardHeader variant="destructive">Error</CardHeader>
-          <p className="text-muted-foreground px-4 py-3 text-sm">{error.message}</p>
+          <CardContent>
+            <p className="text-muted-foreground text-sm">{error.message}</p>
+          </CardContent>
         </Card>
       )}
 

@@ -1,16 +1,34 @@
 import Image from "next/image";
 import SimpleLink from "../simple-link";
 import SimpleTooltip from "../simple-tooltip";
-import Card, { CardHeader } from "../ui/card";
+import Card, { CardContent, CardFooter, CardHeader } from "../ui/card";
 
 const playerExamples = ["ImFascinated", "Notch", "jeb_", "Technoblade", "NoneTaken", "Dinnerbone"];
 const serverExamples = [
-  "wildnetwork.net",
-  "hypixel.net",
-  "play.cubecraft.net",
-  "mineplex.com",
-  "aetheria.cc",
-  "play.wynncraft.com",
+  {
+    name: "WildNetwork",
+    ip: "wildnetwork.net",
+  },
+  {
+    name: "Hypixel",
+    ip: "hypixel.net",
+  },
+  {
+    name: "CubeCraft",
+    ip: "cubecraft.net",
+  },
+  {
+    name: "Mineplex",
+    ip: "mineplex.com",
+  },
+  {
+    name: "Aetheria",
+    ip: "aetheria.cc",
+  },
+  {
+    name: "Wynncraft",
+    ip: "wynncraft.com",
+  },
 ];
 
 export default async function LandingExamples() {
@@ -19,52 +37,56 @@ export default async function LandingExamples() {
       {/* Player Examples */}
       <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
         <CardHeader>Player Examples</CardHeader>
-        <div className="flex flex-wrap justify-center gap-3 p-4">
+        <CardContent className="flex flex-wrap justify-center gap-3">
           {playerExamples.map(player => (
             <LandingExample
               key={player}
-              icon={<LandingExampleImage url={`https://mc.fascinated.cc/api/skins/${player}/face.png`} />}
+              url={`https://mc.fascinated.cc/api/skins/${player}/face.png`}
               tooltip={
                 <span>
                   Click to view information for <b>{player}</b>
                 </span>
               }
+              name={player}
               href={`/player/${player}`}
             />
           ))}
-        </div>
+        </CardContent>
       </Card>
 
       {/* Server Examples */}
       <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
         <CardHeader>Server Examples</CardHeader>
-        <div className="flex flex-wrap justify-center gap-3 p-4">
+        <CardContent className="flex flex-wrap justify-center gap-3">
           {serverExamples.map(server => (
             <LandingExample
-              key={server}
-              icon={<LandingExampleImage url={`https://mc.fascinated.cc/api/servers/${server}/icon.png`} />}
+              key={server.ip}
+              url={`https://mc.fascinated.cc/api/servers/${server.ip}/icon.png`}
               tooltip={
                 <span>
-                  Click to view information for <b>{server}</b>
+                  Click to view information for <b>{server.name}</b>
                 </span>
               }
-              href={`/server/java/${server}`}
+              name={server.name}
+              href={`/server/java/${server.ip}`}
             />
           ))}
-        </div>
+        </CardContent>
       </Card>
     </div>
   );
 }
 
 function LandingExample({
-  icon,
   href,
+  url,
   tooltip,
+  name,
 }: {
-  icon: React.ReactNode;
+  url: string;
   href: string;
   tooltip: React.ReactNode;
+  name: string;
 }) {
   return (
     <SimpleTooltip display={tooltip}>
@@ -72,22 +94,15 @@ function LandingExample({
         href={href}
         className="block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
       >
-        <Card className="border-border/80 hover:border-primary/30 hover:bg-accent/50 flex h-full flex-col items-center justify-center transition-colors">
-          <div className="flex shrink-0 items-center justify-center">{icon}</div>
+        <Card className="flex size-34 flex-col p-0">
+          <CardContent className="flex flex-1 items-center justify-center p-0">
+            <Image alt="" src={url} width={64} height={64} className="rounded-lg object-cover" unoptimized />
+          </CardContent>
+          <CardFooter>
+            <p className="text-muted-foreground text-center text-sm">{name}</p>
+          </CardFooter>
         </Card>
       </SimpleLink>
     </SimpleTooltip>
-  );
-}
-
-function LandingExampleImage({ url }: { url: string }) {
-  const size = 48;
-  return (
-    <span
-      className="bg-muted/50 ring-border/50 flex shrink-0 overflow-hidden rounded-xl ring-1"
-      style={{ width: size, height: size }}
-    >
-      <Image alt="" src={url} width={size} height={size} className="object-cover" unoptimized />
-    </span>
   );
 }
