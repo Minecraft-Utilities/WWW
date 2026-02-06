@@ -9,6 +9,8 @@ import type { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { Metadata } from "next";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{
     query?: string[];

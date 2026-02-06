@@ -3,6 +3,8 @@ import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Capes",
   description: "A list of all known capes in Minecraft",

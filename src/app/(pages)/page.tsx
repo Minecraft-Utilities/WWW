@@ -1,6 +1,8 @@
 import LandingExamples from "@/components/landing/landing-examples";
 import LandingQuerySearch from "@/components/landing/landing-query-search";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <div className="mx-auto mt-24 flex w-full max-w-2xl flex-col items-center gap-24">

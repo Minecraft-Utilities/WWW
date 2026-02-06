@@ -6,6 +6,8 @@ import PlayerSkin from "@/components/player/player-skin";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{
     query: string;
