@@ -36,7 +36,7 @@ export async function generateMetadata(props: PlayerPageProps): Promise<Metadata
     title: `${player.username}`,
     description: `Minecraft player profile for ${player.username} (UUID: ${player.uniqueId})`,
     openGraph: {
-      description: `UUID: ${player.uniqueId}`,
+      description: `View the information for ${player.username}`,
       images: [
         {
           url: skullUrl,
