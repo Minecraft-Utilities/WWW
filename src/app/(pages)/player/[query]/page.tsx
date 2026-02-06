@@ -1,14 +1,42 @@
 import { mcUtilsApi } from "@/app/common/mc-utils";
 import CopyTextButton from "@/components/copy-text-button";
 import PlayerCapes from "@/components/player/player-capes";
+import PlayerSkin from "@/components/player/player-skin";
 import Card from "@/components/ui/card";
-import Image from "next/image";
+import { Metadata } from "next";
 
 type Props = {
   params: Promise<{
     query: string;
   }>;
 };
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { query } = await props.params;
+  const { player, error } = await mcUtilsApi.fetchPlayer(query);
+
+  if (player === undefined) {
+    return {
+      title: "Player not found",
+      description: "Player not found",
+      openGraph: {
+        title: "Player not found",
+        description: "Player not found",
+      },
+    };
+  }
+
+  return {
+    title: `${player.username}`,
+    openGraph: {
+      siteName: "MC Utils",
+      title: `${player.username}`,
+    },
+    twitter: {
+      card: "summary",
+    },
+  };
+}
 
 export default async function PlayerPage({ params }: Props) {
   const { query } = await params;
@@ -24,44 +52,31 @@ export default async function PlayerPage({ params }: Props) {
       )}
 
       {player && (
-        <div className="flex w-full max-w-3xl flex-col-reverse gap-6 sm:flex-row sm:items-start sm:gap-8">
-          {/* Skin and Cape */}
-          <div className="flex shrink-0 flex-col gap-4">
-            <Card className="items-center overflow-hidden p-0">
-              <Image
-                src={player.skin.parts.FULLBODY_FRONT}
-                alt={`${player.username} skin - front`}
-                width={256}
-                height={256}
-                unoptimized
-                className="object-cover p-4"
-              />
-            </Card>
-
-            <PlayerCapes player={player} />
-          </div>
-
+        <div className="flex flex-col w-full max-w-3xl gap-12 mt-12">
           {/* Player Info */}
-          <Card className="flex min-w-0 flex-1 flex-col gap-6 p-6 sm:p-8">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <section className="flex min-w-0 flex-1 flex-col gap-2 items-center">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground text-center">
               {player.username}
             </h1>
 
-            <div className="flex flex-col gap-2">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                UUID
-              </p>
-              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 font-mono text-sm">
-                <span className="break-all text-foreground">
-                  {player.uniqueId}
-                </span>
-                <CopyTextButton
-                  text={player.uniqueId}
-                  tooltip={`Copy ${player.username}'s UUID`}
-                />
-              </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-muted/30 px-3 py-2 font-mono text-sm w-fit">
+              <span className="break-all text-foreground">
+                {player.uniqueId}
+              </span>
+              <CopyTextButton
+                text={player.uniqueId}
+                tooltip={`Copy ${player.username}'s UUID`}
+              />
             </div>
-          </Card>
+          </section>
+
+          {/* Skin and Cape */}
+          <section className="flex flex-col gap-4">
+            <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
+              <PlayerSkin skin={player.skin} username={player.username} />
+              <PlayerCapes player={player} />
+            </div>
+          </section>
         </div>
       )}
     </div>

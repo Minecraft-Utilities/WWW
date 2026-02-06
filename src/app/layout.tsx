@@ -13,7 +13,10 @@ const siteFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MC Utils",
+  title: {
+    default: "MC Utils",
+    template: "%s | MC Utils",
+  },
   description:
     "API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and previews.",
 };

@@ -1,10 +1,12 @@
 import { mcUtilsApi } from "@/app/common/mc-utils";
+import { capitalize } from "@/app/common/utils";
 import ServerDetails from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import type { ServerType } from "mcutils-js-api/dist/types/server/server";
+import { Metadata } from "next";
 import Image from "next/image";
 
 type Props = {
@@ -13,16 +15,20 @@ type Props = {
   }>;
 };
 
-const EDITIONS: ServerType[] = ["java", "bedrock"];
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { query } = await props.params;
+  const edition = query?.[0] as ServerType;
+  const hostname = query?.[1];
 
-function isServerType(s: string): s is ServerType {
-  return EDITIONS.includes(s as ServerType);
+  return {
+    title: `${hostname} - ${capitalize(edition)}`,
+  };
 }
 
 export default async function ServerPage({ params }: Props) {
   const { query } = await params;
 
-  const edition = query?.[0];
+  const edition = query?.[0] as ServerType;
   const hostname = query?.[1];
 
   const invalidParams =
@@ -30,7 +36,7 @@ export default async function ServerPage({ params }: Props) {
     query.length < 2 ||
     !edition ||
     !hostname ||
-    !isServerType(edition);
+    !["java", "bedrock"].includes(edition);
 
   if (invalidParams) {
     return <InvalidServer />;

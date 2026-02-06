@@ -71,3 +71,13 @@ export function formatNumberWithCommas(number: number | string): string {
   }
   return Number(number).toLocaleString();
 }
+
+/**
+ * Capitalizes the first letter of the given string.
+ *
+ * @param string the string to capitalize
+ * @returns the capitalized string
+ */
+export function capitalize(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

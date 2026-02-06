@@ -1,8 +1,12 @@
 import { mcUtilsApi } from "@/app/common/mc-utils";
-import LandingExamples from "@/components/landing/landing-examples";
-import LandingQuerySearch from "@/components/landing/landing-query-search";
 import Card from "@/components/ui/card";
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Capes",
+  description: "A list of all known capes in Minecraft",
+};
 
 export default async function CapsPage() {
   const response = await mcUtilsApi.fetchCapes();
