@@ -31,13 +31,12 @@ export default function QuerySearch({
   const [serverDialogOpen, setServerDialogOpen] = useState(false);
   const [pendingServer, setPendingServer] = useState("");
   const [search, setSearch] = useState("");
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, 300);
 
   const trimmed = debouncedSearch.trim();
-  const shouldLookup =
-    trimmed.length > 0 && !isIpOrDomain(trimmed);
+  const shouldLookup = trimmed.length > 0 && !isIpOrDomain(trimmed);
 
-  const { data, isPending } = useQuery({
+  const { data, isFetching, isLoading } = useQuery({
     queryKey: ["player", "lookup", trimmed],
     queryFn: () => mcUtilsApi.fetchPlayer(trimmed),
     enabled: shouldLookup,
@@ -98,7 +97,7 @@ export default function QuerySearch({
         />
 
         <InputGroupAddon>
-          {isPending ? (
+          {isFetching || isLoading ? (
             <Loader2 className="size-4 animate-spin text-muted-foreground" />
           ) : showSearchIcon ? (
             <Search className="size-4 text-muted-foreground" />
