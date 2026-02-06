@@ -13,9 +13,13 @@ export default function CopyTextButton({ text, tooltip }: { text: string; toolti
         variant="ghost"
         size="icon-xs"
         aria-label={tooltip}
-        onClick={() => {
-          navigator.clipboard.writeText(text);
-          toast.success(`Copied to clipboard`);
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            toast.success("Copied to clipboard");
+          } catch {
+            toast.error("Failed to copy");
+          }
         }}
       >
         <CopyIcon className="text-input size-4" />

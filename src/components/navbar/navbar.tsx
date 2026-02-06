@@ -29,7 +29,9 @@ export default function Navbar() {
           >
             <Image width={28} height={28} className="size-7" src="/media/logo.png" alt="MC Utils Logo" />
 
-            <h1 className="text-primary hidden text-base font-bold sm:flex sm:text-lg">MC Utils</h1>
+            <span className="text-primary hidden text-base font-bold sm:inline sm:text-lg" aria-hidden="true">
+              MC Utils
+            </span>
           </SimpleLink>
 
           {/* Links */}

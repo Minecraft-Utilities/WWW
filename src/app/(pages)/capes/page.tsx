@@ -2,8 +2,11 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";
+import { cache } from "react";
 
 export const dynamic = "force-dynamic";
+
+const getCapes = cache(() => mcUtilsApi.fetchCapes());
 
 export const metadata: Metadata = {
   title: "Capes",
@@ -11,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CapsPage() {
-  const response = await mcUtilsApi.fetchCapes();
+  const response = await getCapes();
   const capes = response.capes ?? [];
   const isEmpty = capes.length === 0;
 

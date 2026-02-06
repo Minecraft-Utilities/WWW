@@ -57,7 +57,7 @@ export default function Footer() {
                 draggable={false}
               >
                 <Image src="/media/logo.png" alt="MC Utils" width={36} height={36} className="size-9" />
-                <h1 className="text-primary text-xl font-bold">MC Utils</h1>
+                <span className="text-primary text-xl font-bold">MC Utils</span>
               </SimpleLink>
               <p className="max-w-md text-sm opacity-85">
                 API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and

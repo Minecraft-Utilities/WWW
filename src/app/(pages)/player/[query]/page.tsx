@@ -4,8 +4,8 @@ import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
 import PlayerSkin from "@/components/player/player-skin";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
-import { cache } from "react";
 import { Metadata } from "next";
+import { cache } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const skullUrl = player.skin.parts.HEAD;
   return {
     title: `${player.username}`,
+    description: `Minecraft player profile for ${player.username} (UUID: ${player.uniqueId})`,
     openGraph: {
       description: `UUID: ${player.uniqueId}`,
       images: [

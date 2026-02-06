@@ -1,8 +1,16 @@
+import { env } from "@/common/env";
 import LandingPlayerExamples from "@/components/landing/landing-player-examples";
 import LandingQuerySearch from "@/components/landing/landing-query-search";
 import LandingServerExamples from "@/components/landing/landing-server-examples";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  openGraph: {
+    url: env.NEXT_PUBLIC_BASE_URL,
+  },
+};
 
 export default function HomePage() {
   return (

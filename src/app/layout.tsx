@@ -2,10 +2,10 @@ import { env } from "@/common/env";
 import Background from "@/components/background";
 import { ViewportProvider } from "@/components/context/viewport-context";
 import Footer from "@/components/footer";
+import Navbar from "@/components/navbar/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Navbar from "@/components/navbar/navbar";
 import { QueryProvider } from "../providers/query-provider";
 import "./styles/globals.css";
 
@@ -51,7 +51,7 @@ export default function RootLayout({
           <body className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}>
             <Navbar />
             <Background />
-            <main className="relative flex min-h-0 w-full flex-1 flex-col">
+            <main id="main-content" className="relative flex min-h-0 w-full flex-1 flex-col" tabIndex={-1}>
               <Toaster />
               <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">
                 <div className="mx-auto w-full max-w-[1600px] shrink-0 px-2">{children}</div>
