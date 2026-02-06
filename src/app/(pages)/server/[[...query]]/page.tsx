@@ -50,13 +50,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const players = server.players;
 
   return {
-    title: `${server?.hostname} - ${capitalize(edition!)}`,
+    title: `${server.hostname} - ${capitalize(edition!)} Server`,
     icons: {
       ...(favicon ? { icon: favicon } : {}),
     },
     openGraph: {
       ...(favicon ? { images: [{ url: favicon }] } : {}),
-      description: `${players.online}/${players.max} players online`,
+      description: `${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online`,
     },
   };
 }
