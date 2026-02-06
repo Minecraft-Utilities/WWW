@@ -10,7 +10,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 60 * 5; // 5 minutes
 
 type Props = {
   params: Promise<{

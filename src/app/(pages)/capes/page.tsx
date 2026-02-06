@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 60 * 60 * 24; // 24 hours
 
 export const metadata: Metadata = {
   title: "Capes",
