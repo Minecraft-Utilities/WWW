@@ -54,6 +54,8 @@ body {
   --scrollbar-track: hsl(12 6.5% 9.5%);
   --scrollbar-thumb: hsl(12 6.5% 20%);
   --scrollbar-thumb-hover: hsl(12 6.5% 25%);
+
+  --nav-height: 3rem;
 }
 
 @theme inline {

@@ -8,8 +8,11 @@ const height = 500;
 export default function Background({ url }: BackgroundProps) {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-0 -z-50 overflow-hidden select-none"
-      style={{ height: `${height}px` }}
+      className="pointer-events-none absolute inset-x-0 -z-50 overflow-hidden select-none"
+      style={{
+        top: "calc(-1 * var(--nav-height))",
+        height: "calc(500px + var(--nav-height))",
+      }}
       aria-hidden
     >
       <Image
@@ -18,7 +21,7 @@ export default function Background({ url }: BackgroundProps) {
         width={1920}
         height={height}
         fetchPriority="high"
-        className="h-full w-full object-cover blur-[10px]"
+        className="h-full w-full object-cover blur-xs brightness-80"
       />
       <div
         className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_40%,var(--background)_100%),linear-gradient(to_bottom,transparent_0%,transparent_10%,rgba(0,0,0,0.5)_100%)]"

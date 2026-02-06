@@ -25,7 +25,7 @@ export default function Navbar() {
   const path = usePathname();
 
   return (
-    <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8">
+    <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-(--nav-height) w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8">
       <div className="flex w-full max-w-6xl justify-between">
         <div className="flex items-center gap-(--spacing-md) md:gap-6">
           {/* Branding */}

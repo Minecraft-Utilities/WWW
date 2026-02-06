@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
     formats: ["image/webp"],
     dangerouslyAllowLocalIP: true,
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default nextConfig;
