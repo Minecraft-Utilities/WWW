@@ -5,7 +5,7 @@ import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
 
 export default function PlayerHeader({ player }: { player: CachedPlayer }) {
   return (
-    <section className="flex min-w-0 flex-1 flex-col gap-4 items-center">
+    <header className="flex min-w-0 flex-1 flex-col gap-4 items-center">
       <div className="flex items-center gap-4">
         <Image
           src={player.skin.parts.HEAD}
@@ -26,6 +26,6 @@ export default function PlayerHeader({ player }: { player: CachedPlayer }) {
           tooltip={`Copy ${player.username}'s UUID`}
         />
       </div>
-    </section>
+    </header>
   );
 }

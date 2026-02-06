@@ -25,9 +25,9 @@ const serverExamples: { name: string; ip: string }[] = [
 
 export default async function LandingExamples() {
   return (
-    <>
+    <div className="flex flex-col w-full gap-4 mt-20">
       {/* Player Examples */}
-      <Card className="flex flex-col border-border/80 p-0 overflow-hidden">
+      <Card className="flex flex-col border-border/80 p-0 overflow-hidden w-full">
         <CardHeader>Player Examples</CardHeader>
         <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
           {playerExamples.map((player) => (
@@ -47,7 +47,7 @@ export default async function LandingExamples() {
       </Card>
 
       {/* Server Examples */}
-      <Card className="flex flex-col border-border/80 p-0 overflow-hidden">
+      <Card className="flex flex-col border-border/80 p-0 overflow-hidden w-full">
         <CardHeader>Server Examples</CardHeader>
         <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-4">
           {serverExamples
@@ -67,7 +67,7 @@ export default async function LandingExamples() {
             ))}
         </div>
       </Card>
-    </>
+    </div>
   );
 }
 

@@ -16,7 +16,16 @@ export default async function CapsPage() {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center flex-col w-full gap-24 mt-24">
+      <header className="flex min-w-0 flex-1 flex-col gap-4 items-center">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground text-center">
+          Capes
+        </h1>
+        <p className="text-sm text-muted-foreground text-center">
+          A list of all known capes in Minecraft
+        </p>
+      </header>
+
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {capes.map((cape) => (
           <div key={cape.textureId}>

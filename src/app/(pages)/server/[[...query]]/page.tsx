@@ -66,7 +66,7 @@ export default async function ServerPage({ params }: Props) {
   const { server, error, edition } = await getServer(query);
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6 mt-24">
       {(error || !server) && (
         <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10 p-0 overflow-hidden">
           <CardHeader variant="destructive">Error</CardHeader>
@@ -77,9 +77,9 @@ export default async function ServerPage({ params }: Props) {
       )}
 
       {server && (
-        <div className="flex flex-col w-full max-w-3xl gap-24 mt-24">
+        <div className="flex flex-col w-full max-w-3xl gap-24">
           {/* Header */}
-          <section className="flex min-w-0 flex-1 flex-col gap-4 items-center">
+          <header className="flex min-w-0 flex-1 flex-col gap-4 items-center">
             <div className="flex items-center gap-4">
               {edition === "java" && (server as JavaServer).favicon?.base64 && (
                 <Image
@@ -95,7 +95,8 @@ export default async function ServerPage({ params }: Props) {
                 {server.hostname}
               </h1>
             </div>
-          </section>
+          </header>
+
           <div className="flex flex-col gap-4">
             {/* MOTD preview (Java only) */}
             {edition === "java" && (server as JavaServer).motd?.preview && (
