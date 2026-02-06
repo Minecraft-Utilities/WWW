@@ -31,6 +31,16 @@ const ensurePortalContainer = () => {
   return portalContainer;
 };
 
+export interface TooltipProps {
+  children: React.ReactNode;
+  content: React.ReactNode;
+  side?: "top" | "right" | "bottom" | "left";
+  className?: string;
+  delayDuration?: number;
+  closeDelayDuration?: number;
+  showOnMobile?: boolean;
+}
+
 export const Tooltip = React.memo(function Tooltip({
   children,
   content,
@@ -39,15 +49,7 @@ export const Tooltip = React.memo(function Tooltip({
   delayDuration = 0,
   closeDelayDuration = 0,
   showOnMobile = false,
-}: {
-  children: React.ReactNode;
-  content: React.ReactNode;
-  side?: "top" | "right" | "bottom" | "left";
-  className?: string;
-  delayDuration?: number;
-  closeDelayDuration?: number;
-  showOnMobile?: boolean;
-}) {
+}: TooltipProps) {
   const isMobile = useIsMobile();
 
   const [isOpen, setIsOpen] = useState(false);

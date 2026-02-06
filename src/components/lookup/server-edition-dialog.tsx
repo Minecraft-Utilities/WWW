@@ -5,12 +5,12 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Coffee, Layers } from "lucide-react";
 import { ServerType } from "mcutils-js-api/dist/types/server/server";
 
-type Props = {
+export interface ServerEditionDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   serverAddress: string;
   onSelectEdition: (edition: ServerType) => void;
-};
+}
 
 const editionOptions: {
   type: ServerType;
@@ -27,7 +27,12 @@ const editionOptions: {
   },
 ];
 
-export default function ServerEditionDialog({ open, onOpenChange, serverAddress, onSelectEdition }: Props) {
+export default function ServerEditionDialog({
+  open,
+  onOpenChange,
+  serverAddress,
+  onSelectEdition,
+}: ServerEditionDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton={true} className="sm:max-w-md">

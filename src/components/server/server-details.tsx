@@ -4,7 +4,12 @@ import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
 import DetailRow from "../detail-row";
 
-export function ServerDetails({ server, edition }: { server: Server; edition: ServerType }) {
+export interface ServerDetailsProps {
+  server: Server;
+  edition: ServerType;
+}
+
+export function ServerDetails({ server, edition }: ServerDetailsProps) {
   const javaServer = server as JavaServer;
   const bedrockServer = server as BedrockServer;
 

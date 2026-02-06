@@ -2,7 +2,11 @@ import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
 import Image from "next/image";
 import CopyTextButton from "../copy-text-button";
 
-export default function PlayerHeader({ player }: { player: CachedPlayer }) {
+export interface PlayerHeaderProps {
+  player: CachedPlayer;
+}
+
+export default function PlayerHeader({ player }: PlayerHeaderProps) {
   return (
     <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
       <div className="flex items-center gap-4">

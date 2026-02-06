@@ -3,7 +3,11 @@ import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
 import DetailRow from "../detail-row";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
-export default function PlayerDetails({ player }: { player: CachedPlayer }) {
+export interface PlayerDetailsProps {
+  player: CachedPlayer;
+}
+
+export default function PlayerDetails({ player }: PlayerDetailsProps) {
   return (
     <Card className="flex h-fit w-full flex-col overflow-hidden p-0">
       <CardHeader>Details</CardHeader>

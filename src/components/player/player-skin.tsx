@@ -9,12 +9,12 @@ import Card, { CardContent, CardHeader } from "../ui/card";
 
 const SKIN_PARTS: SkinPart[] = ["HEAD", "FACE", "BODY", "FULLBODY_FRONT", "FULLBODY_BACK"];
 
-type Props = {
+export interface PlayerSkinProps {
   skin: Skin;
   username: string;
-};
+}
 
-export default function PlayerSkin({ skin, username }: Props) {
+export default function PlayerSkin({ skin, username }: PlayerSkinProps) {
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_FRONT");
 
   return (

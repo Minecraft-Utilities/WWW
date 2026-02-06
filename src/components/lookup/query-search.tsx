@@ -8,7 +8,7 @@ import { Loader2, Search, X } from "lucide-react";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import { ServerType } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
@@ -23,15 +23,13 @@ const querySearchSchema = z.object({
 
 type QuerySearchValues = z.infer<typeof querySearchSchema>;
 
-export default function QuerySearch({
-  landingPage,
-  className,
-  setQueryError,
-}: {
+export interface QuerySearchProps {
   landingPage?: boolean;
   className?: string;
   setQueryError?: (invalid: ErrorResponse | undefined) => void;
-}) {
+}
+
+export default function QuerySearch({ landingPage, className, setQueryError }: QuerySearchProps) {
   const router = useRouter();
   const [serverDialogOpen, setServerDialogOpen] = useState(false);
   const [pendingServer, setPendingServer] = useState("");
@@ -45,55 +43,56 @@ export default function QuerySearch({
 
   const queryValue = form.watch("query");
 
-  useEffect(() => {
-    if (lookupError) {
-      setLookupError(undefined);
-      setQueryError?.(undefined);
-    }
-  }, [queryValue]); // eslint-disable-line react-hooks/exhaustive-deps -- clear error when user edits
-
-  async function onSubmit(data: QuerySearchValues) {
-    const trimmed = data.query.trim();
-    if (!trimmed) return;
-
-    if (isIpOrDomain(trimmed)) {
-      setPendingServer(trimmed);
-      setServerDialogOpen(true);
-      return;
-    }
-
+  const clearError = useCallback(() => {
     setLookupError(undefined);
-    setIsLookupLoading(true);
-    try {
-      const result = await mcUtilsApi.fetchPlayer(trimmed);
-      if (result.error) {
-        setLookupError(result.error);
-        setQueryError?.(result.error);
+    setQueryError?.(undefined);
+  }, [setQueryError]);
+
+  const onSubmit = useCallback(
+    async (data: QuerySearchValues) => {
+      const trimmed = data.query.trim();
+      if (!trimmed) return;
+
+      if (isIpOrDomain(trimmed)) {
+        setPendingServer(trimmed);
+        setServerDialogOpen(true);
         return;
       }
-      setQueryError?.(undefined);
-      router.push(`/player/${encodeURIComponent(trimmed)}`);
-      form.reset();
-    } finally {
-      setIsLookupLoading(false);
-    }
-  }
 
-  function handleServerEdition(edition: ServerType) {
-    if (!pendingServer) return;
-    router.push(`/server/${edition}/${encodeURIComponent(pendingServer)}`);
-    form.reset();
-    setPendingServer("");
-    setServerDialogOpen(false);
-  }
+      setLookupError(undefined);
+      setQueryError?.(undefined);
+      setIsLookupLoading(true);
+      try {
+        const result = await mcUtilsApi.fetchPlayer(trimmed);
+        if (result.error) {
+          setLookupError(result.error);
+          setQueryError?.(result.error);
+          return;
+        }
+        router.push(`/player/${encodeURIComponent(trimmed)}`);
+        form.reset();
+      } finally {
+        setIsLookupLoading(false);
+      }
+    },
+    [router, form, setQueryError]
+  );
+
+  const handleServerEdition = useCallback(
+    (edition: ServerType) => {
+      if (!pendingServer) return;
+      router.push(`/server/${edition}/${encodeURIComponent(pendingServer)}`);
+      form.reset();
+      setPendingServer("");
+      setServerDialogOpen(false);
+    },
+    [pendingServer, router, form]
+  );
 
   return (
     <form
-      method="post"
-      onSubmit={e => {
-        e.preventDefault();
-        form.handleSubmit(onSubmit)(e);
-      }}
+      role="search"
+      onSubmit={form.handleSubmit(onSubmit)}
       className="flex flex-col items-center gap-2 md:flex-row md:gap-0"
     >
       <InputGroup className={cn("w-full", className)}>
@@ -106,6 +105,11 @@ export default function QuerySearch({
               type="text"
               placeholder="Search..."
               aria-invalid={fieldState.invalid || !!lookupError}
+              disabled={isLookupLoading}
+              onChange={e => {
+                field.onChange(e);
+                if (lookupError) clearError();
+              }}
             />
           )}
         />
@@ -124,11 +128,11 @@ export default function QuerySearch({
               type="button"
               size="icon-xs"
               variant="ghost"
-              aria-label="Clear"
+              aria-label="Clear search"
+              disabled={isLookupLoading}
               onClick={() => {
                 form.setValue("query", "");
-                setLookupError(undefined);
-                setQueryError?.(undefined);
+                clearError();
               }}
             >
               <X className="size-4" />
@@ -138,7 +142,7 @@ export default function QuerySearch({
       </InputGroup>
 
       {landingPage && (
-        <Button type="submit" className="block w-full md:hidden">
+        <Button type="submit" className="block w-full md:hidden" disabled={isLookupLoading}>
           Search
         </Button>
       )}

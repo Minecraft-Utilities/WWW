@@ -22,7 +22,11 @@ interface ViewportContextType {
 
 const ViewportContext = createContext<ViewportContextType | null>(null);
 
-export function ViewportProvider({ children }: { children: ReactNode }) {
+export interface ViewportProviderProps {
+  children: ReactNode;
+}
+
+export function ViewportProvider({ children }: ViewportProviderProps) {
   const [viewport, setViewport] = useState<ViewportContextType>(getInitialViewport);
 
   useIsomorphicLayoutEffect(() => {

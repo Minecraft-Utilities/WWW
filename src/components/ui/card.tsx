@@ -2,16 +2,16 @@ import { type ClassValue } from "clsx";
 
 import { cn } from "@/common/utils";
 
-type CardProps = {
+export interface CardProps {
   children: React.ReactNode;
   className?: ClassValue;
-};
+}
 
-type CardHeaderProps = {
+export interface CardHeaderProps {
   children: React.ReactNode;
   className?: ClassValue;
   variant?: "default" | "destructive";
-};
+}
 
 export function CardHeader({ children, className, variant = "default" }: CardHeaderProps) {
   return (
@@ -28,20 +28,20 @@ export function CardHeader({ children, className, variant = "default" }: CardHea
   );
 }
 
-type CardContentProps = {
+export interface CardContentProps {
   children: React.ReactNode;
   className?: ClassValue;
-};
+}
 
 export function CardContent({ children, className }: CardContentProps) {
   return <div className={cn("p-4", className)}>{children}</div>;
 }
 
-type CardFooterProps = {
+export interface CardFooterProps {
   children: React.ReactNode;
   className?: ClassValue;
   variant?: "default" | "destructive";
-};
+}
 
 export function CardFooter({ children, className, variant = "default" }: CardFooterProps) {
   return (

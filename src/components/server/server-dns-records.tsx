@@ -4,7 +4,11 @@ function isSrvRecord(r: DnsRecord): r is SRVRecord {
   return r.type === "SRV";
 }
 
-export default function ServerDnsRecords({ records }: { records: DnsRecord[] }) {
+export interface ServerDnsRecordsProps {
+  records: DnsRecord[];
+}
+
+export default function ServerDnsRecords({ records }: ServerDnsRecordsProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="border-border min-w-0 overflow-x-auto rounded-lg border [-webkit-overflow-scrolling:touch]">

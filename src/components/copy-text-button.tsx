@@ -5,7 +5,12 @@ import { CopyIcon } from "lucide-react";
 import { toast } from "sonner";
 import SimpleTooltip from "./simple-tooltip";
 
-export default function CopyTextButton({ text, tooltip }: { text: string; tooltip: string }) {
+export interface CopyTextButtonProps {
+  text: string;
+  tooltip: string;
+}
+
+export default function CopyTextButton({ text, tooltip }: CopyTextButtonProps) {
   return (
     <SimpleTooltip display={tooltip}>
       <Button

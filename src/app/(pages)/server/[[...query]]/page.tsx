@@ -15,11 +15,11 @@ const fetchServerCached = cache((hostname: string, edition: ServerType) =>
   mcUtilsApi.fetchServer(hostname, edition)
 );
 
-type Props = {
+export interface ServerPageProps {
   params: Promise<{
     query?: string[];
   }>;
-};
+}
 
 async function getServer(query: string[] | undefined) {
   const edition = query?.[0] as ServerType;
@@ -33,7 +33,7 @@ async function getServer(query: string[] | undefined) {
   return { server, error, edition };
 }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(props: ServerPageProps): Promise<Metadata> {
   const { query } = await props.params;
   const { server, error, edition } = await getServer(query);
 
@@ -62,7 +62,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export default async function ServerPage({ params }: Props) {
+export default async function ServerPage({ params }: ServerPageProps) {
   const { query } = await params;
   const { server, error, edition } = await getServer(query);
 

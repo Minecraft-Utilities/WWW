@@ -3,17 +3,14 @@ import SimpleLink from "../simple-link";
 import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardFooter } from "../ui/card";
 
-export function LandingExampleCard({
-  href,
-  url,
-  tooltip,
-  name,
-}: {
+export interface LandingExampleCardProps {
   url: string;
   href: string;
   tooltip: React.ReactNode;
   name: string;
-}) {
+}
+
+export function LandingExampleCard({ href, url, tooltip, name }: LandingExampleCardProps) {
   return (
     <SimpleTooltip display={tooltip}>
       <SimpleLink

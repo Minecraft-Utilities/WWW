@@ -5,11 +5,18 @@ import { ComputerDesktopIcon } from "@heroicons/react/16/solid";
 import { FlameIcon } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ReactElement } from "react";
+import { type ReactNode } from "react";
 import QuerySearch from "../lookup/query-search";
 import SimpleLink from "../simple-link";
 
-const links: ReactElement<any>[] = [
+interface NavLinkProps {
+  name: string;
+  icon: ReactNode;
+  href: string;
+  className?: string;
+}
+
+const links = [
   <NavLink key="capes" name="Capes" icon={<FlameIcon className="size-5" />} href="/capes" />,
   <NavLink key="servers" name="Servers" icon={<ComputerDesktopIcon className="size-5" />} href="/servers" />,
 ];
@@ -44,17 +51,7 @@ export default function Navbar() {
   );
 }
 
-function NavLink({
-  name,
-  icon,
-  href,
-  className,
-}: {
-  name: string;
-  icon: ReactElement<any>;
-  href: string;
-  className?: string;
-}) {
+function NavLink({ name, icon, href, className }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = pathname && (pathname === href || (href !== "/" && pathname.startsWith(href)));
 

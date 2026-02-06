@@ -5,6 +5,15 @@ import { clsx } from "clsx";
 import React from "react";
 import { Tooltip } from "./ui/tooltip";
 
+export interface SimpleTooltipProps {
+  children: React.ReactNode;
+  display: React.ReactNode | string;
+  side?: (typeof SIDE_OPTIONS)[number];
+  className?: string;
+  showOnMobile?: boolean;
+  closeDelayDuration?: number;
+}
+
 export default function SimpleTooltip({
   children,
   display,
@@ -12,14 +21,7 @@ export default function SimpleTooltip({
   className,
   showOnMobile,
   closeDelayDuration,
-}: {
-  children: React.ReactNode;
-  display: React.ReactNode | string;
-  side?: (typeof SIDE_OPTIONS)[number];
-  className?: string;
-  showOnMobile?: boolean;
-  closeDelayDuration?: number;
-}) {
+}: SimpleTooltipProps) {
   return (
     <Tooltip
       content={typeof display === "string" ? <p className="max-w-[400px] text-wrap">{display}</p> : display}
