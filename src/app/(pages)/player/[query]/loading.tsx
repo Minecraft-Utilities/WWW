@@ -11,9 +11,12 @@ export default function PlayerLoading() {
         <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
           <div className="flex items-center gap-4">
             <div className="bg-muted/30 size-16 animate-pulse rounded-md" />
-            <div className="bg-muted/30 h-10 w-48 animate-pulse rounded-md" />
+            <div className="bg-muted/30 h-9 w-48 animate-pulse rounded-md" />
           </div>
-          <div className="bg-muted/30 h-9 w-72 max-w-full animate-pulse rounded-lg" />
+          <div className="border-border bg-muted/30 flex w-full min-w-0 items-center justify-between gap-4 rounded-lg border px-3 py-1.5">
+            <div className="bg-muted/30 h-5 min-w-0 flex-1 max-w-xs animate-pulse rounded" />
+            <div className="bg-muted/30 size-6 shrink-0 animate-pulse rounded-md" />
+          </div>
         </header>
         <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
           <section className="flex w-full flex-col gap-4 md:max-w-88">
