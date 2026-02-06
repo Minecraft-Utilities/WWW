@@ -11,7 +11,7 @@ import SimpleLink from "../simple-link";
 
 const links: ReactElement<any>[] = [
   <NavLink key="capes" name="Capes" icon={<FlameIcon className="size-5" />} href="/capes" />,
-  <NavLink key="servers" name="Servers" icon={<ComputerDesktopIcon className="size-5" />} href="/server" />,
+  <NavLink key="servers" name="Servers" icon={<ComputerDesktopIcon className="size-5" />} href="/servers" />,
 ];
 
 export default function Navbar() {
