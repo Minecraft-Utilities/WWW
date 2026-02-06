@@ -47,7 +47,7 @@ export default function Footer() {
   return (
     <footer
       className={cn(
-        "border-border flex min-h-60 h-full flex-1 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0 bg-secondary/60 mt-5",
+        "border-border flex shrink-0 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0 bg-secondary/60 mt-5",
       )}
     >
       <div className="flex justify-center">

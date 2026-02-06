@@ -1,11 +1,10 @@
 import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
-import Image from "next/image";
 import DetailRow from "../detail-row";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import { formatNumberWithCommas } from "@/app/common/utils";
 
-export default function ServerDetails({
+export function ServerDetails({
   server,
   edition,
 }: {
@@ -16,39 +15,11 @@ export default function ServerDetails({
   const bedrockServer = server as BedrockServer;
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-col gap-3 xs:flex-row xs:items-center xs:gap-4">
-        {edition === "java" && (
-          <Image
-            src={javaServer.favicon?.base64!}
-            alt={`${server.hostname} favicon`}
-            width={64}
-            height={64}
-            unoptimized
-            className="h-12 w-12 shrink-0 object-contain sm:h-16 sm:w-16"
-          />
-        )}
-
-        <h1 className="min-w-0 wrap-break-word text-xl font-semibold tracking-tight text-foreground xs:text-2xl sm:text-3xl">
-          {server.hostname}
-        </h1>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Players
-        </p>
-        <p className="text-sm text-foreground">
-          {formatNumberWithCommas(server.players.online)} /{" "}
-          {formatNumberWithCommas(server.players.max)} online
-        </p>
-      </div>
-
-      {/* Server details (key-value) */}
-      <div className="flex flex-col gap-0 border-t border-border pt-4">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Details
-        </p>
+    <div className="flex flex-col gap-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        Details
+      </p>
+      <div className="flex flex-col gap-0">
         <DetailRow label="Hostname" value={server.hostname} />
         <DetailRow label="IP address" value={server.ip} />
         <DetailRow label="Port" value={String(server.port)} />

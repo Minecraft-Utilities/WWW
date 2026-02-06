@@ -1,14 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { ReactElement } from "react";
-import SimpleLink from "../simple-link";
-import QuerySearch from "../lookup/query-search";
-import { usePathname } from "next/navigation";
 import { cn } from "@/app/common/utils";
-import { FlameIcon, PlaneIcon, ServerIcon } from "lucide-react";
 import { ComputerDesktopIcon } from "@heroicons/react/16/solid";
-import { useIsMobile } from "../context/viewport-context";
+import { FlameIcon } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { ReactElement } from "react";
+import QuerySearch from "../lookup/query-search";
+import SimpleLink from "../simple-link";
 
 const links: ReactElement<any>[] = [
   <NavLink
@@ -27,11 +26,10 @@ const links: ReactElement<any>[] = [
 
 export default function Navbar() {
   const path = usePathname();
-  const isMobile = useIsMobile();
 
   return (
-    <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8 ">
-      <div className="w-5xl flex justify-between">
+    <nav className="border-border bg-background/55 sticky inset-x-0 top-0 z-50 flex h-12 w-full items-center justify-between border-b px-2 py-1 backdrop-blur-md select-none lg:justify-around lg:px-8">
+      <div className="w-6xl flex justify-between">
         <div className="flex items-center gap-(--spacing-md) md:gap-6">
           {/* Branding */}
           <SimpleLink

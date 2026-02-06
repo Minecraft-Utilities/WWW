@@ -35,16 +35,17 @@ export default function RootLayout({
             className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}
           >
             <Navbar />
-            <div className="relative flex min-h-screen w-full flex-1 flex-col">
-              <Background />
+            <Background />
+            <main className="relative flex min-h-0 flex-1 flex-col w-full">
               <Toaster />
-              <div className="z-1 flex min-h-0 w-full flex-1 flex-col gap-2 pt-2">
-                <div className="m-auto flex min-h-0 w-full flex-1 flex-col">
-                  <div className="max-w-[1600px] m-auto w-full">{children}</div>
-                  <Footer />
+              <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">
+                <div className="max-w-[1600px] mx-auto w-full shrink-0">
+                  {children}
                 </div>
+                <div className="min-h-0 flex-1" aria-hidden />
+                <Footer />
               </div>
-            </div>
+            </main>
           </body>
         </ViewportProvider>
       </QueryProvider>

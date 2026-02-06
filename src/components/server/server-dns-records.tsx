@@ -10,8 +10,11 @@ export default function ServerDnsRecords({
   records: DnsRecord[];
 }) {
   return (
-    <div className="flex flex-col gap-2 border-t border-border pt-4">
-      <div className="mt-3 min-w-0 overflow-x-auto rounded-lg border border-border [-webkit-overflow-scrolling:touch]">
+    <div className="flex flex-col gap-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        SRV records
+      </p>
+      <div className="min-w-0 overflow-x-auto rounded-lg border border-border [-webkit-overflow-scrolling:touch]">
         <table className="w-full min-w-[320px] text-left text-sm">
           <thead>
             <tr className="border-b border-border bg-muted/30">

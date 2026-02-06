@@ -1,6 +1,6 @@
 import { mcUtilsApi } from "@/app/common/mc-utils";
-import { capitalize } from "@/app/common/utils";
-import ServerDetails from "@/components/server/server-details";
+import { capitalize, formatNumberWithCommas } from "@/app/common/utils";
+import { ServerDetails } from "@/components/server/server-details";
 import ServerDnsRecords from "@/components/server/server-dns-records";
 import Card from "@/components/ui/card";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
@@ -47,36 +47,69 @@ export default async function ServerPage({ params }: Props) {
     edition,
   );
 
-  if (error || !server) {
-    return <InvalidServer error={error} />;
-  }
-
-  const javaServer = server as JavaServer;
-
   return (
-    <div className="flex flex-col md:flex-row gap-2 justify-center">
-      {/* Server info (top) */}
-      <Card className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[50%]">
-        <ServerDetails server={server} edition={edition} />
-
-        {/* DNS records (collapsible) */}
-        {server.records && server.records.length > 0 && (
-          <ServerDnsRecords records={server.records} />
-        )}
-      </Card>
-
-      {/* MOTD preview (below info, Java only) */}
-      {edition === "java" && javaServer.motd?.preview && (
-        <Card className="items-center overflow-hidden p-0 h-fit">
-          <Image
-            src={javaServer.motd.preview}
-            alt={`${server.hostname} MOTD preview`}
-            width={768}
-            height={128}
-            unoptimized
-            className="object-contain p-4"
-          />
+    <div className="flex w-full flex-col items-center gap-6">
+      {error && (
+        <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
+          <p className="font-medium text-destructive">Error</p>
+          <p className="text-sm text-muted-foreground">{error.message}</p>
         </Card>
+      )}
+
+      {server && (
+        <div className="flex flex-col w-full max-w-3xl gap-24 mt-24">
+          {/* Header */}
+          <section className="flex min-w-0 flex-1 flex-col gap-4 items-center">
+            <div className="flex items-center gap-4">
+              {edition === "java" && (server as JavaServer).favicon?.base64 && (
+                <Image
+                  src={(server as JavaServer).favicon!.base64!}
+                  alt={`${server.hostname} favicon`}
+                  width={64}
+                  height={64}
+                  unoptimized
+                />
+              )}
+
+              <h1 className="min-w-0 wrap-break-word text-4xl font-bold tracking-tight text-foreground text-center">
+                {server.hostname}
+              </h1>
+            </div>
+          </section>
+          <div className="flex flex-col gap-4">
+            {/* MOTD preview (Java only) */}
+            {edition === "java" && (server as JavaServer).motd?.preview && (
+              <section className="flex flex-col gap-4">
+                <Card className="items-center overflow-hidden p-0 h-fit">
+                  <Image
+                    src={(server as JavaServer).motd!.preview!}
+                    alt={`${server.hostname} MOTD preview`}
+                    width={768}
+                    height={128}
+                    unoptimized
+                    className="object-contain p-4"
+                  />
+                </Card>
+              </section>
+            )}
+
+            {/* Details */}
+            <section className="flex flex-col gap-4">
+              <Card className="flex w-full min-w-0 flex-col gap-4">
+                <ServerDetails server={server} edition={edition} />
+              </Card>
+            </section>
+
+            {/* DNS records (collapsible) */}
+            {server.records && server.records.length > 0 && (
+              <section className="flex flex-col gap-4">
+                <Card className="flex w-full min-w-0 flex-col gap-4">
+                  <ServerDnsRecords records={server.records} />
+                </Card>
+              </section>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
@@ -85,11 +118,9 @@ export default async function ServerPage({ params }: Props) {
 function InvalidServer({ error }: { error?: ErrorResponse }) {
   return (
     <div className="flex w-full flex-col items-center gap-6">
-      <Card className="w-full max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-destructive">
-          Error
-        </p>
-        <p className="mt-1.5 font-medium text-foreground">
+      <Card className="w-full max-w-xl border-destructive/50 bg-destructive/10">
+        <p className="font-medium text-destructive">Error</p>
+        <p className="text-sm text-muted-foreground">
           {error?.message ?? "Invalid address"}
         </p>
       </Card>
