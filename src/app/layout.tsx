@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { QueryProvider } from "../providers/query-provider";
 import "./styles/globals.css";
 
@@ -45,6 +46,13 @@ export interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-full">
+      {/* Analytics */}
+      <Script
+        defer
+        src="https://analytics.fascinated.cc/script.js"
+        data-website-id="83459095-69ee-4511-be2f-784217ba6a88"
+      />
+
       <QueryProvider>
         <ViewportProvider>
           <body className={`${siteFont.className} flex min-h-full w-full flex-col antialiased`}>
