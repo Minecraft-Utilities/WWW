@@ -23,7 +23,7 @@ export interface ServerPageProps {
 }
 
 async function getServer(query: string[] | undefined) {
-  const edition = query?.[0] as ServerPlatform;
+  const edition = query?.[0].toLowerCase() as ServerPlatform;
   const hostname = query?.[1];
 
   if (!hostname) {

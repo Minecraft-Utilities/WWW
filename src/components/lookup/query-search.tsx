@@ -129,7 +129,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     (entry: ServerRegistryEntry) => {
       const hostname = entry.hostnames[0];
       if (!hostname) return;
-      router.push(`/server/${entry.platform}/${encodeURIComponent(hostname)}`);
+      router.push(`/server/${entry.platform.toLowerCase()}/${encodeURIComponent(hostname)}`);
       form.reset();
       setServerPopoverOpen(false);
     },
@@ -162,6 +162,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
                   className="text-xs md:text-sm"
                   aria-invalid={fieldState.invalid || !!lookupError}
                   disabled={isLookupLoading}
+                  onFocus={() => setServerPopoverOpen(true)}
                   onChange={e => {
                     field.onChange(e);
                     if (lookupError) clearError();
