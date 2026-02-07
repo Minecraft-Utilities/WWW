@@ -27,6 +27,10 @@ const links: { [category: string]: FooterLink[] } = {
       name: "Documentation",
       href: "https://mc.fascinated.cc/api/swagger-ui/index.html",
     },
+    {
+      name: "Server Registry",
+      href: "https://github.com/Minecraft-Utilities/ServerRegistry",
+    },
   ],
 };
 
