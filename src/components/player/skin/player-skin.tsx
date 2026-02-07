@@ -66,7 +66,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                   alt={key}
                   width={56}
                   height={56}
-                  className="h-full w-full object-contain object-center p-1"
+                  className="h-full w-full object-contain object-center p-1.5"
                   unoptimized
                 />
               </SkinSelectionButton>
