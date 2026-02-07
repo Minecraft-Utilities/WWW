@@ -6,8 +6,8 @@ import { FlameIcon } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
-import QuerySearch from "../lookup/query-search";
 import SimpleLink from "../simple-link";
+import QuerySearchNavbar from "./query-search-navbar";
 
 interface NavLinkProps {
   name: string;
@@ -45,7 +45,7 @@ export default function Navbar() {
           <div className="flex items-center gap-0.5 sm:gap-1">{links.map(link => link)}</div>
         </div>
 
-        {path !== "/" && <QuerySearch className={"w-56 md:w-75"} />}
+        {path !== "/" && <QuerySearchNavbar />}
       </div>
     </nav>
   );

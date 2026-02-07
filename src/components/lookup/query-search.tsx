@@ -51,7 +51,9 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   const onSubmit = useCallback(
     async (data: QuerySearchValues) => {
       const trimmed = data.query.trim();
-      if (!trimmed) return;
+      if (!trimmed) {
+        return;
+      }
 
       if (isIpOrDomain(trimmed)) {
         setPendingServer(trimmed);
@@ -122,22 +124,21 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
           )}
         </InputGroupAddon>
 
-        <InputGroupAddon align="inline-end">
-          {queryValue.length > 0 && (
-            <InputGroupButton
-              type="button"
-              size="icon-xs"
-              variant="ghost"
-              aria-label="Clear search"
-              disabled={isLookupLoading}
-              onClick={() => {
-                form.setValue("query", "");
-                clearError();
-              }}
-            >
-              <X className="size-4" />
-            </InputGroupButton>
-          )}
+        <InputGroupAddon align="inline-end" className="min-w-9">
+          <InputGroupButton
+            type="button"
+            size="icon-xs"
+            variant="ghost"
+            aria-label="Clear search"
+            disabled={isLookupLoading}
+            className={cn(queryValue.length === 0 && "pointer-events-none invisible")}
+            onClick={() => {
+              form.setValue("query", "");
+              clearError();
+            }}
+          >
+            <X className="size-4" />
+          </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
 
