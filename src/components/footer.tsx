@@ -4,16 +4,9 @@ import { cn } from "@/common/utils";
 import SimpleLink from "@/components/simple-link";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import { ReactElement } from "react";
 
 type FooterLink = {
   name: string;
-  href: string;
-};
-
-type SocialLinkType = {
-  name: string;
-  logo: ReactElement;
   href: string;
 };
 
