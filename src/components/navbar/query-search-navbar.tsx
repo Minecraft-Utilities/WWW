@@ -10,7 +10,7 @@ export default function QuerySearchNavbar() {
 
   return (
     <div className="relative flex min-w-0 flex-col items-end">
-      <QuerySearch setQueryError={setQueryError} className="min-w-0" />
+      <QuerySearch setQueryError={setQueryError} className="w-56 min-w-0 md:w-75" />
       {queryError && (
         <Card className="bg-card absolute top-full right-0 z-50 mt-1 w-full max-w-[min(100vw-2rem,24rem)] min-w-48 px-3 py-2 shadow-md">
           <p className="text-destructive text-xs leading-snug" role="alert">
