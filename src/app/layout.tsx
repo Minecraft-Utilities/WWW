@@ -1,4 +1,5 @@
 import { env } from "@/common/env";
+import { isProduction } from "@/common/utils";
 import { ViewportProvider } from "@/components/context/viewport-context";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar/navbar";
@@ -47,11 +48,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-full">
       {/* Analytics */}
-      <Script
-        defer
-        src="https://analytics.fascinated.cc/script.js"
-        data-website-id="83459095-69ee-4511-be2f-784217ba6a88"
-      />
+      {isProduction() && (
+        <Script
+          defer
+          src="https://analytics.fascinated.cc/script.js"
+          data-website-id="83459095-69ee-4511-be2f-784217ba6a88"
+        />
+      )}
 
       <QueryProvider>
         <ViewportProvider>

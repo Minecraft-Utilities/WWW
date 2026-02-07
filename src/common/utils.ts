@@ -1,8 +1,18 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { env } from "./env";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/**
+ * Checks if the environment is production.
+ *
+ * @returns true if the environment is production
+ */
+export function isProduction(): boolean {
+  return env.NEXT_PUBLIC_ENVIRONMENT === "production";
 }
 
 /**

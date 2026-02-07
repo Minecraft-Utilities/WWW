@@ -34,6 +34,8 @@ COPY --from=depends /app/.next/standalone ./
 COPY --from=depends /app/.next/static ./.next/static
 COPY --from=depends /app/public ./public
 
+ENV ENVIRONMENT=production
+
 # Expose the app port
 EXPOSE 3000
 ENV HOSTNAME="0.0.0.0"
