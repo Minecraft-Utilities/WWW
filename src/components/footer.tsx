@@ -5,7 +5,6 @@ import SimpleLink from "@/components/simple-link";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { ReactElement } from "react";
-import GithubLogo from "./logos/logos/github-logo";
 
 type FooterLink = {
   name: string;
@@ -22,7 +21,7 @@ const links: { [category: string]: FooterLink[] } = {
   Resources: [
     {
       name: "Source Code",
-      href: "https://github.com",
+      href: "https://github.com/Minecraft-Utilities",
     },
     {
       name: "Swagger API",
@@ -31,19 +30,11 @@ const links: { [category: string]: FooterLink[] } = {
   ],
 };
 
-const socialLinks: SocialLinkType[] = [
-  {
-    name: "GitHub",
-    logo: <GithubLogo className="size-5 lg:size-6" />,
-    href: "https://github.com",
-  },
-];
-
 export default function Footer() {
   return (
     <footer
       className={cn(
-        "border-border bg-secondary/60 mt-5 flex shrink-0 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0"
+        "border-border bg-secondary/60 mt-5 flex min-h-40 shrink-0 flex-col justify-between gap-10 border-t px-10 py-5 select-none lg:gap-0"
       )}
     >
       <div className="flex justify-center">
@@ -63,21 +54,6 @@ export default function Footer() {
                 API for Minecraft player data (skins, capes, profiles), Java/Bedrock server status and
                 previews.
               </p>
-            </div>
-            <div className="flex items-center justify-center gap-4 lg:justify-start">
-              {socialLinks.map(link => (
-                <SimpleLink
-                  key={link.name}
-                  className="transition-all hover:opacity-75"
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  draggable={false}
-                  aria-label={link.name}
-                >
-                  {link.logo}
-                </SimpleLink>
-              ))}
             </div>
           </div>
 
