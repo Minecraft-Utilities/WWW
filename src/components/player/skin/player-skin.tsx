@@ -34,7 +34,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
               alt={`${player.username} skin - ${selectedPart}`}
               width={256}
               height={256}
-              className="max-h-full max-w-full object-contain p-4"
+              className="max-h-full max-w-full object-contain"
               unoptimized
             />
           )}

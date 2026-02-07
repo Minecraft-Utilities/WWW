@@ -18,7 +18,7 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
     const viewer = new Render({
       canvas,
       width: 230,
-      height: 256,
+      height: 288,
     });
     viewer.loadSkin(player.skin.textureUrl);
     if (player.cape) {
