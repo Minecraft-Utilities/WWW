@@ -10,7 +10,7 @@ export default function LandingQuerySearch() {
 
   return (
     <div className="flex w-full flex-col">
-      <Card className="flex w-full flex-col">
+      <Card className="w-full">
         <CardContent>
           <QuerySearch landingPage setQueryError={setQueryError} />
         </CardContent>

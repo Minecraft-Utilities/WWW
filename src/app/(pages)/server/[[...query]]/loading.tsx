@@ -16,7 +16,7 @@ export default function ServerLoading() {
               <div className="bg-muted/30 h-32 w-full animate-pulse rounded-2xl" />
             </CardContent>
           </Card>
-          <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+          <Card className="w-full min-w-0 overflow-hidden p-0">
             <CardHeader>Details</CardHeader>
             <CardContent>
               <div className="flex flex-col gap-2">

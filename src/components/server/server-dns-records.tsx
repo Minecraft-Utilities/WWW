@@ -14,7 +14,7 @@ export default function ServerDnsRecords({ records }: ServerDnsRecordsProps) {
     records &&
     records.length > 0 && (
       <section className="flex flex-col gap-4">
-        <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+        <Card className="w-full min-w-0 overflow-hidden p-0">
           <CardHeader>DNS Records</CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">

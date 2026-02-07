@@ -19,10 +19,10 @@ export function ServerDetails({ server, edition }: ServerDetailsProps) {
 
   return (
     <section className="flex flex-col gap-4">
-      <Card className="flex w-full min-w-0 flex-col overflow-hidden p-0">
+      <Card className="w-full min-w-0 overflow-hidden p-0">
         <CardHeader>Details</CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col">
             <DetailRow label="Cached" value={server.cached ? timeAgo(new Date(server.cachedTime)) : "No"} />
             <DetailRow label="Hostname" value={server.hostname} />
             <DetailRow label="IP address" value={server.ip} />

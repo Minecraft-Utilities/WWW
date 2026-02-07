@@ -21,7 +21,7 @@ export default async function LandingServerExamples() {
     7
   );
   return (
-    <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
+    <Card className="border-border/80 w-full overflow-hidden p-0">
       <CardHeader>Server Examples</CardHeader>
       <CardContent className="flex flex-wrap justify-center gap-3">
         {servers.map(server => (

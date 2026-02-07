@@ -17,7 +17,7 @@ export function LandingExampleCard({ href, url, tooltip, name }: LandingExampleC
         href={href}
         className="block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
       >
-        <Card className="flex size-34 flex-col p-0">
+        <Card className="size-34 p-0">
           <CardContent className="flex flex-1 items-center justify-center p-0">
             <Image
               alt={name}

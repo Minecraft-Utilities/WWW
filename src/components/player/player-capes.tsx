@@ -11,7 +11,7 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
   const cape = player.cape;
 
   return (
-    <Card className="flex h-fit min-w-48 flex-col overflow-hidden p-0">
+    <Card className="h-fit min-w-48 overflow-hidden p-0">
       <CardHeader>Cape</CardHeader>
       <CardContent className="flex h-full items-center justify-center">
         {cape ? (

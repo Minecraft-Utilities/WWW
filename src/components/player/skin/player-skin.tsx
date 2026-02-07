@@ -24,7 +24,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_FRONT");
 
   return (
-    <Card className="flex flex-col overflow-hidden p-0">
+    <Card className="overflow-hidden p-0">
       <CardHeader>Skin</CardHeader>
       <CardContent className="flex flex-col items-center gap-4">
         <div className="relative flex h-72 w-full items-center justify-center overflow-hidden">

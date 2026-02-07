@@ -21,7 +21,7 @@ export default async function LandingPlayerExamples() {
   const players = getRandomEntries(playerExamples, 7);
 
   return (
-    <Card className="border-border/80 flex w-full flex-col overflow-hidden p-0">
+    <Card className="border-border/80 w-full overflow-hidden p-0">
       <CardHeader>Player Examples</CardHeader>
       <CardContent className="flex flex-wrap justify-center gap-3">
         {players.map(player => (

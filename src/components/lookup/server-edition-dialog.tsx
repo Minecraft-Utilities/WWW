@@ -38,7 +38,7 @@ export default function ServerEditionDialog({
       <DialogContent showCloseButton={true} className="sm:max-w-md">
         <DialogHeader className="space-y-3">
           <DialogTitle className="text-xl">Choose server edition</DialogTitle>
-          <DialogDescription className="text-muted-foreground text-sm leading-relaxed">
+          <DialogDescription className="leading-relaxed">
             Which edition is{" "}
             <span className="text-foreground bg-accent/50 border-border rounded border px-1.5 py-0.5 font-mono font-medium">
               {serverAddress}

@@ -16,7 +16,7 @@ export default function PlayerLoading() {
         </header>
         <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
           <section className="flex w-full flex-col gap-4 md:max-w-88">
-            <Card className="flex flex-col overflow-hidden p-0">
+            <Card className="overflow-hidden p-0">
               <CardHeader>Skin</CardHeader>
               <CardContent className="flex flex-col items-center gap-4">
                 <div className="bg-muted/30 ring-border/50 h-72 w-full max-w-[280px] animate-pulse rounded-xl ring-1" />
@@ -27,14 +27,14 @@ export default function PlayerLoading() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="flex h-fit min-w-48 flex-col overflow-hidden p-0">
+            <Card className="h-fit min-w-48 overflow-hidden p-0">
               <CardHeader>Cape</CardHeader>
               <CardContent className="flex h-full items-center justify-center">
                 <div className="bg-muted/30 h-[105px] w-full max-w-[280px] animate-pulse rounded-xl" />
               </CardContent>
             </Card>
           </section>
-          <Card className="flex h-fit w-full flex-col overflow-hidden p-0 md:flex-1">
+          <Card className="h-fit w-full overflow-hidden p-0 md:flex-1">
             <CardHeader>Details</CardHeader>
             <CardContent className="flex flex-col gap-2">
               {Array.from({ length: 4 }).map((_, i) => (

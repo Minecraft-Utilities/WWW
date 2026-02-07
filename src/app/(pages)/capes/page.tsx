@@ -34,7 +34,7 @@ export default async function CapesPage() {
       ) : (
         <div className="flex max-w-6xl flex-wrap justify-center gap-2">
           {capes.map(cape => (
-            <Card key={cape.textureId} className="flex w-44 shrink-0 flex-col md:w-52">
+            <Card key={cape.textureId} className="w-44 shrink-0 md:w-52">
               <CardHeader className="shrink-0">{cape.name}</CardHeader>
               <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
                 <Image
