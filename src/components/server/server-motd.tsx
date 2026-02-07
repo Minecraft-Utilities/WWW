@@ -20,7 +20,7 @@ export default function ServerMotd({ server, edition }: ServerMotdProps) {
               alt={`${server.hostname} MOTD preview`}
               width={768}
               height={128}
-              className="object-contain"
+              className="rounded-md object-contain"
               unoptimized
             />
           </CardContent>

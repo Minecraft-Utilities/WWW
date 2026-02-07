@@ -22,7 +22,7 @@ export default function ServerHeader({ server, edition }: ServerHeaderProps) {
           />
         )}
 
-        <h1 className="text-foreground min-w-0 text-center text-2xl font-bold tracking-tight wrap-break-word">
+        <h1 className="text-foreground min-w-0 text-center text-2xl font-bold tracking-tight wrap-break-word md:text-4xl">
           {server.hostname}
         </h1>
       </div>
