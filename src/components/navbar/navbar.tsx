@@ -34,7 +34,7 @@ export default function Navbar() {
             href="/"
             draggable={false}
           >
-            <Image width={28} height={28} className="size-7" src="/media/logo.png" alt="MC Utils Logo" />
+            <Image width={28} height={28} className="size-7" src="/media/logo/logo.png" alt="MC Utils Logo" />
 
             <span className="text-primary hidden text-base font-bold sm:inline sm:text-lg" aria-hidden="true">
               MC Utils

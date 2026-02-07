@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     siteName: "MC Utils",
     images: [
       {
-        url: `${env.NEXT_PUBLIC_BASE_URL}/media/logo.png`,
+        url: `${env.NEXT_PUBLIC_BASE_URL}/media/logo/logo.png`,
         width: 128,
         height: 128,
       },
     ],
   },
   icons: {
-    icon: `${env.NEXT_PUBLIC_BASE_URL}/media/logo.png`,
+    icon: `${env.NEXT_PUBLIC_BASE_URL}/media/logo/logo.png`,
   },
   twitter: { card: "summary" },
 };

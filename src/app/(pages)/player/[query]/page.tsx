@@ -2,7 +2,7 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
-import PlayerSkin from "@/components/player/player-skin";
+import PlayerSkin from "@/components/player/skin/player-skin";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 import { cache } from "react";
@@ -72,7 +72,7 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
           <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
             {/* Skin and Cape */}
             <section className="flex w-full flex-col gap-4 md:max-w-88">
-              <PlayerSkin skin={player.skin} username={player.username} />
+              <PlayerSkin player={player} />
               <PlayerCapes player={player} />
             </section>
 
