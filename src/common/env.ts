@@ -13,7 +13,7 @@ export const env = createEnv({
   runtimeEnv: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
-    NEXT_PUBLIC_ENVIRONMENT: process.env.ENVIRONMENT,
+    NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
   },
 
   clientPrefix: "NEXT_PUBLIC_",
