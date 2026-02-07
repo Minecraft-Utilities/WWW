@@ -105,7 +105,8 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
             <InputGroupInput
               {...field}
               type="text"
-              placeholder="Search..."
+              placeholder="Player / Server Lookup"
+              className="text-xs md:text-sm"
               aria-invalid={fieldState.invalid || !!lookupError}
               disabled={isLookupLoading}
               onChange={e => {
