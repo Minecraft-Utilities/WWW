@@ -22,7 +22,7 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
               <SimpleTooltip
                 display={
                   <span>
-                    <b>{cape.name}</b> Cape
+                    <b>{cape.name!}</b> Cape
                   </span>
                 }
               >
