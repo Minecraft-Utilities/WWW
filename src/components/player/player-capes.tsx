@@ -9,28 +9,54 @@ export interface PlayerCapesProps {
 
 export default function PlayerCapes({ player }: PlayerCapesProps) {
   const cape = player.cape;
+  const optifineCape = player.optifineCape;
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
       <CardHeader>Cape</CardHeader>
-      <CardContent className="flex h-full items-center justify-center">
-        {cape ? (
-          <SimpleTooltip
-            display={
-              <span>
-                <b>{cape.name}</b> Cape
-              </span>
-            }
-          >
-            <Image
-              src={cape.parts.FRONT}
-              alt={`${player.username} cape`}
-              width={64}
-              height={105}
-              className="h-[105px] rounded-lg object-cover"
-              unoptimized
-            />
-          </SimpleTooltip>
+      <CardContent className="flex h-full items-center justify-center gap-2">
+        {cape || optifineCape ? (
+          <>
+            {/* Vanilla Cape */}
+            {cape && (
+              <SimpleTooltip
+                display={
+                  <span>
+                    <b>{cape.name}</b> Cape
+                  </span>
+                }
+              >
+                <Image
+                  src={cape.parts.FRONT}
+                  alt={`${player.username} cape`}
+                  width={64}
+                  height={105}
+                  className="h-[105px] rounded-lg object-cover"
+                  unoptimized
+                />
+              </SimpleTooltip>
+            )}
+
+            {/* Optifine Cape */}
+            {optifineCape && (
+              <SimpleTooltip
+                display={
+                  <span>
+                    <b>Optifine Cape</b>
+                  </span>
+                }
+              >
+                <Image
+                  src={optifineCape.parts.FRONT}
+                  alt={`${player.username} optifine cape`}
+                  width={64}
+                  height={105}
+                  className="h-[105px] rounded-lg object-cover"
+                  unoptimized
+                />
+              </SimpleTooltip>
+            )}
+          </>
         ) : (
           <div className="flex h-full min-h-[105px] flex-col items-center justify-center">
             <p className="text-muted-foreground text-center text-sm">No capes available</p>
