@@ -222,7 +222,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         onOpenAutoFocus={e => e.preventDefault()}
       >
         {serverEntries && serverEntries.length > 0 ? (
-          <ul className="max-h-72 overflow-y-auto p-1">
+          <ul className="overflow-y-auto p-1">
             {serverEntries.map(entry => (
               <li key={entry.serverId}>
                 <ServerLookupEntry

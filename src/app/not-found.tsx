@@ -24,7 +24,7 @@ export default function NotFoundPage() {
               className="border-primary/30 bg-primary/5 text-primary hover:border-primary/50 hover:bg-primary/10 group relative h-12 overflow-hidden rounded-xl border-2 px-8 backdrop-blur-sm transition-all duration-300"
             >
               <div className="from-primary/10 to-accent-secondary/10 absolute inset-0 bg-linear-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <HomeIcon className="relative z-10 mr-2 h-5 w-5" />
+              <HomeIcon className="relative z-10 mr-2 size-5" />
               <span className="relative z-10 font-semibold">Return Home</span>
             </Button>
           </SimpleLink>

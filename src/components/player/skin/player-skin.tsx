@@ -91,7 +91,7 @@ function SkinSelectionButton({ children, selected, onClick }: SkinSelectionButto
       className={cn(
         "bg-muted/30 flex overflow-hidden rounded-lg border-2 transition-colors",
         "focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none",
-        "flex size-10 items-center justify-center",
+        "size-10 items-center justify-center",
         selected ? "border-primary" : "border-border/60 hover:border-border"
       )}
     >
