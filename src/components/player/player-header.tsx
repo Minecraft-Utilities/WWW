@@ -9,7 +9,7 @@ export interface PlayerHeaderProps {
 export default function PlayerHeader({ player }: PlayerHeaderProps) {
   return (
     <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-4 md:flex-row">
         <Image src={player.skin.parts.HEAD} alt={player.username} width={64} height={64} unoptimized />
         <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">{player.username}</h1>
       </div>
