@@ -52,7 +52,6 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
 
   const {
     data: serverEntries,
-    isLoading: isServerSearchLoading,
     isFetching: isServerSearchFetching,
     isSuccess: isServerSearchSuccess,
   } = useQuery({
@@ -222,7 +221,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         onOpenAutoFocus={e => e.preventDefault()}
       >
         {serverEntries && serverEntries.length > 0 ? (
-          <ul className="overflow-y-auto p-1">
+          <ul className="flex flex-col gap-1 overflow-y-auto p-1">
             {serverEntries.map(entry => (
               <li key={entry.serverId}>
                 <ServerLookupEntry
