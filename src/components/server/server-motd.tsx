@@ -1,11 +1,11 @@
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
-import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
+import { Server, ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import Image from "next/image";
 import Card, { CardContent } from "../ui/card";
 
 interface ServerMotdProps {
   server: Server;
-  edition: ServerType;
+  edition: ServerPlatform;
 }
 
 export default function ServerMotd({ server, edition }: ServerMotdProps) {

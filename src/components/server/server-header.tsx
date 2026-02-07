@@ -1,10 +1,10 @@
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
-import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
+import { Server, ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import Image from "next/image";
 
 interface ServerHeaderProps {
   server: Server;
-  edition: ServerType;
+  edition: ServerPlatform;
 }
 
 export default function ServerHeader({ server, edition }: ServerHeaderProps) {
@@ -23,7 +23,7 @@ export default function ServerHeader({ server, edition }: ServerHeaderProps) {
         )}
 
         <h1 className="text-foreground min-w-0 text-center text-2xl font-bold tracking-tight wrap-break-word md:text-4xl">
-          {server.hostname}
+          {server.registryEntry?.displayName ?? server.hostname}
         </h1>
       </div>
     </header>

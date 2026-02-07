@@ -6,7 +6,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Search, X } from "lucide-react";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
-import { ServerType } from "mcutils-js-api/dist/types/server/server";
+import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -81,7 +81,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   );
 
   const handleServerEdition = useCallback(
-    (edition: ServerType) => {
+    (edition: ServerPlatform) => {
       if (!pendingServer) return;
       router.push(`/server/${edition}/${encodeURIComponent(pendingServer)}`);
       form.reset();

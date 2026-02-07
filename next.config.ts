@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.fascinated.cc", port: "", pathname: "/**" },
       { protocol: "https", hostname: "mc.fascinated.cc", port: "", pathname: "/**" },
+      { protocol: "https", hostname: "github.com", port: "", pathname: "/**" },
     ],
     qualities: [80, 100],
     formats: ["image/webp"],

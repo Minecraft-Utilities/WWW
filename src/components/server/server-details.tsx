@@ -2,7 +2,7 @@ import { env } from "@/common/env";
 import { timeAgo } from "@/common/time-utils";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
-import { Server, ServerType } from "mcutils-js-api/dist/types/server/server";
+import { Server, ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import DetailRow from "../detail-row";
 import SimpleLink from "../simple-link";
 import { Button } from "../ui/button";
@@ -10,7 +10,7 @@ import Card, { CardContent, CardHeader } from "../ui/card";
 
 export interface ServerDetailsProps {
   server: Server;
-  edition: ServerType;
+  edition: ServerPlatform;
 }
 
 export function ServerDetails({ server, edition }: ServerDetailsProps) {

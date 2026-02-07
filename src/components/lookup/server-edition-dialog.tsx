@@ -3,17 +3,17 @@
 import { cn } from "@/common/utils";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Coffee, Layers } from "lucide-react";
-import { ServerType } from "mcutils-js-api/dist/types/server/server";
+import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 
 export interface ServerEditionDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   serverAddress: string;
-  onSelectEdition: (edition: ServerType) => void;
+  onSelectEdition: (edition: ServerPlatform) => void;
 }
 
 const editionOptions: {
-  type: ServerType;
+  type: ServerPlatform;
   label: string;
   icon: typeof Coffee;
   description: string;
