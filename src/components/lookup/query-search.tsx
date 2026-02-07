@@ -144,7 +144,11 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
       </InputGroup>
 
       {landingPage && (
-        <Button type="submit" className="block w-full md:hidden" disabled={isLookupLoading}>
+        <Button
+          type="submit"
+          className="block w-full text-xs md:hidden md:text-sm"
+          disabled={isLookupLoading}
+        >
           Search
         </Button>
       )}

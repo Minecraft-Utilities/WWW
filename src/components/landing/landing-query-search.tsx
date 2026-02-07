@@ -14,7 +14,7 @@ export default function LandingQuerySearch() {
         <CardContent>
           <QuerySearch landingPage setQueryError={setQueryError} />
         </CardContent>
-        <CardFooter>
+        <CardFooter className="text-xs md:text-sm">
           {queryError ? (
             <p className="text-destructive">{queryError.message}</p>
           ) : (
