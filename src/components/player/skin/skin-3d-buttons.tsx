@@ -32,12 +32,6 @@ export default function Skin3DButtons({ player }: Skin3DButtonsProps) {
         onClick={() => playAnimation(skin3DAnimations.walking)}
       />
       <SkinActionButton
-        tooltip="Play Run Animation"
-        icon="/media/3d-skin-buttons/steve-sneaking.webp"
-        isSelected={animation.name === skin3DAnimations.running.name}
-        onClick={() => playAnimation(skin3DAnimations.running)}
-      />
-      <SkinActionButton
         tooltip="Play Fly Animation"
         icon="/media/3d-skin-buttons/feather.webp"
         isSelected={animation.name === skin3DAnimations.flying.name}
