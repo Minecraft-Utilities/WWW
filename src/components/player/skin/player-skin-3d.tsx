@@ -32,5 +32,5 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
     };
   }, [player.skin.textureUrl, updateSkinViewerRef]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} className="rounded-lg" />;
 }
