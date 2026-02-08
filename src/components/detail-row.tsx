@@ -19,7 +19,7 @@ export interface DetailRowProps {
 export default function DetailRow({ label, value, variant = "default" }: DetailRowProps) {
   return (
     <div className="xs:flex-row xs:flex-wrap xs:items-center xs:justify-between xs:gap-2 flex flex-col gap-1.5 py-1.5 first:pt-0 last:pb-0">
-      <span className="text-muted-foreground shrink-0 text-sm">{label}</span>
+      <span className="text-muted-foreground shrink-0 text-sm select-none">{label}</span>
       <span className={cn("min-w-0 break-all", variantClasses[variant])}>{value}</span>
     </div>
   );
