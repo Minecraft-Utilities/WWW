@@ -8,15 +8,13 @@ import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export default function Statistics() {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["statistics"],
     queryFn: () => mcUtilsApi.fetchStatistics(),
     refetchInterval: TimeUnit.toMillis(TimeUnit.Second, 30),
   });
 
-  if (isLoading || !data?.statistics) {
-    return null;
-  }
+  const statistics = data?.statistics;
 
   return (
     <div className="mt-8 flex w-full flex-row gap-4">
@@ -26,7 +24,7 @@ export default function Statistics() {
           <SimpleTooltip
             display={<p>The number of Java Minecraft profiles that have been stored in our database.</p>}
           >
-            {formatNumberWithCommas(data.statistics.seenPlayers)}
+            {statistics ? formatNumberWithCommas(statistics.seenPlayers) : "..."}
           </SimpleTooltip>
         </CardContent>
       </Card>
@@ -34,7 +32,7 @@ export default function Statistics() {
         <CardHeader>Skin Collection Size</CardHeader>
         <CardContent className="text-xl">
           <SimpleTooltip display={<p>The number of unique skins that have been stored in our database.</p>}>
-            {formatNumberWithCommas(data.statistics.seenSkins)}
+            {statistics ? formatNumberWithCommas(statistics.seenSkins) : "..."}
           </SimpleTooltip>
         </CardContent>
       </Card>
