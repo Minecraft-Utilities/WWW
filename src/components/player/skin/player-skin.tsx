@@ -3,7 +3,7 @@
 import { cn } from "@/common/utils";
 import { Skin3DSettingsProvider } from "@/components/provider/skin-3d-settings-provider";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
-import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
+import { Player } from "mcutils-js-api/dist/types/player/player";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
 import { useState } from "react";
@@ -14,7 +14,7 @@ const SKIN_PARTS: SkinPart[] = ["HEAD", "FACE", "BODY", "FULLBODY_FRONT", "FULLB
 const SKIN_MODES = ["3D", "2D"];
 
 export interface PlayerSkinProps {
-  player: CachedPlayer;
+  player: Player;
 }
 
 export default function PlayerSkin({ player }: PlayerSkinProps) {

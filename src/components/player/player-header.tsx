@@ -1,9 +1,9 @@
-import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
+import { Player } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import CopyTextButton from "../copy-text-button";
 
 export interface PlayerHeaderProps {
-  player: CachedPlayer;
+  player: Player;
 }
 
 export default function PlayerHeader({ player }: PlayerHeaderProps) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
+import { Player } from "mcutils-js-api/dist/types/player/player";
 import {
   createContext,
   useContext,
@@ -54,7 +54,7 @@ type Skin3DSettingsContextType = {
 
 const Skin3DSettingsContext = createContext<Skin3DSettingsContextType | undefined>(undefined);
 
-export function Skin3DSettingsProvider({ player, children }: { player: CachedPlayer; children: ReactNode }) {
+export function Skin3DSettingsProvider({ player, children }: { player: Player; children: ReactNode }) {
   const skinViewerRef: RefObject<Render | null> = useRef<Render | null>(null);
   const [selectedAnimation, setSelectedAnimation] = useState<Skin3DAnimation>(skin3DAnimations.idle);
   const [showElytra, setShowElytra] = useState<boolean>(false);

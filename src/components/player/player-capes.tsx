@@ -1,10 +1,10 @@
-import { CachedPlayer } from "mcutils-js-api/dist/types/cache/cached-player";
 import Image from "next/image";
 import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
+import { Player } from "mcutils-js-api/dist/types/player/player";
 
 export interface PlayerCapesProps {
-  player: CachedPlayer;
+  player: Player;
 }
 
 export default function PlayerCapes({ player }: PlayerCapesProps) {

@@ -4,6 +4,7 @@ import { LandingExampleCard } from "./landing-example-card";
 
 const playerExamples: string[] = [
   "ImFascinated",
+  "Rainnny",
   "Notch",
   "jeb_",
   "Technoblade",
@@ -15,6 +16,27 @@ const playerExamples: string[] = [
   "Hypixel",
   "Herobrine",
   "DanTDM",
+  "Dream",
+  "GeorgeNotFound",
+  "Sapnap",
+  "PewDiePie",
+  "Stampy",
+  "Skephalo",
+  "BadBoyHalo",
+  "AntVenom",
+  "Mumbo",
+  "Grian",
+  "Scar",
+  "Docm77",
+  "Xisuma",
+  "Keralis",
+  "BdoubleO100",
+  "Etho",
+  "Tango",
+  "Zedaph",
+  "ImpulseSV",
+  "Cubfan135",
+  "FalseSymmetry",
 ];
 
 export default async function LandingPlayerExamples() {
