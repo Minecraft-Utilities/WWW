@@ -1,6 +1,8 @@
 import { mcUtilsApi } from "@/common/mc-utils";
+import { formatNumberWithCommas } from "@/common/utils";
 import { CAPE_ASPECT_RATIO } from "@/components/player/player-capes";
-import Card, { CardContent, CardHeader } from "@/components/ui/card";
+import Card, { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { UserIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { cache } from "react";
@@ -47,6 +49,12 @@ export default async function CapesPage() {
                   className="object-fit mx-auto h-[120px]"
                 />
               </CardContent>
+              <CardFooter className="flex items-center gap-2">
+                <UserIcon className="size-4" />
+                <span className="text-muted-foreground text-sm">
+                  {formatNumberWithCommas(cape.accountsOwned)}
+                </span>
+              </CardFooter>
             </Card>
           ))}
         </div>

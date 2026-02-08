@@ -23,7 +23,7 @@ export default function PlayerLoading() {
             <Card className="overflow-hidden p-0">
               <CardHeader>Skin</CardHeader>
               <CardContent className="flex flex-col items-center gap-4">
-                <div className="bg-muted/30 ring-border/50 flex h-72 w-full items-center justify-center animate-pulse rounded-xl ring-1" />
+                <div className="bg-muted/30 ring-border/50 flex h-72 w-full animate-pulse items-center justify-center rounded-xl ring-1" />
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <div key={i} className="bg-muted/30 size-10 animate-pulse rounded-lg" />

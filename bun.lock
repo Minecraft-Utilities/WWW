@@ -16,7 +16,7 @@
         "clsx": "^2.1.1",
         "dayjs": "^1.11.19",
         "lucide-react": "^0.563.0",
-        "mcutils-js-api": "^2.0.31",
+        "mcutils-js-api": "^2.0.32",
         "next": "^16.2.0-canary.31",
         "prettier-plugin-organize-imports": "^4.3.0",
         "prettier-plugin-tailwindcss": "^0.7.2",
@@ -818,7 +818,7 @@
 
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 
-    "mcutils-js-api": ["mcutils-js-api@2.0.31", "", {}, "sha512-+1NgcReSMp9CyrCq/UJbu6VKiYTHbA/POQmCNegVgXet6/t8VLpLxAFkqPfr9ydpPpc750r0JY4m0Y9YIy9MZQ=="],
+    "mcutils-js-api": ["mcutils-js-api@2.0.32", "", {}, "sha512-FuKh88fUWBlKTLGp8S83Jiu9jM4A0mDR30MKMynrL48PepVGw5w8HIPQ6FE9FtJ/mK3Cq0si/Ilaqhb5RmZd/w=="],
 
     "merge2": ["merge2@1.4.1", "", {}, "sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg=="],
 
