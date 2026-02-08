@@ -1,4 +1,5 @@
 import { mcUtilsApi } from "@/common/mc-utils";
+import { CAPE_ASPECT_RATIO } from "@/components/player/player-capes";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -40,10 +41,10 @@ export default async function CapesPage() {
                 <Image
                   src={cape.parts.FRONT}
                   alt={cape.name ?? "Unknown Cape"}
-                  width={96}
+                  width={120 * CAPE_ASPECT_RATIO}
                   height={96}
                   unoptimized
-                  className="mx-auto"
+                  className="object-fit mx-auto h-[120px]"
                 />
               </CardContent>
             </Card>

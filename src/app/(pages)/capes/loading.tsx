@@ -18,7 +18,7 @@ export default function CapesLoading() {
               <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
             </CardHeader>
             <CardContent className="flex items-center justify-center">
-              <div className="bg-muted/30 size-24 animate-pulse rounded-md" />
+              <div className="bg-muted/30 h-[120px] w-auto animate-pulse rounded-md" />
             </CardContent>
           </Card>
         ))}
