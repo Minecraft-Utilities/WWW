@@ -1,6 +1,7 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { formatNumberWithCommas } from "@/common/utils";
 import { CAPE_ASPECT_RATIO } from "@/components/player/player-capes";
+import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { UserIcon } from "lucide-react";
 import { Metadata } from "next";
@@ -51,9 +52,11 @@ export default async function CapesPage() {
               </CardContent>
               <CardFooter className="flex items-center gap-2">
                 <UserIcon className="size-4" />
-                <span className="text-muted-foreground text-sm">
-                  {formatNumberWithCommas(cape.accountsOwned)}
-                </span>
+                <SimpleTooltip display="The amount of accounts that have used this cape">
+                  <span className="text-muted-foreground text-sm">
+                    {formatNumberWithCommas(cape.accountsOwned)}
+                  </span>
+                </SimpleTooltip>
               </CardFooter>
             </Card>
           ))}

@@ -1,5 +1,6 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { formatNumberWithCommas } from "@/common/utils";
+import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardFooter } from "@/components/ui/card";
 import Pagination from "@/components/ui/pagination";
 import { UserIcon } from "lucide-react";
@@ -58,9 +59,11 @@ export default async function SkinsPage({ params }: SkinPageProps) {
                 </CardContent>
                 <CardFooter className="flex items-center gap-2">
                   <UserIcon className="size-4" />
-                  <span className="text-muted-foreground text-sm">
-                    {formatNumberWithCommas(skin.accountsUsed)}
-                  </span>
+                  <SimpleTooltip display="The amount of accounts that have used this skin">
+                    <span className="text-muted-foreground text-sm">
+                      {formatNumberWithCommas(skin.accountsUsed)}
+                    </span>
+                  </SimpleTooltip>
                 </CardFooter>
               </Card>
             ))}
