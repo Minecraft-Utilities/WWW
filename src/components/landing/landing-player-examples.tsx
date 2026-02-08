@@ -49,7 +49,7 @@ export default async function LandingPlayerExamples() {
         {players.map(player => (
           <LandingExampleCard
             key={player}
-            url={`https://mc.fascinated.cc/api/skins/${player}/face.png`}
+            url={`https://mc.fascinated.cc/api/skins/${player}/face.png?overlays=false`}
             tooltip={
               <span>
                 Click to view information for <b>{player}</b>
