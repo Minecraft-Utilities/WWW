@@ -2,6 +2,7 @@ import { env } from "@/common/env";
 import LandingPlayerExamples from "@/components/landing/landing-player-examples";
 import LandingQuerySearch from "@/components/landing/landing-query-search";
 import LandingServerExamples from "@/components/landing/landing-server-examples";
+import Statistics from "@/components/landing/statistics";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +32,8 @@ export default function HomePage() {
           <LandingPlayerExamples />
           <LandingServerExamples />
         </div>
+
+        <Statistics />
       </div>
     </div>
   );
