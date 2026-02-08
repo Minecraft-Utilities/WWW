@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/common/utils";
-import { SparklesIcon } from "lucide-react";
+import { SparklesIcon, UserIcon } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
@@ -15,7 +15,10 @@ interface NavLinkProps {
   className?: string;
 }
 
-const links = [<NavLink key="capes" name="Capes" icon={<SparklesIcon className="size-5" />} href="/capes" />];
+const links = [
+  <NavLink key="capes" name="Capes" icon={<SparklesIcon className="size-5" />} href="/capes" />,
+  <NavLink key="skins" name="Skins" icon={<UserIcon className="size-5" />} href="/skins/1" />,
+];
 
 export default function Navbar() {
   const path = usePathname();
