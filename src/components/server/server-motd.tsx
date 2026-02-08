@@ -19,9 +19,10 @@ export default function ServerMotd({ server, edition }: ServerMotdProps) {
               src={(server as JavaServer).motd!.preview!}
               alt={`${server.hostname} MOTD preview`}
               width={768}
-              height={128}
-              className="rounded-md object-contain"
+              height={87}
+              className="w-auto rounded-md object-contain"
               unoptimized
+              priority
             />
           </CardContent>
         </Card>
