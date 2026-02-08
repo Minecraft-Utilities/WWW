@@ -29,7 +29,7 @@ export function LandingExampleCard({ href, url, tooltip, name }: LandingExampleC
             />
           </CardContent>
           <CardFooter>
-            <p className="text-muted-foreground text-center text-sm">{name}</p>
+            <p className="text-muted-foreground text-center text-xs">{name}</p>
           </CardFooter>
         </Card>
       </SimpleLink>

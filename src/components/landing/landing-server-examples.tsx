@@ -18,7 +18,7 @@ const serverExamples: Record<string, string> = {
 export default async function LandingServerExamples() {
   const servers = getRandomEntries(
     Object.entries(serverExamples).map(([ip, name]) => ({ ip, name })),
-    7
+    5
   );
   return (
     <Card className="border-border/80 w-full overflow-hidden p-0">

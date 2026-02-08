@@ -40,7 +40,7 @@ const playerExamples: string[] = [
 ];
 
 export default async function LandingPlayerExamples() {
-  const players = getRandomEntries(playerExamples, 7);
+  const players = getRandomEntries(playerExamples, 5);
 
   return (
     <Card className="border-border/80 w-full overflow-hidden p-0">
