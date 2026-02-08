@@ -44,6 +44,13 @@ export default async function SkinsPage({ params }: SkinPageProps) {
         </Card>
       ) : (
         <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
+          <Pagination
+            page={pageNumber}
+            totalItems={skins.totalItems ?? 0}
+            itemsPerPage={skins.itemsPerPage ?? 0}
+            basePath="/skins"
+          />
+
           <div className="flex flex-wrap justify-center gap-2">
             {skins.items.map(skin => (
               <Card key={skin.textureId} className="w-44 shrink-0 md:w-44">

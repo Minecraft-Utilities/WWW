@@ -13,6 +13,13 @@ export default function SkinsLoading() {
         <div className="bg-muted/30 h-5 w-72 max-w-full animate-pulse rounded-md" />
       </header>
       <div className="flex max-w-5xl flex-wrap justify-center gap-6">
+        {/* Pagination */}
+        <div className="flex w-full items-center justify-center gap-2">
+          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
+          <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
+          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
+        </div>
+
         <div className="flex flex-wrap justify-center gap-2">
           {Array.from({ length: 25 }).map((_, i) => (
             <Card key={i} className="w-44 shrink-0 md:w-44">
@@ -26,6 +33,8 @@ export default function SkinsLoading() {
             </Card>
           ))}
         </div>
+
+        {/* Pagination */}
         <div className="flex w-full items-center justify-center gap-2">
           <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
           <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
