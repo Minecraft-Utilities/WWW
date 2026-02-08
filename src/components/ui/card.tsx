@@ -17,7 +17,7 @@ export function CardHeader({ children, className, variant = "default" }: CardHea
   return (
     <div
       className={cn(
-        "rounded-t-2xl border-b px-4 py-3 text-xs font-medium tracking-wider uppercase",
+        "rounded-t-2xl border-b px-4 py-2.5 text-xs font-medium tracking-wider uppercase",
         variant === "default" && "border-border/60 bg-muted/20 text-muted-foreground",
         variant === "destructive" && "border-destructive/50 bg-destructive/10 text-destructive",
         className
@@ -34,7 +34,7 @@ export interface CardContentProps {
 }
 
 export function CardContent({ children, className }: CardContentProps) {
-  return <div className={cn("p-4", className)}>{children}</div>;
+  return <div className={cn("p-3", className)}>{children}</div>;
 }
 
 export interface CardFooterProps {

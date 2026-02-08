@@ -1,11 +1,8 @@
-import { env } from "@/common/env";
 import { timeAgo } from "@/common/time-utils";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { Server, ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import DetailRow from "../detail-row";
-import SimpleLink from "../simple-link";
-import { Button } from "../ui/button";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export interface ServerDetailsProps {
@@ -67,13 +64,6 @@ export function ServerDetails({ server, edition }: ServerDetailsProps) {
             {server.location?.country && (
               <DetailRow label="Location" variant="warning" value={server.location.country} />
             )}
-
-            {/* Open API Link */}
-            <SimpleLink href={`${env.NEXT_PUBLIC_API_URL}/servers/${edition}/${server.hostname}`}>
-              <Button variant="outline" size="sm">
-                View API
-              </Button>
-            </SimpleLink>
           </div>
         </CardContent>
       </Card>

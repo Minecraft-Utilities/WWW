@@ -1,0 +1,34 @@
+"use client";
+
+import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
+import { createContext, ReactNode, useContext, useState } from "react";
+
+type SelectedSkinContextProps = {
+  selectedSkin: Skin;
+  setSelectedSkin: (skin: Skin) => void;
+};
+const SelectedSkinContext = createContext<SelectedSkinContextProps | undefined>(undefined);
+
+export const SelectedSkinProvider = ({
+  children,
+  initialSkin,
+}: {
+  children: ReactNode;
+  initialSkin: Skin;
+}) => {
+  const [selectedSkin, setSelectedSkin] = useState<Skin>(initialSkin);
+
+  return (
+    <SelectedSkinContext.Provider value={{ selectedSkin, setSelectedSkin }}>
+      {children}
+    </SelectedSkinContext.Provider>
+  );
+};
+
+export const useSelectedSkin = (): SelectedSkinContextProps => {
+  const context = useContext(SelectedSkinContext);
+  if (!context) {
+    throw new Error("useSelectedSkin must be used within a SelectedSkinProvider");
+  }
+  return context;
+};

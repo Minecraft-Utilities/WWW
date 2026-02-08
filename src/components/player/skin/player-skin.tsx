@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/common/utils";
+import { useSelectedSkin } from "@/components/provider/selected-skin-provider";
 import { Skin3DSettingsProvider } from "@/components/provider/skin-3d-settings-provider";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Player } from "mcutils-js-api/dist/types/player/player";
@@ -18,7 +19,7 @@ export interface PlayerSkinProps {
 }
 
 export default function PlayerSkin({ player }: PlayerSkinProps) {
-  const skin = player.skin;
+  const { selectedSkin } = useSelectedSkin();
 
   const [selectedMode, setSelectedMode] = useState<(typeof SKIN_MODES)[number]>("3D");
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_FRONT");
@@ -30,7 +31,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
         <div className="relative flex h-72 w-full items-center justify-center overflow-hidden">
           {selectedMode === "2D" && (
             <Image
-              src={skin.parts[selectedPart]}
+              src={selectedSkin.parts[selectedPart]}
               alt={`${player.username} skin - ${selectedPart}`}
               width={256}
               height={256}
