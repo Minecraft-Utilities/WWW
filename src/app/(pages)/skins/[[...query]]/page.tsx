@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 type SkinPageProps = {
   params: Promise<{
-    page: string;
+    query?: string[];
   }>;
 };
 
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 const SKIN_ASPECT_RATIO = 452 / 768;
 
 export default async function SkinsPage({ params }: SkinPageProps) {
-  const { page } = await params;
-  const pageNumber = Number(page);
-  const skinsResponse = await mcUtilsApi.fetchSkins(pageNumber);
+  const { query } = await params;
+  const page = Number(query?.[0] ?? "1");
+  const skinsResponse = await mcUtilsApi.fetchSkins(page);
   const skins = skinsResponse.skins;
   const isEmpty = skins?.items.length === 0 || !skins;
 
@@ -45,7 +45,7 @@ export default async function SkinsPage({ params }: SkinPageProps) {
       ) : (
         <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
           <Pagination
-            page={pageNumber}
+            page={page}
             totalItems={skins.totalItems ?? 0}
             itemsPerPage={skins.itemsPerPage ?? 0}
             basePath="/skins"
@@ -77,7 +77,7 @@ export default async function SkinsPage({ params }: SkinPageProps) {
           </div>
 
           <Pagination
-            page={pageNumber}
+            page={page}
             totalItems={skins.totalItems ?? 0}
             itemsPerPage={skins.itemsPerPage ?? 0}
             basePath="/skins"

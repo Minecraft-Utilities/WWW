@@ -17,7 +17,7 @@ interface NavLinkProps {
 
 const links = [
   <NavLink key="capes" name="Capes" icon={<SparklesIcon className="size-5" />} href="/capes" />,
-  <NavLink key="skins" name="Skins" icon={<UserIcon className="size-5" />} href="/skins/1" />,
+  <NavLink key="skins" name="Skins" icon={<UserIcon className="size-5" />} href="/skins" />,
 ];
 
 export default function Navbar() {

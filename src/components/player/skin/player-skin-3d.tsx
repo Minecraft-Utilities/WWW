@@ -23,6 +23,7 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
       canvas,
       width: 230,
       height: 288,
+      allowZoom: false,
     });
 
     viewer.loadSkin(selectedSkin.textureUrl);
