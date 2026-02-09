@@ -6,7 +6,5 @@ export interface SkeletonProps {
 }
 
 export default function Skeleton({ className, children }: SkeletonProps) {
-  return (
-    <div className={cn("bg-muted/30 animate-pulse rounded-md", className)}>{children}</div>
-  );
+  return <div className={cn("bg-muted/30 animate-pulse rounded-md", className)}>{children}</div>;
 }

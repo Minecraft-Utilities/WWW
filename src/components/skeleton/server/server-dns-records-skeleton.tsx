@@ -1,5 +1,5 @@
-import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import TableSkeleton from "@/components/skeleton/ui/table-skeleton";
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
 
 export default function ServerDnsRecordsSkeleton() {
   return (

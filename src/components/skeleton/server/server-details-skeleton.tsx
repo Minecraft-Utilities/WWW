@@ -1,5 +1,5 @@
-import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import DetailRowsSkeleton from "@/components/skeleton/ui/detail-rows-skeleton";
+import Card, { CardContent, CardHeader } from "@/components/ui/card";
 
 export default function ServerDetailsSkeleton() {
   return (

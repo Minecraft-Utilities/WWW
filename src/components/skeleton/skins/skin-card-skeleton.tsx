@@ -1,6 +1,6 @@
+import Skeleton from "@/components/skeleton/ui/skeleton";
 import Card, { CardContent, CardFooter } from "@/components/ui/card";
 import { UserIcon } from "lucide-react";
-import Skeleton from "@/components/skeleton/ui/skeleton";
 
 export default function SkinCardSkeleton() {
   return (

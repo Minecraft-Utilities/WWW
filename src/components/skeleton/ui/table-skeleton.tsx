@@ -17,10 +17,7 @@ export default function TableSkeleton({ columns = 3, rows = 4 }: TableSkeletonPr
         <thead>
           <tr className="border-border bg-muted/30 border-b">
             {headerWidths.map((w, i) => (
-              <th
-                key={i}
-                className="text-muted-foreground px-3 py-2 font-medium whitespace-nowrap"
-              >
+              <th key={i} className="text-muted-foreground px-3 py-2 font-medium whitespace-nowrap">
                 <Skeleton className={`h-4 ${w} rounded`} />
               </th>
             ))}

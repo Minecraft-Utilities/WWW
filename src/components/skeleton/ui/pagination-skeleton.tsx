@@ -8,13 +8,18 @@ export default function PaginationSkeleton() {
         <Button variant="ghost" size="icon" disabled className="pointer-events-none">
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        <Button variant="ghost" size="sm" disabled className="relative h-9 min-w-10 px-3 pointer-events-none">
+        <Button variant="ghost" size="sm" disabled className="pointer-events-none relative h-9 min-w-10 px-3">
           <span className="bg-muted/50 h-3.5 w-4 animate-pulse rounded" />
         </Button>
-        <Button variant="default" size="sm" disabled className="relative h-9 min-w-10 px-3 pointer-events-none">
+        <Button
+          variant="default"
+          size="sm"
+          disabled
+          className="pointer-events-none relative h-9 min-w-10 px-3"
+        >
           <span className="bg-primary-foreground/30 h-3.5 w-5 animate-pulse rounded" />
         </Button>
-        <Button variant="ghost" size="sm" disabled className="relative h-9 min-w-10 px-3 pointer-events-none">
+        <Button variant="ghost" size="sm" disabled className="pointer-events-none relative h-9 min-w-10 px-3">
           <span className="bg-muted/50 h-3.5 w-4 animate-pulse rounded" />
         </Button>
         <Button variant="ghost" size="icon" disabled className="pointer-events-none">

@@ -1,5 +1,5 @@
-import PaginationSkeleton from "@/components/skeleton/ui/pagination-skeleton";
 import SkinCardSkeleton from "@/components/skeleton/skins/skin-card-skeleton";
+import PaginationSkeleton from "@/components/skeleton/ui/pagination-skeleton";
 
 export default function SkinsLoading() {
   return (
