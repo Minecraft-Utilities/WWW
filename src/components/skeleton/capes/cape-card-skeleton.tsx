@@ -4,7 +4,7 @@ import { UserIcon } from "lucide-react";
 
 export default function CapeCardSkeleton() {
   return (
-    <Card className="w-44 shrink-0 md:w-52">
+    <Card className="w-44 shrink-0 md:w-50">
       <CardHeader className="shrink-0">
         <Skeleton className="h-4 w-28" />
       </CardHeader>
