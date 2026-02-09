@@ -36,8 +36,8 @@ export async function generateMetadata(props: PlayerPageProps): Promise<Metadata
   }
   const skullUrl = player.skin.parts.HEAD;
   return {
-    title: `${player.username}`,
-    description: `Minecraft player profile for ${player.username} (UUID: ${player.uniqueId})`,
+    title: `${player.username}'s Profile`,
+    description: `Minecraft player profile for ${player.username}`,
     openGraph: {
       description: `View the information for ${player.username}`,
       images: [
