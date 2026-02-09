@@ -21,7 +21,7 @@ export interface PlayerSkinProps {
 export default function PlayerSkin({ player }: PlayerSkinProps) {
   const { selectedSkin } = useSelectedSkin();
 
-  const [selectedMode, setSelectedMode] = useState<(typeof SKIN_MODES)[number]>("3D");
+  const [selectedMode, setSelectedMode] = useState<(typeof SKIN_MODES)[number]>("2D");
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_FRONT");
 
   return (
