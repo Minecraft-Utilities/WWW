@@ -1,5 +1,5 @@
-import Card, { CardContent, CardFooter } from "@/components/ui/card";
-import { UserIcon } from "lucide-react";
+import PaginationSkeleton from "@/components/skeleton/ui/pagination-skeleton";
+import SkinCardSkeleton from "@/components/skeleton/skins/skin-card-skeleton";
 
 export default function SkinsLoading() {
   return (
@@ -9,37 +9,17 @@ export default function SkinsLoading() {
       aria-busy="true"
     >
       <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-        <div className="bg-muted/30 h-10 w-48 animate-pulse rounded-md" />
-        <div className="bg-muted/30 h-5 w-72 max-w-full animate-pulse rounded-md" />
+        <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Skins</h1>
+        <p className="text-muted-foreground text-center text-sm">The list of all seen skins for players</p>
       </header>
-      <div className="flex max-w-5xl flex-wrap justify-center gap-6">
-        {/* Pagination */}
-        <div className="flex w-full items-center justify-center gap-2">
-          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
-          <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
-          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
-        </div>
-
+      <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
+        <PaginationSkeleton />
         <div className="flex flex-wrap justify-center gap-2">
           {Array.from({ length: 25 }).map((_, i) => (
-            <Card key={i} className="w-44 shrink-0 md:w-44">
-              <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
-                <div className="bg-muted/30 h-[120px] w-[70px] animate-pulse rounded-md" />
-              </CardContent>
-              <CardFooter className="flex items-center gap-2">
-                <UserIcon className="text-muted-foreground/50 size-4" />
-                <div className="bg-muted/30 h-[20px] w-12 animate-pulse rounded-md" />
-              </CardFooter>
-            </Card>
+            <SkinCardSkeleton key={i} />
           ))}
         </div>
-
-        {/* Pagination */}
-        <div className="flex w-full items-center justify-center gap-2">
-          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
-          <div className="bg-muted/30 h-4 w-24 animate-pulse rounded-md" />
-          <div className="bg-muted/30 h-9 w-9 animate-pulse rounded-md" />
-        </div>
+        <PaginationSkeleton />
       </div>
     </div>
   );
