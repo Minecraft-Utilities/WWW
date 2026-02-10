@@ -7,7 +7,7 @@ import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Loader2, Search, X } from "lucide-react";
+import { Loader2, Search, Server, User, X } from "lucide-react";
 import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
@@ -82,9 +82,14 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     enabled: !!debouncedQuery,
   });
 
+  const hasServerResults = !!serverEntries && serverEntries.length > 0;
+  const hasPlayerResults = Array.isArray(playerEntry) && playerEntry.length > 0;
   const isSearching = isServerSearchFetching || isPlayerSearchFetching;
   const searchSettled = isServerSearchSuccess && isPlayerSearchSuccess;
-  const serverPopoverOpenDerived = !!debouncedQuery && (searchSettled || isSearching);
+  const serverPopoverOpenDerived =
+    !!debouncedQuery &&
+    (hasServerResults || hasPlayerResults || isSearching) &&
+    (searchSettled || isSearching);
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
   useEffect(() => {
@@ -239,35 +244,44 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         </form>
       </PopoverAnchor>
       <PopoverContent
-        className="max-h-72 w-(--radix-popover-trigger-width) min-w-(--radix-popover-trigger-width) p-0"
+        className="max-h-72 w-(--radix-popover-trigger-width) min-w-(--radix-popover-trigger-width) overflow-y-auto p-0"
         align="start"
         role="listbox"
         onOpenAutoFocus={e => e.preventDefault()}
       >
         <div className="flex flex-col gap-1 overflow-y-auto p-1">
           {playerEntry && playerEntry.length > 0 ? (
-            <ul className="flex flex-col gap-1">
-              {playerEntry.map(entry => (
-                <li key={entry.id}>
-                  <PlayerLookupEntry entry={entry} onSelect={handlePlayerEntryClick} />
-                </li>
-              ))}
-            </ul>
+            <section className="flex flex-col gap-1" aria-label="Players">
+              <div className="text-muted-foreground flex items-center gap-2 px-3 py-1.5">
+                <User className="size-3.5 shrink-0" aria-hidden />
+                <span className="text-xs font-medium tracking-wider uppercase">Players</span>
+              </div>
+              <ul className="flex flex-col gap-0.5">
+                {playerEntry.map(entry => (
+                  <li key={entry.id}>
+                    <PlayerLookupEntry entry={entry} onSelect={handlePlayerEntryClick} />
+                  </li>
+                ))}
+              </ul>
+            </section>
           ) : null}
           {serverEntries && serverEntries.length > 0 ? (
-            <ul className="flex flex-col gap-1">
-              {serverEntries.map(entry => (
-                <li key={entry.serverId}>
-                  <ServerLookupEntry
-                    entry={entry}
-                    handleServerEntryClick={() => handleServerEntryClick(entry)}
-                  />
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          {!playerEntry && (!serverEntries || serverEntries.length === 0) && searchSettled ? (
-            <p className="text-muted-foreground px-4 py-3 text-sm">No players or servers found.</p>
+            <section className="flex flex-col gap-1" aria-label="Servers">
+              <div className="text-muted-foreground flex items-center gap-2 px-3 py-1.5">
+                <Server className="size-3.5 shrink-0" aria-hidden />
+                <span className="text-xs font-medium tracking-wider uppercase">Servers</span>
+              </div>
+              <ul className="flex flex-col gap-0.5">
+                {serverEntries.map(entry => (
+                  <li key={entry.serverId}>
+                    <ServerLookupEntry
+                      entry={entry}
+                      handleServerEntryClick={() => handleServerEntryClick(entry)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
           ) : null}
         </div>
       </PopoverContent>
