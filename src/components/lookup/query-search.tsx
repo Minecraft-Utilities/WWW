@@ -9,12 +9,14 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Loader2, Search, X } from "lucide-react";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
+import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
 import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import PlayerLookupEntry from "../player/player-lookup-entry";
 import ServerLookupEntry from "../server/server-lookup-entry";
 import { Button } from "../ui/button";
 import ServerEditionDialog from "./server-edition-dialog";
@@ -65,11 +67,29 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     enabled: !!debouncedQuery,
   });
 
+  const {
+    data: playerEntry,
+    isFetching: isPlayerSearchFetching,
+    isSuccess: isPlayerSearchSuccess,
+  } = useQuery({
+    queryKey: ["playerSearch", debouncedQuery],
+    queryFn: async (): Promise<PlayerSearchEntry | null> => {
+      const result = await mcUtilsApi.searchPlayers(debouncedQuery);
+      if (result.error) return null;
+      return result.entry ?? null;
+    },
+    placeholderData: keepPreviousData,
+    enabled: !!debouncedQuery,
+  });
+
+  const hasServerResults = !!serverEntries && serverEntries.length > 0;
+  const hasPlayerResult = !!playerEntry;
+  const isSearching = isServerSearchFetching || isPlayerSearchFetching;
+  const searchSettled = isServerSearchSuccess && isPlayerSearchSuccess;
   const serverPopoverOpenDerived =
     !!debouncedQuery &&
-    !!serverEntries &&
-    serverEntries.length > 0 &&
-    (isServerSearchSuccess || isServerSearchFetching);
+    (hasServerResults || hasPlayerResult || isSearching) &&
+    (searchSettled || isSearching);
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
   useEffect(() => {
@@ -122,6 +142,15 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
       setServerDialogOpen(false);
     },
     [pendingServer, router, form]
+  );
+
+  const handlePlayerEntryClick = useCallback(
+    (entry: PlayerSearchEntry) => {
+      router.push(`/player/${encodeURIComponent(entry.username)}`);
+      form.reset();
+      setServerPopoverOpen(false);
+    },
+    [router, form]
   );
 
   const handleServerEntryClick = useCallback(
@@ -220,18 +249,33 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         role="listbox"
         onOpenAutoFocus={e => e.preventDefault()}
       >
-        {serverEntries && serverEntries.length > 0 ? (
-          <ul className="flex flex-col gap-1 overflow-y-auto p-1">
-            {serverEntries.map(entry => (
-              <li key={entry.serverId}>
-                <ServerLookupEntry
-                  entry={entry}
-                  handleServerEntryClick={() => handleServerEntryClick(entry)}
+        <div className="flex flex-col gap-1 overflow-y-auto p-1">
+          {playerEntry ? (
+            <ul className="flex flex-col gap-1">
+              <li>
+                <PlayerLookupEntry
+                  entry={playerEntry}
+                  onSelect={handlePlayerEntryClick}
                 />
               </li>
-            ))}
-          </ul>
-        ) : null}
+            </ul>
+          ) : null}
+          {serverEntries && serverEntries.length > 0 ? (
+            <ul className="flex flex-col gap-1">
+              {serverEntries.map(entry => (
+                <li key={entry.serverId}>
+                  <ServerLookupEntry
+                    entry={entry}
+                    handleServerEntryClick={() => handleServerEntryClick(entry)}
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          {!playerEntry && (!serverEntries || serverEntries.length === 0) && searchSettled ? (
+            <p className="text-muted-foreground px-4 py-3 text-sm">No players or servers found.</p>
+          ) : null}
+        </div>
       </PopoverContent>
     </Popover>
   );

@@ -3,6 +3,6 @@ import { env } from "./env";
 
 export const mcUtilsApi = new McUtilsAPI(env.NEXT_PUBLIC_API_URL, {
     next: {
-        revalidate: 60 * 60, // 1 hour
+        revalidate: 60, // 1 minute
     }
 });
