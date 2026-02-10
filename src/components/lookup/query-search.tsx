@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Loader2, Search, X } from "lucide-react";
-import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
+import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
 import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
@@ -73,10 +73,11 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     isSuccess: isPlayerSearchSuccess,
   } = useQuery({
     queryKey: ["playerSearch", debouncedQuery],
-    queryFn: async (): Promise<PlayerSearchEntry | null> => {
+    queryFn: async (): Promise<PlayerSearchEntry[] | null> => {
       const result = await mcUtilsApi.searchPlayers(debouncedQuery);
+      console.log(result);
       if (result.error) return null;
-      return result.entry ?? null;
+      return result.entries ?? null;
     },
     placeholderData: keepPreviousData,
     enabled: !!debouncedQuery,
@@ -250,14 +251,13 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         onOpenAutoFocus={e => e.preventDefault()}
       >
         <div className="flex flex-col gap-1 overflow-y-auto p-1">
-          {playerEntry ? (
+          {playerEntry && playerEntry.length > 0 ? (
             <ul className="flex flex-col gap-1">
-              <li>
-                <PlayerLookupEntry
-                  entry={playerEntry}
-                  onSelect={handlePlayerEntryClick}
-                />
-              </li>
+              {playerEntry.map(entry => (
+                <li key={entry.id}>
+                  <PlayerLookupEntry entry={entry} onSelect={handlePlayerEntryClick} />
+                </li>
+              ))}
             </ul>
           ) : null}
           {serverEntries && serverEntries.length > 0 ? (
