@@ -83,14 +83,10 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     enabled: !!debouncedQuery,
   });
 
-  const hasServerResults = !!serverEntries && serverEntries.length > 0;
-  const hasPlayerResult = !!playerEntry;
   const isSearching = isServerSearchFetching || isPlayerSearchFetching;
   const searchSettled = isServerSearchSuccess && isPlayerSearchSuccess;
   const serverPopoverOpenDerived =
-    !!debouncedQuery &&
-    (hasServerResults || hasPlayerResult || isSearching) &&
-    (searchSettled || isSearching);
+    !!debouncedQuery && (searchSettled || isSearching);
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
   useEffect(() => {
