@@ -75,7 +75,6 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     queryKey: ["playerSearch", debouncedQuery],
     queryFn: async (): Promise<PlayerSearchEntry[] | null> => {
       const result = await mcUtilsApi.searchPlayers(debouncedQuery);
-      console.log(result);
       if (result.error) return null;
       return result.entries ?? null;
     },
@@ -85,8 +84,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
 
   const isSearching = isServerSearchFetching || isPlayerSearchFetching;
   const searchSettled = isServerSearchSuccess && isPlayerSearchSuccess;
-  const serverPopoverOpenDerived =
-    !!debouncedQuery && (searchSettled || isSearching);
+  const serverPopoverOpenDerived = !!debouncedQuery && (searchSettled || isSearching);
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
   useEffect(() => {
