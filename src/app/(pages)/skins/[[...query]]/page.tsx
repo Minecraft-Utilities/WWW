@@ -52,16 +52,17 @@ export default async function SkinsPage({ params }: SkinPageProps) {
           />
 
           <div className="flex flex-wrap justify-center gap-2">
-            {skins.items.map(skin => (
-              <Card key={skin.textureId} className="w-44 shrink-0 md:w-44">
+            {skins.items.map((skin, index) => (
+              <Card key={index} className="w-44 shrink-0 md:w-44">
                 <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
                   <Image
-                    src={skin.parts.FULLBODY_FRONT}
-                    alt={skin.textureId}
+                    src={skin.imageUrl}
+                    className="object-fit mx-auto h-[120px]"
+                    alt={`Skin ${index + 1}`}
                     width={120 * SKIN_ASPECT_RATIO}
                     height={96}
+                    priority
                     unoptimized
-                    className="object-fit mx-auto h-[120px]"
                   />
                 </CardContent>
                 <CardFooter className="flex items-center gap-2">
