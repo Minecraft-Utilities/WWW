@@ -73,7 +73,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
   return (
     <>
       <Background url={serverBackground} />
-      <div className="mt-24 flex w-full flex-col items-center gap-6">
+      <div className="mt-16 flex w-full flex-col items-center gap-6">
         {(error || !server) && (
           <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
             <CardHeader variant="destructive">Error</CardHeader>
@@ -84,7 +84,7 @@ export default async function ServerPage({ params }: ServerPageProps) {
         )}
 
         {server && (
-          <div className="flex w-full max-w-3xl flex-col gap-24">
+          <div className="flex w-full max-w-3xl flex-col gap-16">
             {/* Header */}
             <ServerHeader server={server} edition={edition} />
 

@@ -6,8 +6,8 @@ import PlayerSkinsCardSkeleton from "@/components/skeleton/player/player-skins-c
 
 export default function PlayerLoading() {
   return (
-    <div className="mt-24 flex w-full flex-col items-center gap-6" aria-live="polite" aria-busy="true">
-      <div className="flex w-full flex-col items-center gap-24">
+    <div className="mt-16 flex w-full flex-col items-center gap-6" aria-live="polite" aria-busy="true">
+      <div className="flex w-full flex-col items-center gap-16">
         <PlayerHeaderSkeleton />
 
         <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">

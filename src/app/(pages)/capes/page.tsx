@@ -23,7 +23,7 @@ export default async function CapesPage() {
   const isEmpty = capes.length === 0;
 
   return (
-    <div className="mt-24 flex w-full flex-col items-center justify-center gap-24">
+    <div className="mt-16 flex w-full flex-col items-center justify-center gap-16">
       <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
         <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Capes</h1>
         <p className="text-muted-foreground text-center text-sm">A list of all known capes in Minecraft</p>

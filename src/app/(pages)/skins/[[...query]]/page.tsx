@@ -1,5 +1,6 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { formatNumberWithCommas } from "@/common/utils";
+import SimpleLink from "@/components/simple-link";
 import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardFooter } from "@/components/ui/card";
 import Pagination from "@/components/ui/pagination";
@@ -30,7 +31,7 @@ export default async function SkinsPage({ params }: SkinPageProps) {
   const isEmpty = skins?.items.length === 0 || !skins;
 
   return (
-    <div className="mt-24 flex w-full flex-col items-center justify-center gap-24">
+    <div className="mt-16 flex w-full flex-col items-center justify-center gap-16">
       <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
         <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Skins</h1>
         <p className="text-muted-foreground text-center text-sm">The list of all seen skins for players</p>
@@ -55,15 +56,22 @@ export default async function SkinsPage({ params }: SkinPageProps) {
             {skins.items.map((skin, index) => (
               <Card key={index} className="w-44 shrink-0 md:w-44">
                 <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
-                  <Image
-                    src={skin.imageUrl}
-                    className="object-fit mx-auto h-[120px]"
-                    alt={`Skin ${index + 1}`}
-                    width={120 * SKIN_ASPECT_RATIO}
-                    height={96}
-                    priority
-                    unoptimized
-                  />
+                  <SimpleLink
+                    href={`/skin/${skin.id}`}
+                    className="block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <SimpleTooltip display="Click to view the skin">
+                      <Image
+                        src={skin.imageUrl}
+                        className="object-fit mx-auto h-[120px]"
+                        alt={`Skin ${index + 1}`}
+                        width={120 * SKIN_ASPECT_RATIO}
+                        height={96}
+                        priority
+                        unoptimized
+                      />
+                    </SimpleTooltip>
+                  </SimpleLink>
                 </CardContent>
                 <CardFooter className="flex items-center gap-2">
                   <UserIcon className="size-4" />

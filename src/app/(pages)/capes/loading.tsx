@@ -3,7 +3,7 @@ import CapeCardSkeleton from "@/components/skeleton/capes/cape-card-skeleton";
 export default function CapesLoading() {
   return (
     <div
-      className="mt-24 flex w-full flex-col items-center justify-center gap-24"
+      className="mt-16 flex w-full flex-col items-center justify-center gap-16"
       aria-live="polite"
       aria-busy="true"
     >

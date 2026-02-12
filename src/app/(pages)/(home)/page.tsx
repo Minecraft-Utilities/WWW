@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="mx-auto mt-24 flex w-full max-w-3xl flex-col items-center gap-24">
+    <div className="mx-auto mt-16 flex w-full max-w-3xl flex-col items-center gap-16">
       <header className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-foreground text-3xl font-semibold tracking-tight sm:text-4xl">
           Minecraft Player & Server Lookup
