@@ -28,7 +28,7 @@ export async function generateMetadata(props: PageProps<"/player/[query]">): Pro
       },
     };
   }
-  const skullUrl = player.skin.parts.HEAD;
+  const skullUrl = player.skin.parts.HEAD_ISO;
   return {
     title: `${player.username}'s Profile`,
     description: `Minecraft player profile for ${player.username}`,
@@ -68,7 +68,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
 
           <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
             {/* Skin and Cape */}
-            <section className="flex w-full flex-col gap-4 md:max-w-88">
+            <section className="flex w-full flex-col gap-4 md:max-w-90">
               <SelectedSkinProvider initialSkin={player.skin}>
                 <PlayerSkin player={player} />
                 <PlayerSkins player={player} />
