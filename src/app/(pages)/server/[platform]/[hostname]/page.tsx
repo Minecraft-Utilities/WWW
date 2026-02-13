@@ -16,27 +16,16 @@ const fetchServerCached = cache((hostname: string, edition: ServerPlatform) =>
   mcUtilsApi.fetchServer(hostname, edition)
 );
 
-export interface ServerPageProps {
-  params: Promise<{
-    query?: string[];
-  }>;
-}
-
-async function getServer(query: string[] | undefined) {
-  const edition = query?.[0].toLowerCase() as ServerPlatform;
-  const hostname = query?.[1];
-
-  if (!hostname) {
-    return { server: undefined, error: undefined };
-  }
+async function getServer(platform: string, hostname: string) {
+  const edition = platform.toLowerCase() as ServerPlatform;
 
   const { server, error } = await fetchServerCached(decodeURIComponent(hostname), edition);
   return { server, error, edition };
 }
 
-export async function generateMetadata(props: ServerPageProps): Promise<Metadata> {
-  const { query } = await props.params;
-  const { server, error, edition } = await getServer(query);
+export async function generateMetadata(props: PageProps<"/server/[platform]/[hostname]">): Promise<Metadata> {
+  const { platform, hostname } = await props.params;
+  const { server, error, edition } = await getServer(platform, hostname);
 
   if (error || !server) {
     return {
@@ -63,9 +52,9 @@ export async function generateMetadata(props: ServerPageProps): Promise<Metadata
   };
 }
 
-export default async function ServerPage({ params }: ServerPageProps) {
-  const { query } = await params;
-  const { server, error, edition } = await getServer(query);
+export default async function ServerPage({ params }: PageProps<"/server/[platform]/[hostname]">) {
+  const { platform, hostname } = await params;
+  const { server, error, edition } = await getServer(platform, hostname);
   const serverBackground = server?.registryEntry
     ? server.registryEntry.backgroundImageUrl
     : "https://cdn.fascinated.cc/wjLURHpJ.jpg";

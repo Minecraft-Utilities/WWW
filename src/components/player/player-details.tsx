@@ -28,8 +28,8 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
         </SimpleTooltip>
       </CardHeader>
       <CardContent className="flex flex-col">
-        <DetailRow label="UUID" value={player.uniqueId} />
-        <DetailRow label="Username" value={player.username} />
+        <DetailRow label="UUID" value={player.uniqueId} copyable />
+        <DetailRow label="Username" value={player.username} copyable />
         <DetailRow label="Legacy Account" value={player.legacyAccount ? "Yes" : "No"} />
         {showDebug && (
           <>

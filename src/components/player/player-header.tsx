@@ -16,7 +16,7 @@ export default function PlayerHeader({ player }: PlayerHeaderProps) {
         </h1>
       </div>
 
-      <div className="border-border bg-muted/30 flex w-full min-w-0 flex-wrap items-center justify-between gap-4 rounded-lg border px-3 py-1.5 text-sm">
+      <div className="border-border bg-muted/30 flex w-full min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-1.5 text-sm">
         <span className="text-foreground min-w-0 flex-1 break-all">{player.uniqueId}</span>
         <span className="shrink-0">
           <CopyTextButton text={player.uniqueId} tooltip={`Copy ${player.username}'s UUID`} />

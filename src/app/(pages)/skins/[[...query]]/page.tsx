@@ -10,12 +10,6 @@ import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
-type SkinPageProps = {
-  params: Promise<{
-    query?: string[];
-  }>;
-};
-
 export const metadata: Metadata = {
   title: "Skins",
   description: "The list of all seen skins for players",
@@ -23,9 +17,10 @@ export const metadata: Metadata = {
 
 const SKIN_ASPECT_RATIO = 452 / 768;
 
-export default async function SkinsPage({ params }: SkinPageProps) {
+export default async function SkinsPage({ params }: PageProps<"/skins/[[...query]]">) {
   const { query } = await params;
   const page = Number(query?.[0] ?? "1");
+
   const skinsResponse = await mcUtilsApi.fetchSkins(page);
   const skins = skinsResponse.skins;
   const isEmpty = skins?.items.length === 0 || !skins;

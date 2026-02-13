@@ -21,7 +21,9 @@ export default function CopyTextButton({ text, tooltip }: CopyTextButtonProps) {
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(text);
-            toast.success("Copied to clipboard");
+            toast.success("Copied to your clipboard", {
+              description: text,
+            });
           } catch {
             toast.error("Failed to copy");
           }

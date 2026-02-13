@@ -14,13 +14,7 @@ export const dynamic = "force-dynamic";
 
 const getPlayer = cache((query: string) => mcUtilsApi.fetchPlayer(query));
 
-export interface PlayerPageProps {
-  params: Promise<{
-    query: string;
-  }>;
-}
-
-export async function generateMetadata(props: PlayerPageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps<"/player/[query]">): Promise<Metadata> {
   const { query } = await props.params;
   const { player } = await getPlayer(query);
 
@@ -52,7 +46,7 @@ export async function generateMetadata(props: PlayerPageProps): Promise<Metadata
   };
 }
 
-export default async function PlayerPage({ params }: PlayerPageProps) {
+export default async function PlayerPage({ params }: PageProps<"/player/[query]">) {
   const { query } = await params;
   const { player, error } = await getPlayer(query);
 

@@ -8,12 +8,6 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-type SkinPageProps = {
-  params: Promise<{
-    query: string;
-  }>;
-};
-
 export const metadata: Metadata = {
   title: "Skin",
   description: "A specific skin's details",
@@ -21,8 +15,9 @@ export const metadata: Metadata = {
 
 const SKIN_ASPECT_RATIO = 452 / 768;
 
-export default async function SkinsPage({ params }: SkinPageProps) {
+export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) {
   const { query } = await params;
+
   const skinResponse = await mcUtilsApi.fetchSkin(query);
   const skin = skinResponse.skin;
 
