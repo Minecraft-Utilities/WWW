@@ -68,7 +68,7 @@ export default async function SkinsPage({ params }: SkinPageProps) {
                   <p>{account}</p>
                 </SimpleLink>
               ))}
-              {skin.accountsSeenUsing.length == 250 && (
+              {skin.accountsSeenUsing.length < skin.accountsUsed && (
                 <p>+ {formatNumberWithCommas(skin.accountsUsed - 250)} more...</p>
               )}
             </CardContent>

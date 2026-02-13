@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function PaginationSkeleton() {
   return (
-    <div className="relative flex w-full items-center justify-between lg:justify-center">
+    <div className="relative flex w-full items-center justify-center">
       <nav className="flex flex-wrap items-center justify-center gap-1.5" aria-hidden="true">
         <Button variant="ghost" size="icon" disabled className="pointer-events-none">
           <ChevronLeft className="h-4 w-4" />

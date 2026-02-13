@@ -105,7 +105,7 @@ export default function Pagination({ page, totalItems, itemsPerPage, basePath }:
   }
 
   return (
-    <div className={cn("relative flex w-full items-center justify-between lg:justify-center")}>
+    <div className={cn("relative flex w-full items-center justify-center")}>
       <nav className="flex flex-wrap items-center justify-center gap-1.5" aria-label="Pagination navigation">
         <NavigationButton href={href(page - 1)} disabled={page === 1} ariaLabel="Go to previous page">
           <ChevronLeft className="h-4 w-4" />
