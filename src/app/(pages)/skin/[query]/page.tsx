@@ -8,10 +8,35 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Skin",
-  description: "A specific skin's details",
-};
+export async function generateMetadata(props: PageProps<"/skin/[query]">): Promise<Metadata> {
+  const { query } = await props.params;
+  const skinResponse = await mcUtilsApi.fetchSkin(query);
+  const skin = skinResponse.skin;
+
+  if (!skin) {
+    return {
+      title: "Skin not found",
+      description: "Skin not found",
+      openGraph: {
+        title: "Skin not found",
+        description: "Skin not found",
+      },
+    };
+  }
+
+  return {
+    title: `Minecraft Skin`,
+    description: `View the details for this skin`,
+    openGraph: {
+      description: `View the details for this skin`,
+      images: [
+        {
+          url: skin.imageUrl,
+        },
+      ],
+    },
+  };
+}
 
 const SKIN_ASPECT_RATIO = 452 / 768;
 
