@@ -62,7 +62,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Navbar />
             <main id="main-content" className="relative flex min-h-0 w-full flex-1 flex-col" tabIndex={-1}>
               <Toaster />
-              <div className="z-1 flex min-h-0 flex-1 flex-col gap-2 pt-2">
+              <div className="z-1 flex min-h-0 flex-1 flex-col gap-2">
                 <div className="mx-auto w-full max-w-[1600px] shrink-0 px-2">{children}</div>
                 <div className="min-h-0 flex-1" aria-hidden />
                 <Footer />
