@@ -18,7 +18,7 @@ export default function PlayerLookupEntry({ entry, onSelect }: PlayerLookupEntry
       onClick={() => onSelect(entry)}
     >
       <img
-        src={entry.skin.parts.HEAD}
+        src={entry.skin.parts.FACE}
         alt=""
         className="size-8 shrink-0 rounded-md object-cover"
         width={32}
