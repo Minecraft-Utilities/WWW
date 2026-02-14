@@ -101,3 +101,14 @@ export function getRandomEntries<T>(array: T[], count: number): T[] {
   }
   return shuffled.slice(0, count);
 }
+
+/**
+ * Truncates a string to the given length.
+ *
+ * @param string the string to truncate
+ * @param length the length to truncate to
+ * @returns the truncated string
+ */
+export function truncateString(string: string, length: number): string {
+  return string.length > length ? string.substring(0, length) + "..." : string;
+}

@@ -1,9 +1,10 @@
 import { mcUtilsApi } from "@/common/mc-utils";
-import { formatNumberWithCommas } from "@/common/utils";
 import SimpleLink from "@/components/simple-link";
-import Card, { CardContent, CardHeader } from "@/components/ui/card";
+import SkinFirstUsedBy from "@/components/skin/skin-first-used-by";
+import SkinHeadCommands from "@/components/skin/skin-head-commands";
+import SkinPlayers from "@/components/skin/skin-players";
+import SkinPreview from "@/components/skin/skin-preview";
 import { Metadata } from "next";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -38,8 +39,6 @@ export async function generateMetadata(props: PageProps<"/skin/[query]">): Promi
   };
 }
 
-const SKIN_ASPECT_RATIO = 452 / 768;
-
 export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) {
   const { query } = await params;
 
@@ -52,61 +51,24 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
 
   return (
     <div className="mt-16 flex w-full flex-col items-center justify-center gap-16">
-      <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-        <h1 className="text-foreground flex flex-row items-center gap-5 text-center text-4xl font-bold tracking-tight">
+      <header className="flex min-w-0 flex-1 flex-col items-center gap-4 px-4">
+        <h1 className="text-foreground flex flex-col items-center gap-1 text-center text-2xl font-bold tracking-tight sm:flex-row sm:gap-5 sm:text-4xl">
           <SimpleLink href={`/player/${skin.firstSeenUsing}`}>{skin.firstSeenUsing}</SimpleLink>
-          Minecraft Skin
+          <span className="whitespace-nowrap">Minecraft Skin</span>
         </h1>
       </header>
 
       <div className="flex w-full max-w-5xl flex-col gap-4 md:flex-row">
         {/* Left */}
-        <div className="flex w-full min-w-0 flex-1 flex-row gap-4 md:flex-col">
-          <Card className="h-fit w-full">
-            <CardHeader>
-              <p>Skin</p>
-            </CardHeader>
-            <CardContent className="flex items-center justify-center">
-              <Image
-                src={skin.imageUrl}
-                alt={skin.id}
-                width={320 * SKIN_ASPECT_RATIO}
-                height={0}
-                priority
-                unoptimized
-              />
-            </CardContent>
-          </Card>
-
-          <Card className="h-fit w-full text-sm">
-            <CardHeader>
-              <p>Players ({formatNumberWithCommas(skin.accountsUsed)})</p>
-            </CardHeader>
-            <CardContent className="flex h-64 flex-wrap gap-2 overflow-y-auto">
-              {skin.accountsSeenUsing.map(account => (
-                <SimpleLink key={account} href={`/player/${account}`}>
-                  <p>{account}</p>
-                </SimpleLink>
-              ))}
-              {skin.accountsSeenUsing.length < skin.accountsUsed && (
-                <p>+ {formatNumberWithCommas(skin.accountsUsed - 250)} more...</p>
-              )}
-            </CardContent>
-          </Card>
+        <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
+          <SkinPreview skin={skin} />
+          <SkinPlayers skin={skin} />
         </div>
 
         {/* Right */}
-        <div className="w-full max-w-sm min-w-0 shrink-0">
-          <Card className="h-fit w-full">
-            <CardHeader>
-              <p>First Used By</p>
-            </CardHeader>
-            <CardContent>
-              <SimpleLink href={`/player/${skin.firstSeenUsing}`}>
-                <p>{skin.firstSeenUsing}</p>
-              </SimpleLink>
-            </CardContent>
-          </Card>
+        <div className="flex w-full min-w-0 flex-col gap-4 md:max-w-sm">
+          <SkinFirstUsedBy skin={skin} />
+          <SkinHeadCommands skin={skin} />
         </div>
       </div>
     </div>
