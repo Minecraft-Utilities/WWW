@@ -13,7 +13,7 @@ import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
 import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import PlayerLookupEntry from "../player/player-lookup-entry";
@@ -92,10 +92,6 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     (searchSettled || isSearching);
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
-  useEffect(() => {
-    if (debouncedQuery) setServerPopoverOpen(true);
-  }, [debouncedQuery]);
-
   const clearError = useCallback(() => {
     setLookupError(undefined);
     setQueryError?.(undefined);
@@ -126,6 +122,8 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         }
         router.push(`/player/${encodeURIComponent(trimmed)}`);
         form.reset();
+      } catch (err) {
+        throw err;
       } finally {
         setIsLookupLoading(false);
       }
@@ -193,6 +191,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
                   onFocus={() => setServerPopoverOpen(true)}
                   onChange={e => {
                     field.onChange(e);
+                    if (e.target.value.trim()) setServerPopoverOpen(true);
                     if (lookupError) clearError();
                   }}
                 />

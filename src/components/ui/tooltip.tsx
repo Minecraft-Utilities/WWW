@@ -267,9 +267,21 @@ export const Tooltip = React.memo(function Tooltip({
     <>
       <div
         ref={triggerRef}
+        role={isMobile ? "button" : undefined}
+        tabIndex={isMobile ? 0 : undefined}
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
         onMouseLeave={!isMobile ? handleMouseLeave : undefined}
         onClick={isMobile ? handleClick : undefined}
+        onKeyDown={
+          isMobile
+            ? e => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleClick();
+                }
+              }
+            : undefined
+        }
       >
         {children}
       </div>

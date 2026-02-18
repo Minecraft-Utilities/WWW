@@ -69,7 +69,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
           <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
             {/* Skin and Cape */}
             <section className="flex w-full flex-col gap-4 md:max-w-90">
-              <SelectedSkinProvider initialSkin={player.skin}>
+              <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
                 <PlayerSkin player={player} />
                 <PlayerSkins player={player} />
               </SelectedSkinProvider>

@@ -24,6 +24,7 @@ export default function ServerLookupEntry({ entry, handleServerEntryClick }: Ser
       <button
         type="button"
         role="option"
+        aria-selected={false}
         className={cn(
           "relative z-10 flex w-full flex-col items-start gap-0.5 rounded-md px-3 py-2.5 text-left text-sm transition-colors outline-none",
           entry.backgroundImageUrl

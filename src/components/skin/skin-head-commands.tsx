@@ -42,7 +42,7 @@ export default function SkinHeadCommands({ skin }: SkinHeadCommandsProps) {
           <SelectContent>
             <SelectGroup>
               {commands.map((command, index) => (
-                <SelectItem key={index} value={index.toString()}>
+                <SelectItem key={command.version} value={index.toString()}>
                   {command.version}
                 </SelectItem>
               ))}

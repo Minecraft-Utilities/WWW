@@ -17,7 +17,10 @@ export default function TableSkeleton({ columns = 3, rows = 4 }: TableSkeletonPr
         <thead>
           <tr className="border-border bg-muted/30 border-b">
             {headerWidths.map((w, i) => (
-              <th key={i} className="text-muted-foreground px-3 py-2 font-medium whitespace-nowrap">
+              <th
+                key={`header-${i}-${w}`}
+                className="text-muted-foreground px-3 py-2 font-medium whitespace-nowrap"
+              >
                 <Skeleton className={`h-4 ${w} rounded`} />
               </th>
             ))}
@@ -25,9 +28,9 @@ export default function TableSkeleton({ columns = 3, rows = 4 }: TableSkeletonPr
         </thead>
         <tbody>
           {Array.from({ length: rows }).map((_, rowIndex) => (
-            <tr key={rowIndex} className="border-border/50 border-b last:border-0">
+            <tr key={`row-${rowIndex}`} className="border-border/50 border-b last:border-0">
               {cellWidths.map((w, colIndex) => (
-                <td key={colIndex} className="px-3 py-2">
+                <td key={`cell-${rowIndex}-${colIndex}-${w}`} className="px-3 py-2">
                   <Skeleton className={`h-4 ${w} rounded font-mono`} />
                 </td>
               ))}

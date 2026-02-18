@@ -30,21 +30,26 @@ export default function ServerDnsRecords({ records }: ServerDnsRecordsProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {records.map((record, i) => (
-                      <tr key={i} className="border-border/50 border-b last:border-0">
-                        <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
-                          {isSrvRecord(record) ? record.name : (record.name ?? "—")}
-                        </td>
-                        <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
-                          {record.type}
-                        </td>
-                        <td className="text-muted-foreground px-3 py-2 font-mono whitespace-nowrap">
-                          {isSrvRecord(record)
-                            ? `${record.priority} ${record.weight} ${record.port} ${record.target}`
-                            : (record.address ?? "—")}
-                        </td>
-                      </tr>
-                    ))}
+                    {records.map(record => {
+                      const rowKey = isSrvRecord(record)
+                        ? `srv-${record.name}-${record.port}-${record.target}`
+                        : `record-${record.name}-${record.type}-${record.address ?? ""}`;
+                      return (
+                        <tr key={rowKey} className="border-border/50 border-b last:border-0">
+                          <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
+                            {isSrvRecord(record) ? record.name : (record.name ?? "—")}
+                          </td>
+                          <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
+                            {record.type}
+                          </td>
+                          <td className="text-muted-foreground px-3 py-2 font-mono whitespace-nowrap">
+                            {isSrvRecord(record)
+                              ? `${record.priority} ${record.weight} ${record.port} ${record.target}`
+                              : (record.address ?? "—")}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

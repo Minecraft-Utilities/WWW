@@ -96,10 +96,16 @@ export default function Pagination({ page, totalItems, itemsPerPage, basePath }:
     startPage = endPage - 3 + 1;
   }
 
-  for (let i = startPage; i <= endPage; i++) {
+  for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
     pageNumbers.push(
-      <PageButton key={`page-${i}`} page={i} isActive={i === page} currentPage={page} href={href(i)}>
-        {formatNumberWithCommas(i)}
+      <PageButton
+        key={`page-${pageNum}`}
+        page={pageNum}
+        isActive={pageNum === page}
+        currentPage={page}
+        href={href(pageNum)}
+      >
+        {formatNumberWithCommas(pageNum)}
       </PageButton>
     );
   }
