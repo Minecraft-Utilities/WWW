@@ -20,8 +20,8 @@ export default function Background({ url }: BackgroundProps) {
         alt="Background"
         width={1920}
         height={height}
-        fetchPriority="high"
         className="h-full w-full object-cover blur-xs brightness-80"
+        priority
       />
       <div
         className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_40%,var(--background)_100%),linear-gradient(to_bottom,transparent_0%,transparent_10%,rgba(0,0,0,0.5)_100%)]"
