@@ -9,6 +9,8 @@ interface SkinPreviewProps {
 }
 
 const SKIN_ASPECT_RATIO = 452 / 768;
+const PREVIEW_WIDTH = 320 * SKIN_ASPECT_RATIO;
+const PREVIEW_HEIGHT = 320;
 
 export default function SkinPreview({ skin }: SkinPreviewProps) {
   return (
@@ -17,7 +19,14 @@ export default function SkinPreview({ skin }: SkinPreviewProps) {
         <p>Skin</p>
       </CardHeader>
       <CardContent className="flex items-center justify-center">
-        <Image src={skin.imageUrl} alt={skin.id} width={320 * SKIN_ASPECT_RATIO} height={0} priority />
+        <Image
+          src={skin.imageUrl}
+          alt={skin.id}
+          width={PREVIEW_WIDTH}
+          height={PREVIEW_HEIGHT}
+          sizes="(max-width: 640px) 100vw, 188px"
+          priority
+        />
       </CardContent>
     </Card>
   );

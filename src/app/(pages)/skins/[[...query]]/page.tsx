@@ -62,6 +62,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
                         alt={`Skin ${skin.id}`}
                         width={120 * SKIN_ASPECT_RATIO}
                         height={96}
+                        sizes="(max-width: 640px) 50vw, 120px"
                         priority
                       />
                     </SimpleTooltip>

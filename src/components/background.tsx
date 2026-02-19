@@ -20,6 +20,7 @@ export default function Background({ url }: BackgroundProps) {
         alt="Background"
         width={1920}
         height={height}
+        sizes="100vw"
         fetchPriority="high"
         className="h-full w-full object-cover blur-xs brightness-80"
         priority

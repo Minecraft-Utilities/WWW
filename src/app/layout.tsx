@@ -50,9 +50,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       {/* Analytics */}
       {isProduction() && (
         <Script
-          defer
           src="https://analytics.fascinated.cc/script.js"
           data-website-id="83459095-69ee-4511-be2f-784217ba6a88"
+          strategy="lazyOnload"
         />
       )}
 
