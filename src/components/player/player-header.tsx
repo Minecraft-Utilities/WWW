@@ -10,7 +10,7 @@ export default function PlayerHeader({ player }: PlayerHeaderProps) {
   return (
     <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
       <div className="flex flex-col items-center gap-4 md:flex-row">
-        <Image src={player.skin.parts.HEAD_ISO} alt={player.username} width={64} height={64} unoptimized />
+        <Image src={player.skin.parts.HEAD_ISO} alt={player.username} width={64} height={64} />
         <h1 className="text-foreground text-center text-2xl font-bold tracking-tight md:text-4xl">
           {player.username}
         </h1>

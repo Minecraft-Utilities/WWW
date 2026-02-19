@@ -35,7 +35,6 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
               width={256}
               height={256}
               className="max-h-full max-w-full object-contain"
-              unoptimized
             />
           )}
           {selectedMode === "3D" && (
@@ -69,7 +68,6 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                     width={56}
                     height={56}
                     className="h-full w-full object-contain object-center p-1.5"
-                    unoptimized
                   />
                 </SkinSelectionButton>
               );

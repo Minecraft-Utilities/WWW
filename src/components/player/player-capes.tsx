@@ -34,7 +34,6 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                   width={64 * CAPE_ASPECT_RATIO}
                   height={64}
                   className="h-[64px] rounded-sm object-cover"
-                  unoptimized
                 />
               </SimpleTooltip>
             ))}

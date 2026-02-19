@@ -17,14 +17,7 @@ export default function SkinPreview({ skin }: SkinPreviewProps) {
         <p>Skin</p>
       </CardHeader>
       <CardContent className="flex items-center justify-center">
-        <Image
-          src={skin.imageUrl}
-          alt={skin.id}
-          width={320 * SKIN_ASPECT_RATIO}
-          height={0}
-          priority
-          unoptimized
-        />
+        <Image src={skin.imageUrl} alt={skin.id} width={320 * SKIN_ASPECT_RATIO} height={0} priority />
       </CardContent>
     </Card>
   );

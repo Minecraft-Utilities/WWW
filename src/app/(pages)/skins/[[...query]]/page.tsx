@@ -63,7 +63,6 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
                         width={120 * SKIN_ASPECT_RATIO}
                         height={96}
                         priority
-                        unoptimized
                       />
                     </SimpleTooltip>
                   </SimpleLink>

@@ -33,7 +33,6 @@ export default function PlayerOptifineCape({ player }: PlayerOptifineCapeProps) 
             width={64 * CAPE_ASPECT_RATIO}
             height={64}
             className="object-fit h-[64px] rounded-sm"
-            unoptimized
           />
         </SimpleTooltip>
       </CardContent>

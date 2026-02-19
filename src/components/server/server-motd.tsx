@@ -21,7 +21,6 @@ export default function ServerMotd({ server, edition }: ServerMotdProps) {
               width={768}
               height={87}
               className="w-auto rounded-md object-contain"
-              unoptimized
               priority
             />
           </CardContent>

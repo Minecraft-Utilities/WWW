@@ -46,7 +46,6 @@ export default async function CapesPage() {
                   alt={cape.name ?? "Unknown Cape"}
                   width={120 * CAPE_ASPECT_RATIO}
                   height={96}
-                  unoptimized
                   className="object-fit mx-auto h-[120px]"
                 />
               </CardContent>

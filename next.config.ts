@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "mc.fascinated.cc", port: "", pathname: "/**" },
       { protocol: "https", hostname: "github.com", port: "", pathname: "/**" },
     ],
-    qualities: [80, 100],
+    qualities: [85, 100],
     formats: ["image/webp"],
     dangerouslyAllowLocalIP: true,
   },

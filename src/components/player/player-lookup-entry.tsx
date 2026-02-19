@@ -25,7 +25,6 @@ export default function PlayerLookupEntry({ entry, onSelect }: PlayerLookupEntry
         className="size-8 shrink-0 rounded-md object-cover"
         width={32}
         height={32}
-        unoptimized
       />
       <span className="min-w-0 truncate font-medium">{entry.username}</span>
     </button>

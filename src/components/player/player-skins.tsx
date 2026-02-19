@@ -35,7 +35,6 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
                   width={38}
                   height={38}
                   className={cn("rounded-sm border-2 object-cover", isSelected ? "border-primary" : "")}
-                  unoptimized
                 />
               </button>
             </SimpleTooltip>
