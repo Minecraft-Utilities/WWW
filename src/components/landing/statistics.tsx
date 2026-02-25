@@ -1,20 +1,13 @@
 "use client";
 
-import { mcUtilsApi } from "@/common/mc-utils";
-import { TimeUnit } from "@/common/time-utils";
-import { formatNumberWithCommas } from "@/common/utils";
-import { useQuery } from "@tanstack/react-query";
+import CountUp from "react-countup";
+import useWebSocket from "react-use-websocket";
 import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export default function Statistics() {
-  const { data } = useQuery({
-    queryKey: ["statistics"],
-    queryFn: () => mcUtilsApi.fetchStatistics(),
-    refetchInterval: TimeUnit.toMillis(TimeUnit.Second, 30),
-  });
-
-  const statistics = data?.statistics;
+  const { lastJsonMessage } = useWebSocket("wss://mc.fascinated.cc/api/ws/statistics");
+  const statistics = lastJsonMessage as { playersTracked: number; trackedSkins: number };
 
   return (
     <div className="mt-8 flex w-full flex-row gap-4">
@@ -24,7 +17,7 @@ export default function Statistics() {
           <SimpleTooltip
             display={<p>The number of Java Minecraft profiles that have been stored in our database.</p>}
           >
-            {statistics ? formatNumberWithCommas(statistics.seenPlayers) : "..."}
+            {statistics ? <CountUp end={statistics.playersTracked} preserveValue /> : "..."}
           </SimpleTooltip>
         </CardContent>
       </Card>
@@ -32,7 +25,7 @@ export default function Statistics() {
         <CardHeader>Skin Collection Size</CardHeader>
         <CardContent className="text-xl">
           <SimpleTooltip display={<p>The number of unique skins that have been stored in our database.</p>}>
-            {statistics ? formatNumberWithCommas(statistics.seenSkins) : "..."}
+            {statistics ? <CountUp end={statistics.trackedSkins} preserveValue /> : "..."}
           </SimpleTooltip>
         </CardContent>
       </Card>
