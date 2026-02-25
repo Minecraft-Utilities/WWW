@@ -6,7 +6,10 @@ import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export default function Statistics() {
-  const { lastJsonMessage } = useWebSocket("wss://mc.fascinated.cc/api/ws/statistics");
+  const { lastJsonMessage } = useWebSocket("wss://mc.fascinated.cc/api/ws/statistics", {
+    reconnectAttempts: 1000000000,
+    reconnectInterval: 1000,
+  });
   const statistics = lastJsonMessage as { playersTracked: number; trackedSkins: number };
 
   return (
