@@ -30,7 +30,7 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
               <button onClick={() => setSelectedSkin(skin)}>
                 <Image
                   key={skin.textureId}
-                  src={skin.parts.FACE + "?overlays=false"}
+                  src={skin.parts.FACE}
                   alt={`${player.username}'s skin`}
                   width={38}
                   height={38}
