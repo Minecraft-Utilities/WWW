@@ -9,6 +9,7 @@ export default function Statistics() {
   const { lastJsonMessage } = useWebSocket("wss://mc.fascinated.cc/api/ws/statistics", {
     reconnectAttempts: 1000000000,
     reconnectInterval: 1000,
+    retryOnError: true,
   });
   const statistics = lastJsonMessage as { playersTracked: number; trackedSkins: number };
 
