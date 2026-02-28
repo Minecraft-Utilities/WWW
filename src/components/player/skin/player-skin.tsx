@@ -3,7 +3,10 @@
 import { cn } from "@/common/utils";
 import { useSelectedSkin } from "@/components/provider/selected-skin-provider";
 import { Skin3DSettingsProvider } from "@/components/provider/skin-3d-settings-provider";
+import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
+import DownloadFileButton from "@/components/ui/download-file-button";
+import { DownloadIcon } from "lucide-react";
 import { Player } from "mcutils-js-api/dist/types/player/player";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
@@ -26,7 +29,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
   return (
     <Card className="overflow-hidden p-0">
       <CardHeader>Skin</CardHeader>
-      <CardContent className="flex flex-col items-center gap-4">
+      <CardContent className="relative flex flex-col items-center gap-4">
         <div className="relative flex h-72 w-full items-center justify-center overflow-hidden">
           {selectedMode === "2D" && (
             <Image
@@ -72,6 +75,18 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                 </SkinSelectionButton>
               );
             })}
+        </div>
+
+        {/* Download Buttons */}
+        <div className="absolute top-2 right-2 flex gap-2">
+          <SimpleTooltip display="Download Skin Texture">
+            <DownloadFileButton
+              href={selectedSkin.textureUrl}
+              filename={`${player.username}-skin-texture.png`}
+            >
+              <DownloadIcon className="size-4" />
+            </DownloadFileButton>
+          </SimpleTooltip>
         </div>
       </CardContent>
     </Card>
