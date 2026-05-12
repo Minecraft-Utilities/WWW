@@ -6,14 +6,14 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useDebounce, useLocalStorage } from "@uidotdev/usehooks";
+import { useDebounce } from "@uidotdev/usehooks";
 import { Clock, Loader2, Search, Server, User, X } from "lucide-react";
 import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
 import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import PlayerLookupEntry from "../player/player-lookup-entry";
@@ -22,6 +22,44 @@ import { Button } from "../ui/button";
 import ServerEditionDialog from "./server-edition-dialog";
 
 const HISTORY_MAX = 10;
+
+function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === "undefined") return initialValue;
+    try {
+      const item = window.localStorage.getItem(key);
+      return item !== null ? (JSON.parse(item) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const setValue = useCallback(
+    (value: T | ((prev: T) => T)) => {
+      setStoredValue(prev => {
+        const next = typeof value === "function" ? (value as (prev: T) => T)(prev) : value;
+        try {
+          window.localStorage.setItem(key, JSON.stringify(next));
+        } catch {}
+        return next;
+      });
+    },
+    [key]
+  );
+
+  useEffect(() => {
+    const handler = (e: StorageEvent) => {
+      if (e.key !== key) return;
+      try {
+        setStoredValue(e.newValue !== null ? (JSON.parse(e.newValue) as T) : initialValue);
+      } catch {}
+    };
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, [key, initialValue]);
+
+  return [storedValue, setValue];
+}
 
 type HistoryEntry = { query: string; path: string };
 
