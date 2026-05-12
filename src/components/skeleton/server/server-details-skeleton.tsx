@@ -7,7 +7,7 @@ export default function ServerDetailsSkeleton() {
       <Card className="w-full min-w-0 overflow-hidden p-0">
         <CardHeader>Details</CardHeader>
         <CardContent>
-          <DetailRowsSkeleton count={9} />
+          <DetailRowsSkeleton count={12} />
         </CardContent>
       </Card>
     </section>

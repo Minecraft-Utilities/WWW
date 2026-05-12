@@ -44,6 +44,22 @@ export function ServerDetails({ server, edition }: ServerDetailsProps) {
                     variant="warning"
                   />
                 )}
+                <DetailRow
+                  label="Prevents chat reports"
+                  value={javaServer.preventsChatReports ? "Yes" : "No"}
+                  variant={javaServer.preventsChatReports ? "success" : "default"}
+                />
+                <DetailRow
+                  label="Enforces secure chat"
+                  value={javaServer.enforcesSecureChat ? "Yes" : "No"}
+                  variant={javaServer.enforcesSecureChat ? "success" : "default"}
+                />
+                <DetailRow
+                  label="Previews chat"
+                  value={javaServer.previewsChat ? "Yes" : "No"}
+                  variant={javaServer.previewsChat ? "warning" : "default"}
+                  tooltip="When enabled, the server receives chat messages as they are typed and sends back a styled preview. This allows custom formatting like emojis or chat colors, but messages are transmitted to the server before being sent."
+                />
               </>
             )}
             {edition === "bedrock" && (
