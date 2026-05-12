@@ -11,7 +11,8 @@ export interface PlayerCapesProps {
 export const CAPE_ASPECT_RATIO = 480 / 768;
 
 export default function PlayerCapes({ player }: PlayerCapesProps) {
-  const capes = player.capeHistory ?? [];
+  const capes =
+    player.capeHistory?.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">

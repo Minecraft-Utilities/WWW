@@ -14,7 +14,8 @@ export interface PlayerSkinsProps {
 
 export default function PlayerSkins({ player }: PlayerSkinsProps) {
   const { selectedSkin, setSelectedSkin } = useSelectedSkin();
-  const skins = player.skinHistory ?? [];
+  const skins =
+    player.skinHistory.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
