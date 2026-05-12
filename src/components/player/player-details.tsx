@@ -1,7 +1,7 @@
 "use client";
 
 import { timeAgo } from "@/common/time-utils";
-import { cn } from "@/common/utils";
+import { cn, formatNumberWithCommas } from "@/common/utils";
 import { BugIcon } from "lucide-react";
 import { Player } from "mcutils-js-api/dist/types/player/player";
 import { useState } from "react";
@@ -31,6 +31,7 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
         <DetailRow label="UUID" value={player.uniqueId} copyable />
         <DetailRow label="Username" value={player.username} copyable />
         <DetailRow label="Legacy Account" value={player.legacyAccount ? "Yes" : "No"} />
+        <DetailRow label="Submitted UUIDs" value={formatNumberWithCommas(player.submittedUuids)} />
         {showDebug && (
           <>
             <DetailRow label="Last Updated" value={timeAgo(player.lastUpdated)} />
