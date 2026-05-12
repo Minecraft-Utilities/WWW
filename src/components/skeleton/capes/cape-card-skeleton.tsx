@@ -8,7 +8,7 @@ export default function CapeCardSkeleton() {
       <CardHeader className="shrink-0">
         <Skeleton className="h-4 w-28" />
       </CardHeader>
-      <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
+      <CardContent className="relative flex min-h-0 flex-1 items-center justify-center p-4">
         <Skeleton className="mx-auto h-[120px] w-[75px]" />
       </CardContent>
       <CardFooter className="flex items-center gap-2">

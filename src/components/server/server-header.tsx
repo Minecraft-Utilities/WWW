@@ -18,6 +18,8 @@ export default function ServerHeader({ server, edition }: ServerHeaderProps) {
             width={64}
             height={64}
             className="rounded-md"
+            priority
+            fetchPriority="high"
           />
         )}
 

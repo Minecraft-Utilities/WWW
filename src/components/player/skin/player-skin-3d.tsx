@@ -13,10 +13,14 @@ export interface PlayerSkin3DProps {
 
 export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const viewerRef = useRef<Render | null>(null);
   const { updateSkinViewerRef } = useSkin3DSettings();
   const { selectedSkin } = useSelectedSkin();
   const { selectedCape } = useSelectedCape();
+  const selectedCapeRef = useRef(selectedCape);
+  selectedCapeRef.current = selectedCape;
 
+  // Initialize the viewer (recreate only when the skin changes)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -29,17 +33,29 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
     });
 
     viewer.loadSkin(selectedSkin.textureUrl);
-    if (selectedCape) {
-      viewer.loadCape(selectedCape.textureUrl);
+    if (selectedCapeRef.current) {
+      viewer.loadCape(selectedCapeRef.current.textureUrl);
     }
 
+    viewerRef.current = viewer;
     updateSkinViewerRef(viewer);
 
     return () => {
+      viewerRef.current = null;
       updateSkinViewerRef(null);
       viewer.dispose();
     };
-  }, [selectedSkin.textureUrl, selectedCape?.textureUrl, updateSkinViewerRef]);
+  }, [selectedSkin.textureUrl, updateSkinViewerRef]);
+
+  // Update the cape on the existing viewer without recreating it
+  useEffect(() => {
+    if (!viewerRef.current) return;
+    if (selectedCape) {
+      viewerRef.current.loadCape(selectedCape.textureUrl);
+    } else {
+      viewerRef.current.loadCape(null);
+    }
+  }, [selectedCape]);
 
   return <canvas ref={canvasRef} className="rounded-lg" />;
 }

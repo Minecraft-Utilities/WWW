@@ -9,7 +9,7 @@ export default function SkinCardSkeleton() {
         <Skeleton className="h-[120px] w-[70px]" />
       </CardContent>
       <CardFooter className="flex items-center gap-2">
-        <UserIcon className="text-muted-foreground/50 size-4" />
+        <UserIcon className="text-muted-foreground size-4" />
         <Skeleton className="h-[20px] w-12" />
       </CardFooter>
     </Card>
