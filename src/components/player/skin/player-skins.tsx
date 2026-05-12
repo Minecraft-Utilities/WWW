@@ -1,11 +1,12 @@
 "use client";
 
+import { timeAgo } from "@/common/time-utils";
 import { cn } from "@/common/utils";
 import { Player } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
-import { useSelectedSkin } from "../provider/selected-skin-provider";
-import SimpleTooltip from "../simple-tooltip";
-import Card, { CardContent, CardHeader } from "../ui/card";
+import { useSelectedSkin } from "../../provider/selected-skin-provider";
+import SimpleTooltip from "../../simple-tooltip";
+import Card, { CardContent, CardHeader } from "../../ui/card";
 
 export interface PlayerSkinsProps {
   player: Player;
@@ -24,7 +25,16 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
 
           return (
             <SimpleTooltip
-              display={isSelected ? "Currently selected skin" : "Click to select this skin"}
+              display={
+                <div>
+                  <p>{isSelected ? "Currently selected skin" : "Click to select this skin"}</p>
+                  <p className="text-muted-foreground text-sm">
+                    Last Used:{" "}
+                    {player.skin.textureId === skin.textureId ? "Current Skin" : timeAgo(skin.lastUsed)}
+                  </p>
+                  <p className="text-muted-foreground text-sm">First Seen: {timeAgo(skin.firstSeen)}</p>
+                </div>
+              }
               key={skin.textureId}
             >
               <button onClick={() => setSelectedSkin(skin)}>

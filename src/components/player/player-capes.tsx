@@ -1,3 +1,4 @@
+import { timeAgo } from "@/common/time-utils";
 import { Player } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import SimpleTooltip from "../simple-tooltip";
@@ -25,6 +26,11 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                 display={
                   <span>
                     <b>{cape.name ?? "Unknown"}</b> Cape
+                    <p className="text-muted-foreground text-sm">
+                      Last Used:{" "}
+                      {player.cape?.textureId === cape.textureId ? "Current Cape" : timeAgo(cape.lastUsed)}
+                    </p>
+                    <p className="text-muted-foreground text-sm">First Seen: {timeAgo(cape.firstSeen)}</p>
                   </span>
                 }
               >
@@ -33,13 +39,13 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                   alt={`${player.username} cape`}
                   width={64 * CAPE_ASPECT_RATIO}
                   height={64}
-                  className="h-[64px] rounded-sm object-cover"
+                  className="h-16 rounded-sm object-cover"
                 />
               </SimpleTooltip>
             ))}
           </>
         ) : (
-          <div className="flex h-full min-h-[64px] flex-col items-center justify-center">
+          <div className="flex h-full min-h-16 flex-col items-center justify-center">
             <p className="text-muted-foreground text-center text-sm">No capes available</p>
           </div>
         )}
