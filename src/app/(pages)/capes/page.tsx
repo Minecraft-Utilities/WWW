@@ -1,12 +1,14 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { formatNumberWithCommas } from "@/common/utils";
-import { CAPE_ASPECT_RATIO } from "@/components/player/player-capes";
 import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { UserIcon } from "lucide-react";
+import DownloadFileButton from "@/components/ui/download-file-button";
+import { DownloadIcon, UserIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { cache } from "react";
+
+const CAPE_ASPECT_RATIO = 480 / 768;
 
 export const dynamic = "force-dynamic";
 
@@ -40,14 +42,19 @@ export default async function CapesPage() {
           {capes.map(cape => (
             <Card key={cape.textureId} className="w-44 shrink-0 md:w-50">
               <CardHeader className="shrink-0">{cape.name ?? "Unknown Cape"}</CardHeader>
-              <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
+              <CardContent className="group relative flex min-h-0 flex-1 items-center justify-center p-4">
                 <Image
                   src={cape.parts.FRONT}
                   alt={cape.name ?? "Unknown Cape"}
                   width={120 * CAPE_ASPECT_RATIO}
                   height={96}
-                  className="object-fit mx-auto h-[120px]"
+                  className="object-fit mx-auto h-30"
                 />
+                <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+                  <DownloadFileButton href={cape.textureUrl} filename={`${cape.name ?? cape.textureId}.png`}>
+                    <DownloadIcon className="size-4" />
+                  </DownloadFileButton>
+                </div>
               </CardContent>
               <CardFooter className="flex items-center gap-2">
                 <UserIcon className="size-4" />

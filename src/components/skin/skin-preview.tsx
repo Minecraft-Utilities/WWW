@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { CardContent, CardHeader } from "../ui/card";
-
 import { SkinDTO } from "mcutils-js-api/dist/types/response/skin/skin-dto";
-import Card from "../ui/card";
+import { DownloadIcon } from "lucide-react";
+import Image from "next/image";
+import DownloadFileButton from "../ui/download-file-button";
+import Card, { CardContent, CardHeader } from "../ui/card";
 
 interface SkinPreviewProps {
   skin: SkinDTO;
@@ -18,7 +18,7 @@ export default function SkinPreview({ skin }: SkinPreviewProps) {
       <CardHeader>
         <p>Skin</p>
       </CardHeader>
-      <CardContent className="flex items-center justify-center">
+      <CardContent className="relative flex items-center justify-center">
         <Image
           src={skin.imageUrl}
           alt={skin.id}
@@ -27,6 +27,14 @@ export default function SkinPreview({ skin }: SkinPreviewProps) {
           sizes="(max-width: 640px) 100vw, 188px"
           priority
         />
+        <div className="absolute top-2 right-2">
+          <DownloadFileButton
+            href={`https://textures.minecraft.net/texture/${skin.textureId}`}
+            filename={`${skin.textureId}.png`}
+          >
+            <DownloadIcon className="size-4" />
+          </DownloadFileButton>
+        </div>
       </CardContent>
     </Card>
   );
