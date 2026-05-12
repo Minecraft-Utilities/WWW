@@ -1,5 +1,6 @@
 "use client";
 
+import { useSelectedCape } from "@/components/provider/selected-cape-provider";
 import { useSelectedSkin } from "@/components/provider/selected-skin-provider";
 import { useSkin3DSettings } from "@/components/provider/skin-3d-settings-provider";
 import { Player } from "mcutils-js-api/dist/types/player/player";
@@ -14,6 +15,7 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { updateSkinViewerRef } = useSkin3DSettings();
   const { selectedSkin } = useSelectedSkin();
+  const { selectedCape } = useSelectedCape();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,8 +29,8 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
     });
 
     viewer.loadSkin(selectedSkin.textureUrl);
-    if (player.cape) {
-      viewer.loadCape(player.cape.textureUrl);
+    if (selectedCape) {
+      viewer.loadCape(selectedCape.textureUrl);
     }
 
     updateSkinViewerRef(viewer);
@@ -37,7 +39,7 @@ export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {
       updateSkinViewerRef(null);
       viewer.dispose();
     };
-  }, [selectedSkin.textureUrl, updateSkinViewerRef]);
+  }, [selectedSkin.textureUrl, selectedCape?.textureUrl, updateSkinViewerRef]);
 
   return <canvas ref={canvasRef} className="rounded-lg" />;
 }

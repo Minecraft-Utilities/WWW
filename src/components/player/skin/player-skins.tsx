@@ -27,13 +27,22 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
           return (
             <SimpleTooltip
               display={
-                <div>
-                  <p>{isSelected ? "Currently selected skin" : "Click to select this skin"}</p>
-                  <p className="text-muted-foreground text-sm">
-                    Last Used:{" "}
-                    {player.skin.textureId === skin.textureId ? "Current Skin" : timeAgo(skin.lastUsed)}
+                <div className="flex flex-col gap-2">
+                  <p className={cn("text-sm font-medium", isSelected ? "text-primary" : "")}>
+                    {isSelected ? "Currently selected" : "Click to select"}
                   </p>
-                  <p className="text-muted-foreground text-sm">First Seen: {timeAgo(skin.firstSeen)}</p>
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-center justify-between gap-4 text-xs">
+                      <span className="text-muted-foreground">Last used</span>
+                      <span className="font-medium">
+                        {player.skin.textureId === skin.textureId ? "Current" : timeAgo(skin.lastUsed)}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-4 text-xs">
+                      <span className="text-muted-foreground">First seen</span>
+                      <span className="font-medium">{timeAgo(skin.firstSeen)}</span>
+                    </div>
+                  </div>
                 </div>
               }
               key={skin.textureId}

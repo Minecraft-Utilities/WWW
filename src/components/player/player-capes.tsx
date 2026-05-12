@@ -1,6 +1,10 @@
+"use client";
+
 import { timeAgo } from "@/common/time-utils";
+import { cn } from "@/common/utils";
 import { Player } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
+import { useSelectedCape } from "../provider/selected-cape-provider";
 import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
@@ -11,6 +15,7 @@ export interface PlayerCapesProps {
 export const CAPE_ASPECT_RATIO = 480 / 768;
 
 export default function PlayerCapes({ player }: PlayerCapesProps) {
+  const { selectedCape, setSelectedCape } = useSelectedCape();
   const capes =
     player.capeHistory?.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
 
@@ -20,30 +25,47 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
       <CardContent className="flex h-full items-center justify-center gap-2">
         {capes.length > 0 ? (
           <>
-            {/* Vanilla Cape */}
-            {capes.map(cape => (
-              <SimpleTooltip
-                key={cape.textureId}
-                display={
-                  <span>
-                    <b>{cape.name ?? "Unknown"}</b> Cape
-                    <p className="text-muted-foreground text-sm">
-                      Last Used:{" "}
-                      {player.cape?.textureId === cape.textureId ? "Current Cape" : timeAgo(cape.lastUsed)}
-                    </p>
-                    <p className="text-muted-foreground text-sm">First Seen: {timeAgo(cape.firstSeen)}</p>
-                  </span>
-                }
-              >
-                <Image
-                  src={cape.parts.FRONT}
-                  alt={`${player.username} cape`}
-                  width={64 * CAPE_ASPECT_RATIO}
-                  height={64}
-                  className="h-16 rounded-sm object-cover"
-                />
-              </SimpleTooltip>
-            ))}
+            {capes.map(cape => {
+              const isSelected = selectedCape?.textureId === cape.textureId;
+
+              return (
+                <SimpleTooltip
+                  key={cape.textureId}
+                  display={
+                    <div className="flex flex-col gap-2">
+                      <p className={cn("text-sm font-medium", isSelected ? "text-primary" : "")}>
+                        {isSelected ? "Currently selected" : cape.name ? `${cape.name} Cape` : "Unknown Cape"}
+                      </p>
+                      <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center justify-between gap-4 text-xs">
+                          <span className="text-muted-foreground">Last used</span>
+                          <span className="font-medium">
+                            {player.cape?.textureId === cape.textureId ? "Current" : timeAgo(cape.lastUsed)}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between gap-4 text-xs">
+                          <span className="text-muted-foreground">First seen</span>
+                          <span className="font-medium">{timeAgo(cape.firstSeen)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <button onClick={() => setSelectedCape(cape)}>
+                    <Image
+                      src={cape.parts.FRONT}
+                      alt={`${player.username} cape`}
+                      width={64 * CAPE_ASPECT_RATIO}
+                      height={64}
+                      className={cn(
+                        "h-16 rounded-sm object-cover",
+                        isSelected ? "border-primary border-2" : ""
+                      )}
+                    />
+                  </button>
+                </SimpleTooltip>
+              );
+            })}
           </>
         ) : (
           <div className="flex h-full min-h-16 flex-col items-center justify-center">

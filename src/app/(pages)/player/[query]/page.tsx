@@ -5,6 +5,7 @@ import PlayerHeader from "@/components/player/player-header";
 import PlayerOptifineCape from "@/components/player/player-optifine-cape";
 import PlayerSkin from "@/components/player/skin/player-skin";
 import PlayerSkins from "@/components/player/skin/player-skins";
+import { SelectedCapeProvider } from "@/components/provider/selected-cape-provider";
 import { SelectedSkinProvider } from "@/components/provider/selected-skin-provider";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import { Metadata } from "next";
@@ -69,11 +70,13 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
           <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
             {/* Skin and Cape */}
             <section className="flex w-full flex-col gap-4 md:max-w-90">
-              <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
-                <PlayerSkin player={player} />
-                <PlayerSkins player={player} />
-              </SelectedSkinProvider>
-              <PlayerCapes player={player} />
+              <SelectedCapeProvider initialCape={player.cape ?? null}>
+                <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
+                  <PlayerSkin player={player} />
+                  <PlayerSkins player={player} />
+                </SelectedSkinProvider>
+                <PlayerCapes player={player} />
+              </SelectedCapeProvider>
               <PlayerOptifineCape player={player} />
             </section>
 
