@@ -1,8 +1,8 @@
-import { SkinDTO } from "mcutils-js-api/dist/types/response/skin/skin-dto";
 import { DownloadIcon } from "lucide-react";
+import { SkinDTO } from "mcutils-js-api/dist/types/response/skin/skin-dto";
 import Image from "next/image";
-import DownloadFileButton from "../ui/download-file-button";
 import Card, { CardContent, CardHeader } from "../ui/card";
+import DownloadFileButton from "../ui/download-file-button";
 
 interface SkinPreviewProps {
   skin: SkinDTO;

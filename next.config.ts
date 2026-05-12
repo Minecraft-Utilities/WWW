@@ -6,11 +6,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   poweredByHeader: false,
   experimental: {
-    optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-icons",
-      "@radix-ui/react-popper",
-    ],
+    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons", "@radix-ui/react-popper"],
   },
   async headers() {
     return [
