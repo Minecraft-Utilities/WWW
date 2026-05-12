@@ -6,8 +6,8 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useDebounce } from "@uidotdev/usehooks";
-import { Loader2, Search, Server, User, X } from "lucide-react";
+import { useDebounce, useLocalStorage } from "@uidotdev/usehooks";
+import { Clock, Loader2, Search, Server, User, X } from "lucide-react";
 import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
@@ -20,6 +20,10 @@ import PlayerLookupEntry from "../player/player-lookup-entry";
 import ServerLookupEntry from "../server/server-lookup-entry";
 import { Button } from "../ui/button";
 import ServerEditionDialog from "./server-edition-dialog";
+
+const HISTORY_MAX = 10;
+
+type HistoryEntry = { query: string; path: string };
 
 const querySearchSchema = z.object({
   query: z
@@ -42,7 +46,25 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   const [pendingServer, setPendingServer] = useState("");
   const [isLookupLoading, setIsLookupLoading] = useState(false);
   const [lookupError, setLookupError] = useState<ErrorResponse | undefined>(undefined);
-  const [serverPopoverOpen, setServerPopoverOpen] = useState(true);
+  const [serverPopoverOpen, setServerPopoverOpen] = useState(false);
+  const [history, setHistory] = useLocalStorage<HistoryEntry[]>("search-history", []);
+
+  const addEntry = useCallback(
+    (entry: HistoryEntry) => {
+      setHistory(prev => {
+        const filtered = (prev ?? []).filter(h => h.path !== entry.path);
+        return [entry, ...filtered].slice(0, HISTORY_MAX);
+      });
+    },
+    [setHistory]
+  );
+
+  const removeEntry = useCallback(
+    (path: string) => {
+      setHistory(prev => (prev ?? []).filter(h => h.path !== path));
+    },
+    [setHistory]
+  );
 
   const form = useForm<QuerySearchValues>({
     resolver: zodResolver(querySearchSchema),
@@ -86,10 +108,12 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   const hasPlayerResults = Array.isArray(playerEntry) && playerEntry.length > 0;
   const isSearching = isServerSearchFetching || isPlayerSearchFetching;
   const searchSettled = isServerSearchSuccess && isPlayerSearchSuccess;
+  const showHistoryDropdown = !debouncedQuery && history.length > 0;
   const serverPopoverOpenDerived =
-    !!debouncedQuery &&
-    (hasServerResults || hasPlayerResults || isSearching) &&
-    (searchSettled || isSearching);
+    (!!debouncedQuery &&
+      (hasServerResults || hasPlayerResults || isSearching) &&
+      (searchSettled || isSearching)) ||
+    showHistoryDropdown;
   const serverPopoverOpenControlled = serverPopoverOpen && serverPopoverOpenDerived;
 
   const clearError = useCallback(() => {
@@ -107,6 +131,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
       if (isIpOrDomain(trimmed)) {
         setPendingServer(trimmed);
         setServerDialogOpen(true);
+        setServerPopoverOpen(false);
         return;
       }
 
@@ -120,7 +145,9 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
           setQueryError?.(result.error);
           return;
         }
-        router.push(`/player/${encodeURIComponent(trimmed)}`);
+        const path = `/player/${encodeURIComponent(trimmed)}`;
+        addEntry({ query: trimmed, path });
+        router.push(path);
         form.reset();
       } catch (err) {
         throw err;
@@ -134,32 +161,38 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   const handleServerEdition = useCallback(
     (edition: ServerPlatform) => {
       if (!pendingServer) return;
-      router.push(`/server/${edition}/${encodeURIComponent(pendingServer)}`);
+      const path = `/server/${edition}/${encodeURIComponent(pendingServer)}`;
+      addEntry({ query: pendingServer, path });
+      router.push(path);
       form.reset();
       setPendingServer("");
       setServerDialogOpen(false);
     },
-    [pendingServer, router, form]
+    [pendingServer, router, form, addEntry]
   );
 
   const handlePlayerEntryClick = useCallback(
     (entry: PlayerSearchEntry) => {
-      router.push(`/player/${encodeURIComponent(entry.username)}`);
+      const path = `/player/${encodeURIComponent(entry.username)}`;
+      addEntry({ query: entry.username, path });
+      router.push(path);
       form.reset();
       setServerPopoverOpen(false);
     },
-    [router, form]
+    [router, form, addEntry]
   );
 
   const handleServerEntryClick = useCallback(
     (entry: ServerRegistryEntry) => {
       const hostname = entry.hostnames[0];
       if (!hostname) return;
-      router.push(`/server/${entry.platform.toLowerCase()}/${encodeURIComponent(hostname)}`);
+      const path = `/server/${entry.platform.toLowerCase()}/${encodeURIComponent(hostname)}`;
+      addEntry({ query: hostname, path });
+      router.push(path);
       form.reset();
       setServerPopoverOpen(false);
     },
-    [router, form]
+    [router, form, addEntry]
   );
 
   return (
@@ -249,7 +282,40 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         onOpenAutoFocus={e => e.preventDefault()}
       >
         <div className="flex flex-col gap-1 overflow-y-auto p-1">
-          {playerEntry && playerEntry.length > 0 ? (
+          {showHistoryDropdown ? (
+            <section className="flex flex-col gap-1" aria-label="Recent searches">
+              <div className="text-muted-foreground flex items-center gap-2 px-3 py-1.5">
+                <Clock className="size-3.5 shrink-0" aria-hidden />
+                <span className="text-xs font-medium tracking-wider uppercase">Recent</span>
+              </div>
+              <ul className="flex flex-col gap-0.5">
+                {history.map(entry => (
+                  <li key={entry.path} className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      className="border-border/60 bg-muted/30 hover:border-border hover:bg-accent flex min-w-0 flex-1 items-center gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors outline-none"
+                      onClick={() => {
+                        router.push(entry.path);
+                        setServerPopoverOpen(false);
+                      }}
+                    >
+                      <Clock className="text-muted-foreground size-3.5 shrink-0" aria-hidden />
+                      <span className="min-w-0 flex-1 truncate">{entry.query}</span>
+                    </button>
+                    <button
+                      type="button"
+                      aria-label={`Remove ${entry.query} from history`}
+                      className="text-muted-foreground hover:text-foreground shrink-0 rounded p-1"
+                      onClick={() => removeEntry(entry.path)}
+                    >
+                      <X className="size-3.5" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          {!showHistoryDropdown && playerEntry && playerEntry.length > 0 ? (
             <section className="flex flex-col gap-1" aria-label="Players">
               <div className="text-muted-foreground flex items-center gap-2 px-3 py-1.5">
                 <User className="size-3.5 shrink-0" aria-hidden />
@@ -264,7 +330,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
               </ul>
             </section>
           ) : null}
-          {serverEntries && serverEntries.length > 0 ? (
+          {!showHistoryDropdown && serverEntries && serverEntries.length > 0 ? (
             <section className="flex flex-col gap-1" aria-label="Servers">
               <div className="text-muted-foreground flex items-center gap-2 px-3 py-1.5">
                 <Server className="size-3.5 shrink-0" aria-hidden />
