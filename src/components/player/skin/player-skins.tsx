@@ -15,7 +15,7 @@ export interface PlayerSkinsProps {
 export default function PlayerSkins({ player }: PlayerSkinsProps) {
   const { selectedSkin, setSelectedSkin } = useSelectedSkin();
   const skins =
-    player.skinHistory.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
+    player.skinHistory?.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
@@ -45,7 +45,7 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
                   alt={`${player.username}'s skin`}
                   width={38}
                   height={38}
-                  className={cn("rounded-sm border-2 object-cover", isSelected ? "border-primary" : "")}
+                  className={cn("rounded-sm object-cover", isSelected ? "border-primary border-2" : "")}
                 />
               </button>
             </SimpleTooltip>
