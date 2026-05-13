@@ -32,7 +32,7 @@ export async function generateMetadata(props: PageProps<"/skin/[query]">): Promi
       description: `View the details for this skin`,
       images: [
         {
-          url: skin.imageUrl,
+          url: skin.parts.HEAD_ISO,
         },
       ],
     },
