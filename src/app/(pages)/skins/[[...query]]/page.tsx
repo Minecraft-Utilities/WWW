@@ -57,7 +57,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
                   >
                     <SimpleTooltip display="Click to view the skin">
                       <Image
-                        src={skin.imageUrl}
+                        src={skin.parts.FULLBODY_ISO_FRONT}
                         className="object-fit mx-auto h-[120px]"
                         alt={`Skin ${skin.id}`}
                         width={120 * SKIN_ASPECT_RATIO}
