@@ -1,6 +1,8 @@
+import { timeAgo } from "@/common/time-utils";
 import { formatNumberWithCommas } from "@/common/utils";
 import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
 import SimpleLink from "../simple-link";
+import SimpleTooltip from "../simple-tooltip";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 interface SkinDetailsProps {
@@ -14,15 +16,26 @@ export default function SkinDetails({ skin }: SkinDetailsProps) {
       <CardContent className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span className="text-muted-foreground text-sm">First Seen Using</span>
-          <SimpleLink href={`/player/${skin.firstSeenUsing}`} className="text-sm font-medium">
+          <SimpleLink
+            href={`/player/${skin.firstSeenUsing}`}
+            className="border-primary/20 bg-primary/10 hover:bg-primary/20 rounded-md border px-2 py-1 font-mono text-sm transition-colors"
+          >
             {skin.firstSeenUsing}
           </SimpleLink>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-sm">Total Users</span>
+          <span className="text-muted-foreground text-sm">Total Owners</span>
           <span className="border-primary/20 bg-primary/10 rounded-md border px-2 py-1 font-mono text-sm">
             {formatNumberWithCommas(skin.accountsUsed)}
           </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground text-sm">First Seen</span>
+          <SimpleTooltip display={new Date(skin.firstSeen).toLocaleString()}>
+            <span className="border-primary/20 bg-primary/10 cursor-default rounded-md border px-2 py-1 font-mono text-sm">
+              {timeAgo(new Date(skin.firstSeen))}
+            </span>
+          </SimpleTooltip>
         </div>
       </CardContent>
     </Card>

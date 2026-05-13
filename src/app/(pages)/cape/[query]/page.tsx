@@ -23,11 +23,13 @@ export async function generateMetadata(props: PageProps<"/cape/[query]">): Promi
     };
   }
 
+  const capeName = cape.name ?? "Minecraft Cape";
   return {
-    title: cape.name ?? "Minecraft Cape",
-    description: `View the details for this cape`,
+    title: `${capeName} — Minecraft Cape`,
+    description: `View the ${capeName} Minecraft cape on MC Utils — preview the design, see current wearers, and explore cape details.`,
     openGraph: {
-      description: `View the details for this cape`,
+      title: `${capeName} — Minecraft Cape`,
+      description: `View the ${capeName} Minecraft cape on MC Utils — preview the design, see current wearers, and explore cape details.`,
       images: [
         {
           url: cape.parts.FRONT,

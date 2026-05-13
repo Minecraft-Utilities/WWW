@@ -30,24 +30,28 @@ export async function generateMetadata(props: PageProps<"/server/[platform]/[hos
   if (error || !server) {
     return {
       title: "Server not found",
-      description: "Server not found",
+      description: "This Minecraft server could not be found or is currently offline.",
       openGraph: {
         title: "Server not found",
-        description: "Server not found",
+        description: "This Minecraft server could not be found or is currently offline.",
       },
     };
   }
   const favicon = "favicon" in server ? server.favicon?.url : undefined;
   const players = server.players;
+  const serverName = server.registryEntry?.displayName ?? server.hostname;
+  const editionLabel = capitalize(edition!);
 
   return {
-    title: `${server.registryEntry?.displayName ?? server.hostname} - ${capitalize(edition!)} Server`,
+    title: `${serverName} — ${editionLabel} Minecraft Server`,
+    description: `${serverName} has ${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online. View server status, MOTD, and details on MC Utils.`,
     icons: {
       ...(favicon ? { icon: favicon } : {}),
     },
     openGraph: {
+      title: `${serverName} — ${editionLabel} Minecraft Server`,
+      description: `${serverName} has ${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online. View server status, MOTD, and details on MC Utils.`,
       ...(favicon ? { images: [{ url: favicon }] } : {}),
-      description: `${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online`,
     },
   };
 }

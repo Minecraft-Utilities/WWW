@@ -26,10 +26,11 @@ export async function generateMetadata(props: PageProps<"/skin/[query]">): Promi
   }
 
   return {
-    title: `Minecraft Skin`,
-    description: `View the details for this skin`,
+    title: `${skin.firstSeenUsing}'s Minecraft Skin`,
+    description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils — preview the full body, download, and see which players have used it.`,
     openGraph: {
-      description: `View the details for this skin`,
+      title: `${skin.firstSeenUsing}'s Minecraft Skin`,
+      description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils — preview the full body, download, and see which players have used it.`,
       images: [
         {
           url: skin.parts.HEAD_ISO,

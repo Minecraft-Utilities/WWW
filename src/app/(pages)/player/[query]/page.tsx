@@ -21,19 +21,20 @@ export async function generateMetadata(props: PageProps<"/player/[query]">): Pro
   if (player === undefined) {
     return {
       title: "Player not found",
-      description: "Player not found",
+      description: "This Minecraft player could not be found.",
       openGraph: {
         title: "Player not found",
-        description: "Player not found",
+        description: "This Minecraft player could not be found.",
       },
     };
   }
   const skullUrl = player.skin.parts.HEAD_ISO;
   return {
-    title: `${player.username}'s Profile`,
-    description: `Minecraft player profile for ${player.username}`,
+    title: `${player.username} — Minecraft Profile, Skin & UUID`,
+    description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
     openGraph: {
-      description: `View the information for ${player.username}`,
+      title: `${player.username} — Minecraft Profile, Skin & UUID`,
+      description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
       images: [
         {
           url: skullUrl,
