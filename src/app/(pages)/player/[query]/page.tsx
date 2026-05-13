@@ -2,7 +2,6 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
-import PlayerOptifineCape from "@/components/player/player-optifine-cape";
 import PlayerSkin from "@/components/player/skin/player-skin";
 import PlayerSkins from "@/components/player/skin/player-skins";
 import { SelectedCapeProvider } from "@/components/provider/selected-cape-provider";
@@ -77,7 +76,6 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
                 </SelectedSkinProvider>
                 <PlayerCapes player={player} />
               </SelectedCapeProvider>
-              <PlayerOptifineCape player={player} />
             </section>
 
             {/* Player Details */}
