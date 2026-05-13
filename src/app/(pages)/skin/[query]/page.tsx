@@ -1,6 +1,6 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import SimpleLink from "@/components/simple-link";
-import SkinFirstUsedBy from "@/components/skin/skin-first-used-by";
+import SkinDetails from "@/components/skin/skin-details";
 import SkinHeadCommands from "@/components/skin/skin-head-commands";
 import SkinPlayers from "@/components/skin/skin-players";
 import SkinPreview from "@/components/skin/skin-preview";
@@ -67,7 +67,7 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
 
         {/* Right */}
         <div className="flex w-full min-w-0 flex-col gap-4 md:max-w-sm">
-          <SkinFirstUsedBy skin={skin} />
+          <SkinDetails skin={skin} />
           <SkinHeadCommands skin={skin} />
         </div>
       </div>

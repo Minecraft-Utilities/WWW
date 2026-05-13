@@ -1,0 +1,32 @@
+import { formatNumberWithCommas } from "@/common/utils";
+import { Cape } from "mcutils-js-api/dist/types/player/cape/cape";
+import SimpleLink from "../simple-link";
+import Card, { CardContent, CardHeader } from "../ui/card";
+
+interface CapeDetailsProps {
+  cape: Cape;
+}
+
+export default function CapeDetails({ cape }: CapeDetailsProps) {
+  return (
+    <Card className="h-fit w-full overflow-hidden p-0">
+      <CardHeader>Details</CardHeader>
+      <CardContent className="flex flex-col gap-3">
+        {cape.firstSeenUsing && (
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-sm">First Seen Owning</span>
+            <SimpleLink href={`/player/${cape.firstSeenUsing}`} className="text-sm font-medium">
+              {cape.firstSeenUsing}
+            </SimpleLink>
+          </div>
+        )}
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground text-sm">Total Owners</span>
+          <span className="border-primary/20 bg-primary/10 rounded-md border px-2 py-1 font-mono text-sm">
+            {formatNumberWithCommas(cape.accountsOwned)}
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

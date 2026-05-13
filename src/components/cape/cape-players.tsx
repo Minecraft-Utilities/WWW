@@ -1,26 +1,26 @@
 import { formatNumberWithCommas } from "@/common/utils";
-import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
+import { Cape } from "mcutils-js-api/dist/types/player/cape/cape";
 import SimpleLink from "../simple-link";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
-interface SkinPlayersProps {
-  skin: Skin;
+interface CapePlayersProps {
+  cape: Cape;
 }
 
-export default function SkinPlayers({ skin }: SkinPlayersProps) {
+export default function CapePlayers({ cape }: CapePlayersProps) {
   return (
     <Card className="h-fit w-full text-sm">
       <CardHeader>
-        <p>Players ({formatNumberWithCommas(skin.accountsUsed)})</p>
+        <p>Players ({formatNumberWithCommas(cape.accountsOwned)})</p>
       </CardHeader>
       <CardContent className="flex h-64 flex-wrap gap-2 overflow-y-auto">
-        {skin.accountsSeenUsing?.map(account => (
+        {cape.accountsSeenOwning?.map(account => (
           <SimpleLink key={account} href={`/player/${account}`}>
             <p>{account}</p>
           </SimpleLink>
         ))}
-        {skin.accountsSeenUsing && skin.accountsSeenUsing.length < skin.accountsUsed && (
-          <p>+ {formatNumberWithCommas(skin.accountsUsed - skin.accountsSeenUsing.length)} more...</p>
+        {cape.accountsSeenOwning && cape.accountsSeenOwning.length < cape.accountsOwned && (
+          <p>+ {formatNumberWithCommas(cape.accountsOwned - cape.accountsSeenOwning.length)} more...</p>
         )}
       </CardContent>
     </Card>

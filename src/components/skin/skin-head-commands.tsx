@@ -3,14 +3,14 @@
 import { env } from "@/common/env";
 import { encodeSkinTextures } from "@/common/skin";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
-import { SkinDTO } from "mcutils-js-api/dist/types/response/skin/skin-dto";
+import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
 import { useState } from "react";
 import CopyTextButton from "../copy-text-button";
 import { Input } from "../ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 interface SkinHeadCommandsProps {
-  skin: SkinDTO;
+  skin: Skin;
 }
 
 export default function SkinHeadCommands({ skin }: SkinHeadCommandsProps) {
@@ -36,7 +36,7 @@ export default function SkinHeadCommands({ skin }: SkinHeadCommandsProps) {
       <CardHeader>Head Commands (for Command Blocks)</CardHeader>
       <CardContent className="flex flex-row">
         <Select value={selectedIndex.toString()} onValueChange={value => setSelectedIndex(Number(value))}>
-          <SelectTrigger className="w-[105px] rounded-r-none">
+          <SelectTrigger className="w-26.25 rounded-r-none">
             <SelectValue placeholder={commands[selectedIndex].version} />
           </SelectTrigger>
           <SelectContent>
