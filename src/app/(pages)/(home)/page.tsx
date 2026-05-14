@@ -67,9 +67,9 @@ export default function HomePage() {
 
         <section className="text-muted-foreground max-w-2xl text-center text-sm leading-relaxed">
           <p>
-            MC Utils is a free Minecraft lookup tool. Search any player to view their current skin, cape, UUID, and
-            name history. Paste a Java or Bedrock server address to instantly check whether it&apos;s online, see its
-            MOTD, and monitor live player counts — no login required.
+            MC Utils is a free Minecraft lookup tool. Search any player to view their current skin, cape,
+            UUID, and name history. Paste a Java or Bedrock server address to instantly check whether
+            it&apos;s online, see its MOTD, and monitor live player counts — no login required.
           </p>
         </section>
       </div>

@@ -3,12 +3,12 @@
 import { useSelectedCape } from "@/components/provider/selected-cape-provider";
 import { useSelectedSkin } from "@/components/provider/selected-skin-provider";
 import { useSkin3DSettings } from "@/components/provider/skin-3d-settings-provider";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import { useEffect, useRef } from "react";
 import { Render } from "skin3d";
 
 export interface PlayerSkin3DProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function PlayerSkin3D({ player }: PlayerSkin3DProps) {

@@ -1,23 +1,23 @@
 "use client";
 
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-  type RefObject,
+    createContext,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+    type ReactNode,
+    type RefObject,
 } from "react";
 import {
-  FlyingAnimation,
-  IdleAnimation,
-  RunningAnimation,
-  WalkingAnimation,
-  WaveAnimation,
-  type PlayerAnimation,
-  type Render,
+    FlyingAnimation,
+    IdleAnimation,
+    RunningAnimation,
+    WalkingAnimation,
+    WaveAnimation,
+    type PlayerAnimation,
+    type Render,
 } from "skin3d";
 
 /** UI-facing animation descriptor for skin3d */
@@ -54,7 +54,7 @@ type Skin3DSettingsContextType = {
 
 const Skin3DSettingsContext = createContext<Skin3DSettingsContextType | undefined>(undefined);
 
-export function Skin3DSettingsProvider({ player, children }: { player: Player; children: ReactNode }) {
+export function Skin3DSettingsProvider({ player, children }: { player: FullPlayer; children: ReactNode }) {
   const skinViewerRef: RefObject<Render | null> = useRef<Render | null>(null);
   const [selectedAnimation, setSelectedAnimation] = useState<Skin3DAnimation>(skin3DAnimations.idle);
   const [showElytra, setShowElytra] = useState<boolean>(false);

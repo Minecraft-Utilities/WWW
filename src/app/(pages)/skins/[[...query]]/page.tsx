@@ -72,7 +72,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
                   <UserIcon className="size-4" />
                   <SimpleTooltip display="The amount of accounts that have used this skin">
                     <span className="text-muted-foreground text-sm">
-                      {formatNumberWithCommas(skin.accountsUsed)}
+                      {formatNumberWithCommas(skin.uniqueOwners)}
                     </span>
                   </SimpleTooltip>
                 </CardFooter>

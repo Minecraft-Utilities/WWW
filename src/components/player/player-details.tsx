@@ -1,16 +1,16 @@
 "use client";
 
-import { timeAgo } from "@/common/time-utils";
 import { cn, formatNumberWithCommas } from "@/common/utils";
 import { BugIcon } from "lucide-react";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import { useState } from "react";
 import DetailRow from "../detail-row";
 import SimpleTooltip from "../simple-tooltip";
+import TimeAgo from "../time-ago";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export interface PlayerDetailsProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function PlayerDetails({ player }: PlayerDetailsProps) {
@@ -34,8 +34,8 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
         <DetailRow label="Submitted UUIDs" value={formatNumberWithCommas(player.submittedUuids)} />
         {showDebug && (
           <>
-            <DetailRow label="Last Updated" value={timeAgo(player.lastUpdated)} />
-            <DetailRow label="First Seen" value={timeAgo(player.firstSeen)} />
+            <DetailRow label="Last Updated" value={<TimeAgo date={new Date(player.lastUpdated)} />} />
+            <DetailRow label="First Seen" value={<TimeAgo date={new Date(player.firstSeen)} />} />
           </>
         )}
       </CardContent>

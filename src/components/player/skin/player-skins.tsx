@@ -1,15 +1,15 @@
 "use client";
 
-import { timeAgo } from "@/common/time-utils";
 import { cn } from "@/common/utils";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import { useSelectedSkin } from "../../provider/selected-skin-provider";
 import SimpleTooltip from "../../simple-tooltip";
+import TimeAgo from "../../time-ago";
 import Card, { CardContent, CardHeader } from "../../ui/card";
 
 export interface PlayerSkinsProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function PlayerSkins({ player }: PlayerSkinsProps) {
@@ -33,14 +33,10 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
                   </p>
                   <div className="flex flex-col gap-0.5">
                     <div className="flex items-center justify-between gap-4 text-xs">
-                      <span className="text-muted-foreground">Last used</span>
+                      <span className="text-muted-foreground">First Seen</span>
                       <span className="font-medium">
-                        {player.skin.textureId === skin.textureId ? "Current" : timeAgo(skin.lastUsed)}
+                        <TimeAgo date={new Date(skin.firstSeen)} />
                       </span>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 text-xs">
-                      <span className="text-muted-foreground">First seen</span>
-                      <span className="font-medium">{timeAgo(skin.firstSeen)}</span>
                     </div>
                   </div>
                 </div>

@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Clock, Loader2, Search, Server, User, X } from "lucide-react";
-import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
+import type { BasicPlayer } from "mcutils-js-api/dist/types/player/player";
 import { ErrorResponse } from "mcutils-js-api/dist/types/response/error-response";
 import type { ServerRegistryEntry } from "mcutils-js-api/dist/types/server-registry/server-registry-entry";
 import { ServerPlatform } from "mcutils-js-api/dist/types/server/server";
@@ -133,7 +133,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
     isSuccess: isPlayerSearchSuccess,
   } = useQuery({
     queryKey: ["playerSearch", debouncedQuery],
-    queryFn: async (): Promise<PlayerSearchEntry[] | null> => {
+    queryFn: async (): Promise<BasicPlayer[] | null> => {
       const result = await mcUtilsApi.searchPlayers(debouncedQuery);
       if (result.error) return null;
       return result.entries ?? null;
@@ -210,7 +210,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
   );
 
   const handlePlayerEntryClick = useCallback(
-    (entry: PlayerSearchEntry) => {
+    (entry: BasicPlayer) => {
       const path = `/player/${encodeURIComponent(entry.username)}`;
       addEntry({ query: entry.username, path });
       router.push(path);

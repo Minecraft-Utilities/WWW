@@ -1,9 +1,9 @@
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import CopyTextButton from "../copy-text-button";
 
 export interface PlayerHeaderProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function PlayerHeader({ player }: PlayerHeaderProps) {

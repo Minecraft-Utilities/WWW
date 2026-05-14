@@ -7,7 +7,7 @@ import SimpleTooltip from "@/components/simple-tooltip";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
 import DownloadFileButton from "@/components/ui/download-file-button";
 import { DownloadIcon } from "lucide-react";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
 import { useState } from "react";
@@ -17,7 +17,7 @@ import Skin3DButtons from "./skin-3d-buttons";
 const SKIN_MODES = ["3D", "2D"];
 
 export interface PlayerSkinProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function PlayerSkin({ player }: PlayerSkinProps) {

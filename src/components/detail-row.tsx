@@ -1,5 +1,6 @@
 import { cn } from "@/common/utils";
 import { Info } from "lucide-react";
+import { ReactNode } from "react";
 import CopyTextButton from "./copy-text-button";
 import SimpleTooltip from "./simple-tooltip";
 
@@ -15,7 +16,8 @@ export type DetailRowVariant = keyof typeof variantClasses;
 
 export interface DetailRowProps {
   label: string;
-  value: string;
+  value: ReactNode;
+  copyText?: string;
   variant?: DetailRowVariant;
   copyable?: boolean;
   tooltip?: string;
@@ -24,6 +26,7 @@ export interface DetailRowProps {
 export default function DetailRow({
   label,
   value,
+  copyText,
   variant = "default",
   copyable = false,
   tooltip,
@@ -40,7 +43,7 @@ export default function DetailRow({
       </div>
 
       <div className="flex items-center gap-2">
-        {copyable && <CopyTextButton text={value} tooltip="Copy to clipboard" />}
+        {copyable && <CopyTextButton text={copyText ?? (value as string)} tooltip="Copy to clipboard" />}
         <span className={cn("min-w-0 break-all", variantClasses[variant])}>{value}</span>
       </div>
     </div>

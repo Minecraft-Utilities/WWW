@@ -73,7 +73,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
                   <UserIcon className="size-4" />
                   <SimpleTooltip display="The amount of accounts that have this cape">
                     <span className="text-muted-foreground text-sm">
-                      {formatNumberWithCommas(cape.accountsOwned)}
+                      {formatNumberWithCommas(cape.uniqueOwners)}
                     </span>
                   </SimpleTooltip>
                 </CardFooter>

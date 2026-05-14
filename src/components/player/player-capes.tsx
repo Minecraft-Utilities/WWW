@@ -1,15 +1,15 @@
 "use client";
 
-import { timeAgo } from "@/common/time-utils";
 import { cn } from "@/common/utils";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import { useSelectedCape } from "../provider/selected-cape-provider";
 import SimpleTooltip from "../simple-tooltip";
+import TimeAgo from "../time-ago";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export interface PlayerCapesProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export const CAPE_ASPECT_RATIO = 480 / 768;
@@ -38,14 +38,10 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                       </p>
                       <div className="flex flex-col gap-0.5">
                         <div className="flex items-center justify-between gap-4 text-xs">
-                          <span className="text-muted-foreground">Last used</span>
+                          <span className="text-muted-foreground">First Seen</span>
                           <span className="font-medium">
-                            {player.cape?.textureId === cape.textureId ? "Current" : timeAgo(cape.lastUsed)}
+                            <TimeAgo date={new Date(cape.firstSeen)} />
                           </span>
-                        </div>
-                        <div className="flex items-center justify-between gap-4 text-xs">
-                          <span className="text-muted-foreground">First seen</span>
-                          <span className="font-medium">{timeAgo(cape.firstSeen)}</span>
                         </div>
                       </div>
                     </div>

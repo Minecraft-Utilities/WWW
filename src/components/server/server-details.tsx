@@ -1,8 +1,8 @@
-import { timeAgo } from "@/common/time-utils";
 import { BedrockServer } from "mcutils-js-api/dist/types/server/impl/bedrock-server";
 import { JavaServer } from "mcutils-js-api/dist/types/server/impl/java-server";
 import { Server, ServerPlatform } from "mcutils-js-api/dist/types/server/server";
 import DetailRow from "../detail-row";
+import TimeAgo from "../time-ago";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
 export interface ServerDetailsProps {
@@ -20,7 +20,10 @@ export function ServerDetails({ server, edition }: ServerDetailsProps) {
         <CardHeader>Details</CardHeader>
         <CardContent>
           <div className="flex flex-col">
-            <DetailRow label="Cached" value={server.cached ? timeAgo(new Date(server.cachedTime)) : "No"} />
+            <DetailRow
+              label="Cached"
+              value={server.cached ? <TimeAgo date={new Date(server.cachedTime)} /> : "No"}
+            />
             <DetailRow label="Hostname" value={server.hostname} />
             <DetailRow label="IP address" value={server.ip} />
             <DetailRow label="Port" value={String(server.port)} />

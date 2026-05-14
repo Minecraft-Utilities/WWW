@@ -4,12 +4,12 @@ import { skin3DAnimations, useSkin3DSettings } from "@/components/provider/skin-
 import SimpleTooltip from "@/components/simple-tooltip";
 import { Button } from "@/components/ui/button";
 import { LayersIcon } from "lucide-react";
-import { Player } from "mcutils-js-api/dist/types/player/player";
+import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
 export interface Skin3DButtonsProps {
-  player: Player;
+  player: FullPlayer;
 }
 
 export default function Skin3DButtons({ player }: Skin3DButtonsProps) {

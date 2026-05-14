@@ -1,10 +1,10 @@
 import { cn } from "@/common/utils";
-import type { PlayerSearchEntry } from "mcutils-js-api/dist/types/player/player-search-entry";
+import type { BasicPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
 
 interface PlayerLookupEntryProps {
-  entry: PlayerSearchEntry;
-  onSelect: (entry: PlayerSearchEntry) => void;
+  entry: BasicPlayer;
+  onSelect: (entry: BasicPlayer) => void;
 }
 
 export default function PlayerLookupEntry({ entry, onSelect }: PlayerLookupEntryProps) {

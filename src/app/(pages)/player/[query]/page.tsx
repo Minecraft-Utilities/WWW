@@ -7,12 +7,16 @@ import PlayerSkins from "@/components/player/skin/player-skins";
 import { SelectedCapeProvider } from "@/components/provider/selected-cape-provider";
 import { SelectedSkinProvider } from "@/components/provider/selected-skin-provider";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
+import type { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import { Metadata } from "next";
 import { cache } from "react";
 
 export const dynamic = "force-dynamic";
 
-const getPlayer = cache((query: string) => mcUtilsApi.fetchPlayer(query));
+const getPlayer = cache(async (query: string) => {
+  const result = await mcUtilsApi.fetchPlayer(query, "FULL");
+  return { player: result.player as FullPlayer | undefined, error: result.error };
+});
 
 export async function generateMetadata(props: PageProps<"/player/[query]">): Promise<Metadata> {
   const { query } = await props.params;
