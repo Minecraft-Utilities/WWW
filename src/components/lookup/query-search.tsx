@@ -187,6 +187,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
         addEntry({ query: trimmed, path });
         router.push(path);
         form.reset();
+        setServerPopoverOpen(false);
       } catch (err) {
         throw err;
       } finally {
