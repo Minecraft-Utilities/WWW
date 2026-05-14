@@ -40,12 +40,14 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
         </Card>
       ) : (
         <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
-          <Pagination
-            page={page}
-            totalItems={capes.totalItems ?? 0}
-            itemsPerPage={capes.itemsPerPage ?? 0}
-            basePath="/capes"
-          />
+          {capes.totalPages > 1 && (
+            <Pagination
+              page={page}
+              totalItems={capes.totalItems ?? 0}
+              itemsPerPage={capes.itemsPerPage ?? 0}
+              basePath="/capes"
+            />
+          )}
 
           <div className="flex flex-wrap justify-center gap-2">
             {capes.items.map(cape => (
@@ -81,12 +83,14 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
             ))}
           </div>
 
-          <Pagination
-            page={page}
-            totalItems={capes.totalItems ?? 0}
-            itemsPerPage={capes.itemsPerPage ?? 0}
-            basePath="/capes"
-          />
+          {capes.totalPages > 1 && (
+            <Pagination
+              page={page}
+              totalItems={capes.totalItems ?? 0}
+              itemsPerPage={capes.itemsPerPage ?? 0}
+              basePath="/capes"
+            />
+          )}
         </div>
       )}
     </div>
