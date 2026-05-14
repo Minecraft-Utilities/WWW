@@ -23,6 +23,7 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
       <CardContent className="flex h-full items-center justify-center gap-2">
         {skins.map(skin => {
           const isSelected = selectedSkin?.textureId === skin.textureId;
+          const isCurrent = player.skin.textureId === skin.textureId;
 
           return (
             <SimpleTooltip
@@ -38,6 +39,14 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
                         <TimeAgo date={new Date(skin.firstSeen)} />
                       </span>
                     </div>
+                    {!isCurrent && (
+                      <div className="flex items-center justify-between gap-4 text-xs">
+                        <span className="text-muted-foreground">Last Used</span>
+                        <span className="font-medium">
+                          <TimeAgo date={new Date(skin.lastUsed)} />
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               }

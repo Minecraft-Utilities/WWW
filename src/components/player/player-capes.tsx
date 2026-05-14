@@ -27,6 +27,7 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
           <>
             {capes.map(cape => {
               const isSelected = selectedCape?.textureId === cape.textureId;
+              const isCurrent = player.cape?.textureId === cape.textureId;
 
               return (
                 <SimpleTooltip
@@ -43,6 +44,14 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                             <TimeAgo date={new Date(cape.firstSeen)} />
                           </span>
                         </div>
+                        {!isCurrent && (
+                          <div className="flex items-center justify-between gap-4 text-xs">
+                            <span className="text-muted-foreground">Last Used</span>
+                            <span className="font-medium">
+                              <TimeAgo date={new Date(cape.lastUsed)} />
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   }
