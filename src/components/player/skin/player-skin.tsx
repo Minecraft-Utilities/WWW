@@ -53,7 +53,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
             <p className="font-bold">3D</p>
           </SkinSelectionButton>
 
-          {Object.keys(player.skin.parts)
+          {Object.keys(selectedSkin.parts)
             .sort(key => (key.includes("ISO") ? -1 : 1))
             .map(key => {
               return (
@@ -66,7 +66,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                   }}
                 >
                   <Image
-                    src={player.skin.parts[key as SkinPart]}
+                    src={selectedSkin.parts[key as SkinPart]}
                     alt={key}
                     width={56}
                     height={56}
