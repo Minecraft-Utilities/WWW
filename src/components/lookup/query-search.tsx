@@ -361,7 +361,7 @@ export default function QuerySearch({ landingPage, className, setQueryError }: Q
               </div>
               <ul className="flex flex-col gap-0.5">
                 {playerEntry.map(entry => (
-                  <li key={entry.id}>
+                  <li key={entry.uniqueId}>
                     <PlayerLookupEntry entry={entry} onSelect={handlePlayerEntryClick} />
                   </li>
                 ))}
