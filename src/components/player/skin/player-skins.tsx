@@ -15,7 +15,8 @@ export interface PlayerSkinsProps {
 export default function PlayerSkins({ player }: PlayerSkinsProps) {
   const { selectedSkin, setSelectedSkin } = useSelectedSkin();
   const skins =
-    player.skinHistory?.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
+    player.skinHistory?.sort((a, b) => new Date(b.firstSeen).getTime() - new Date(a.firstSeen).getTime()) ??
+    [];
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
@@ -39,14 +40,6 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
                         <TimeAgo date={new Date(skin.firstSeen)} />
                       </span>
                     </div>
-                    {!isCurrent && (
-                      <div className="flex items-center justify-between gap-4 text-xs">
-                        <span className="text-muted-foreground">Last Used</span>
-                        <span className="font-medium">
-                          <TimeAgo date={new Date(skin.lastUsed)} />
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </div>
               }

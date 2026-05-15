@@ -17,7 +17,8 @@ export const CAPE_ASPECT_RATIO = 480 / 768;
 export default function PlayerCapes({ player }: PlayerCapesProps) {
   const { selectedCape, setSelectedCape } = useSelectedCape();
   const capes =
-    player.capeHistory?.sort((a, b) => new Date(b.lastUsed).getTime() - new Date(a.lastUsed).getTime()) ?? [];
+    player.capeHistory?.sort((a, b) => new Date(b.firstSeen).getTime() - new Date(a.firstSeen).getTime()) ??
+    [];
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
@@ -44,14 +45,6 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                             <TimeAgo date={new Date(cape.firstSeen)} />
                           </span>
                         </div>
-                        {!isCurrent && (
-                          <div className="flex items-center justify-between gap-4 text-xs">
-                            <span className="text-muted-foreground">Last Used</span>
-                            <span className="font-medium">
-                              <TimeAgo date={new Date(cape.lastUsed)} />
-                            </span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   }
