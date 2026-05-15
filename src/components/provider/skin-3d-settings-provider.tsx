@@ -2,22 +2,22 @@
 
 import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import {
-    createContext,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-    type ReactNode,
-    type RefObject,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
 } from "react";
 import {
-    FlyingAnimation,
-    IdleAnimation,
-    RunningAnimation,
-    WalkingAnimation,
-    WaveAnimation,
-    type PlayerAnimation,
-    type Render,
+  FlyingAnimation,
+  IdleAnimation,
+  RunningAnimation,
+  WalkingAnimation,
+  WaveAnimation,
+  type PlayerAnimation,
+  type Render,
 } from "skin3d";
 
 /** UI-facing animation descriptor for skin3d */

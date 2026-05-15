@@ -61,7 +61,11 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                     </div>
                   }
                 >
-                  <button onClick={() => setSelectedCape(cape)} onMouseEnter={() => handleCapeHoverEnter(cape)} onMouseLeave={handleCapeHoverLeave}>
+                  <button
+                    onClick={() => setSelectedCape(cape)}
+                    onMouseEnter={() => handleCapeHoverEnter(cape)}
+                    onMouseLeave={handleCapeHoverLeave}
+                  >
                     <Image
                       src={cape.parts.FRONT}
                       alt={`${player.username} cape`}

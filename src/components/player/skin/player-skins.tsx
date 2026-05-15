@@ -58,7 +58,11 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
               }
               key={skin.textureId}
             >
-              <button onClick={() => setSelectedSkin(skin)} onMouseEnter={() => handleSkinHoverEnter(skin)} onMouseLeave={handleSkinHoverLeave}>
+              <button
+                onClick={() => setSelectedSkin(skin)}
+                onMouseEnter={() => handleSkinHoverEnter(skin)}
+                onMouseLeave={handleSkinHoverLeave}
+              >
                 <Image
                   key={skin.textureId}
                   src={skin.parts.FACE}
