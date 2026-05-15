@@ -3,6 +3,7 @@ import PlayerDetailsSkeleton from "@/components/skeleton/player/player-details-s
 import PlayerHeaderSkeleton from "@/components/skeleton/player/player-header-skeleton";
 import PlayerSkinCardSkeleton from "@/components/skeleton/player/player-skin-card-skeleton";
 import PlayerSkinsCardSkeleton from "@/components/skeleton/player/player-skins-card-skeleton";
+import PlayerUsernameHistorySkeleton from "@/components/skeleton/player/player-username-history-skeleton";
 
 export default function PlayerLoading() {
   return (
@@ -18,6 +19,7 @@ export default function PlayerLoading() {
           </section>
 
           <PlayerDetailsSkeleton />
+          <PlayerUsernameHistorySkeleton />
         </div>
       </div>
     </div>

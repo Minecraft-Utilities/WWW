@@ -2,6 +2,7 @@ import { mcUtilsApi } from "@/common/mc-utils";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
+import PlayerUsernameHistory from "@/components/player/player-username-history";
 import PlayerSkin from "@/components/player/skin/player-skin";
 import PlayerSkins from "@/components/player/skin/player-skins";
 import { SelectedCapeProvider } from "@/components/provider/selected-cape-provider";
@@ -84,7 +85,10 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
             </section>
 
             {/* Player Details */}
-            <PlayerDetails player={player} />
+            <div className="flex min-w-0 flex-1 flex-col gap-4">
+              <PlayerDetails player={player} />
+              <PlayerUsernameHistory player={player} />
+            </div>
           </div>
         </div>
       )}
