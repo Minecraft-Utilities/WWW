@@ -6,6 +6,8 @@ import { createContext, ReactNode, useContext, useState } from "react";
 type SelectedSkinContextProps = {
   selectedSkin: Skin;
   setSelectedSkin: (skin: Skin) => void;
+  hoveredSkin: Skin | null;
+  setHoveredSkin: (skin: Skin | null) => void;
 };
 const SelectedSkinContext = createContext<SelectedSkinContextProps | undefined>(undefined);
 
@@ -17,9 +19,10 @@ export const SelectedSkinProvider = ({
   initialSkin: Skin;
 }) => {
   const [selectedSkin, setSelectedSkin] = useState<Skin>(initialSkin);
+  const [hoveredSkin, setHoveredSkin] = useState<Skin | null>(null);
 
   return (
-    <SelectedSkinContext.Provider value={{ selectedSkin, setSelectedSkin }}>
+    <SelectedSkinContext.Provider value={{ selectedSkin, setSelectedSkin, hoveredSkin, setHoveredSkin }}>
       {children}
     </SelectedSkinContext.Provider>
   );

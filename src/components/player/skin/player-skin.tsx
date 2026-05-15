@@ -22,8 +22,11 @@ export interface PlayerSkinProps {
 }
 
 export default function PlayerSkin({ player }: PlayerSkinProps) {
-  const { selectedSkin } = useSelectedSkin();
-  const { selectedCape } = useSelectedCape();
+  const { selectedSkin, hoveredSkin } = useSelectedSkin();
+  const { selectedCape, hoveredCape } = useSelectedCape();
+
+  const displaySkin = hoveredSkin ?? selectedSkin;
+  const displayCape = hoveredCape ?? selectedCape;
 
   const [selectedMode, setSelectedMode] = useState<(typeof SKIN_MODES)[number]>("2D");
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_ISO_FRONT");
@@ -54,7 +57,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
         <div className="relative flex h-72 w-full items-center justify-center overflow-hidden">
           {displayMode === "2D" && (
             <Image
-              src={`${selectedSkin.parts[displayPart]}?capeId=${selectedCape?.id ?? ""}`}
+              src={`${displaySkin.parts[displayPart]}?capeId=${displayCape?.id ?? ""}`}
               alt={`${player.username} skin - ${displayPart}`}
               width={256}
               height={256}
@@ -74,7 +77,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
             <p className="font-bold">3D</p>
           </SkinSelectionButton>
 
-          {Object.keys(selectedSkin.parts)
+          {Object.keys(displaySkin.parts)
             .sort(key => (key.includes("ISO") ? -1 : 1))
             .map(key => {
               return (
@@ -89,7 +92,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                   onMouseLeave={handlePartHoverLeave}
                 >
                   <Image
-                    src={`${selectedSkin.parts[key as SkinPart]}?capeId=${selectedCape?.id ?? ""}`}
+                    src={`${displaySkin.parts[key as SkinPart]}?capeId=${displayCape?.id ?? ""}`}
                     alt={key}
                     width={56}
                     height={56}
@@ -104,7 +107,7 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
         <div className="absolute top-2 right-2 flex gap-2">
           <SimpleTooltip display="Download Skin Texture">
             <DownloadFileButton
-              href={selectedSkin.textureUrl}
+              href={displaySkin.textureUrl}
               filename={`${player.username}-skin-texture.png`}
             >
               <DownloadIcon className="size-4" />

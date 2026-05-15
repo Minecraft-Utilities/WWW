@@ -3,6 +3,7 @@
 import { cn } from "@/common/utils";
 import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
+import { useRef } from "react";
 import { useSelectedCape } from "../provider/selected-cape-provider";
 import SimpleTooltip from "../simple-tooltip";
 import TimeAgo from "../time-ago";
@@ -15,10 +16,22 @@ export interface PlayerCapesProps {
 export const CAPE_ASPECT_RATIO = 480 / 768;
 
 export default function PlayerCapes({ player }: PlayerCapesProps) {
-  const { selectedCape, setSelectedCape } = useSelectedCape();
+  const { selectedCape, setSelectedCape, setHoveredCape } = useSelectedCape();
+  const hoverClearTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const capes =
     player.capeHistory?.sort((a, b) => new Date(b.firstSeen).getTime() - new Date(a.firstSeen).getTime()) ??
     [];
+
+  function handleCapeHoverEnter(cape: (typeof capes)[number]) {
+    if (hoverClearTimeout.current) clearTimeout(hoverClearTimeout.current);
+    setHoveredCape(cape);
+  }
+
+  function handleCapeHoverLeave() {
+    hoverClearTimeout.current = setTimeout(() => {
+      setHoveredCape(null);
+    }, 80);
+  }
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
@@ -48,7 +61,7 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
                     </div>
                   }
                 >
-                  <button onClick={() => setSelectedCape(cape)}>
+                  <button onClick={() => setSelectedCape(cape)} onMouseEnter={() => handleCapeHoverEnter(cape)} onMouseLeave={handleCapeHoverLeave}>
                     <Image
                       src={cape.parts.FRONT}
                       alt={`${player.username} cape`}

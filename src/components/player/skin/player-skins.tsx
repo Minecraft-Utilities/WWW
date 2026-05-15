@@ -3,6 +3,7 @@
 import { cn } from "@/common/utils";
 import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import Image from "next/image";
+import { useRef } from "react";
 import { useSelectedSkin } from "../../provider/selected-skin-provider";
 import SimpleTooltip from "../../simple-tooltip";
 import TimeAgo from "../../time-ago";
@@ -13,10 +14,22 @@ export interface PlayerSkinsProps {
 }
 
 export default function PlayerSkins({ player }: PlayerSkinsProps) {
-  const { selectedSkin, setSelectedSkin } = useSelectedSkin();
+  const { selectedSkin, setSelectedSkin, setHoveredSkin } = useSelectedSkin();
+  const hoverClearTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const skins =
     player.skinHistory?.sort((a, b) => new Date(b.firstSeen).getTime() - new Date(a.firstSeen).getTime()) ??
     [];
+
+  function handleSkinHoverEnter(skin: (typeof skins)[number]) {
+    if (hoverClearTimeout.current) clearTimeout(hoverClearTimeout.current);
+    setHoveredSkin(skin);
+  }
+
+  function handleSkinHoverLeave() {
+    hoverClearTimeout.current = setTimeout(() => {
+      setHoveredSkin(null);
+    }, 80);
+  }
 
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
@@ -45,7 +58,7 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
               }
               key={skin.textureId}
             >
-              <button onClick={() => setSelectedSkin(skin)}>
+              <button onClick={() => setSelectedSkin(skin)} onMouseEnter={() => handleSkinHoverEnter(skin)} onMouseLeave={handleSkinHoverLeave}>
                 <Image
                   key={skin.textureId}
                   src={skin.parts.FACE}
