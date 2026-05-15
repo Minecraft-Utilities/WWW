@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/common/utils";
+import { useSelectedCape } from "@/components/provider/selected-cape-provider";
 import { useSelectedSkin } from "@/components/provider/selected-skin-provider";
 import { Skin3DSettingsProvider } from "@/components/provider/skin-3d-settings-provider";
 import SimpleTooltip from "@/components/simple-tooltip";
@@ -10,7 +11,7 @@ import { DownloadIcon } from "lucide-react";
 import { FullPlayer } from "mcutils-js-api/dist/types/player/player";
 import { SkinPart } from "mcutils-js-api/dist/types/player/skin/skin-part";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PlayerSkin3D from "./player-skin-3d";
 import Skin3DButtons from "./skin-3d-buttons";
 
@@ -22,25 +23,45 @@ export interface PlayerSkinProps {
 
 export default function PlayerSkin({ player }: PlayerSkinProps) {
   const { selectedSkin } = useSelectedSkin();
+  const { selectedCape } = useSelectedCape();
 
   const [selectedMode, setSelectedMode] = useState<(typeof SKIN_MODES)[number]>("2D");
   const [selectedPart, setSelectedPart] = useState<SkinPart>("FULLBODY_ISO_FRONT");
+  const [hoveredPart, setHoveredPart] = useState<SkinPart | null>(null);
+  const [hoveredMode, setHoveredMode] = useState<string | null>(null);
+  const hoverClearTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const displayMode = hoveredMode ?? selectedMode;
+  const displayPart = hoveredPart ?? selectedPart;
+
+  function handlePartHoverEnter(part: SkinPart) {
+    if (hoverClearTimeout.current) clearTimeout(hoverClearTimeout.current);
+    setHoveredPart(part);
+    setHoveredMode("2D");
+  }
+
+  function handlePartHoverLeave() {
+    hoverClearTimeout.current = setTimeout(() => {
+      setHoveredPart(null);
+      setHoveredMode(null);
+    }, 80);
+  }
 
   return (
     <Card className="overflow-hidden p-0">
       <CardHeader>Skin</CardHeader>
       <CardContent className="relative flex flex-col items-center gap-4">
         <div className="relative flex h-72 w-full items-center justify-center overflow-hidden">
-          {selectedMode === "2D" && (
+          {displayMode === "2D" && (
             <Image
-              src={selectedSkin.parts[selectedPart]}
-              alt={`${player.username} skin - ${selectedPart}`}
+              src={`${selectedSkin.parts[displayPart]}?capeId=${selectedCape?.id ?? ""}`}
+              alt={`${player.username} skin - ${displayPart}`}
               width={256}
               height={256}
               className="max-h-full max-w-full object-contain"
             />
           )}
-          {selectedMode === "3D" && (
+          {displayMode === "3D" && (
             <Skin3DSettingsProvider player={player}>
               <PlayerSkin3D player={player} />
               <Skin3DButtons player={player} />
@@ -64,9 +85,11 @@ export default function PlayerSkin({ player }: PlayerSkinProps) {
                     setSelectedPart(key as SkinPart);
                     setSelectedMode("2D");
                   }}
+                  onMouseEnter={() => handlePartHoverEnter(key as SkinPart)}
+                  onMouseLeave={handlePartHoverLeave}
                 >
                   <Image
-                    src={selectedSkin.parts[key as SkinPart]}
+                    src={`${selectedSkin.parts[key as SkinPart]}?capeId=${selectedCape?.id ?? ""}`}
                     alt={key}
                     width={56}
                     height={56}
@@ -97,12 +120,22 @@ interface SkinSelectionButtonProps {
   children: React.ReactNode;
   selected: boolean;
   onClick: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-function SkinSelectionButton({ children, selected, onClick }: SkinSelectionButtonProps) {
+function SkinSelectionButton({
+  children,
+  selected,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+}: SkinSelectionButtonProps) {
   return (
     <button
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className={cn(
         "bg-muted/30 flex overflow-hidden rounded-lg border-2 transition-colors",
         "focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none",

@@ -28,7 +28,6 @@ export default function PlayerCapes({ player }: PlayerCapesProps) {
           <>
             {capes.map(cape => {
               const isSelected = selectedCape?.textureId === cape.textureId;
-              const isCurrent = player.cape?.textureId === cape.textureId;
 
               return (
                 <SimpleTooltip

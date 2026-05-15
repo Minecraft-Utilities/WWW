@@ -17,7 +17,7 @@ export default function CapePreview({ cape }: CapePreviewProps) {
     <Card className="h-fit w-full">
       <CardContent className="group relative flex items-center justify-center p-4">
         <Image
-          src={cape.parts.FRONT}
+          src={cape.parts.ISO}
           alt={cape.name ?? cape.id}
           width={PREVIEW_WIDTH}
           height={PREVIEW_HEIGHT}

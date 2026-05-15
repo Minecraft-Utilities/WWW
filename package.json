@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
     "lucide-react": "^0.563.0",
-    "mcutils-js-api": "^2.0.55",
+    "mcutils-js-api": "^2.0.56",
     "next": "^16.2.6",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.4",

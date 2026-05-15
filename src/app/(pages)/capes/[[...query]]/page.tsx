@@ -60,7 +60,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
                   >
                     <SimpleTooltip display="Click to view the cape">
                       <Image
-                        src={cape.parts.FRONT}
+                        src={cape.parts.ISO}
                         className="object-fit mx-auto h-30"
                         alt={`Cape ${cape.id}`}
                         width={120 * CAPE_ASPECT_RATIO}
