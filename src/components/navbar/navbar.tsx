@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/common/utils";
-import { AtSignIcon, ShirtIcon, ScanFaceIcon } from "lucide-react";
+import { AtSignIcon, ScanFaceIcon, ShirtIcon } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
