@@ -42,7 +42,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
               <SimpleLink key={cape.id} href={`/cape/${cape.id}`} className="group block w-full">
                 <Card className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5">
                   <CardContent className="relative flex min-h-0 flex-1 flex-col items-center justify-center p-0">
-                    <div className="flex items-center justify-center px-4 pt-4 pb-10">
+                    <div className="flex items-center justify-center px-4 pt-4 pb-15">
                       <img
                         src={`https://mc.fascinated.cc/api/skins/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b/fullbody_iso_back.png?capeId=${cape.id}`}
                         className="object-fit mx-auto h-46"

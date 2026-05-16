@@ -20,11 +20,11 @@ export default async function NamesPage() {
   const { nameChanges, error } = await mcUtilsApi.getRecentNameChanges();
 
   return (
-    <div className="mt-16 flex w-full flex-col items-center gap-10">
-      <header className="flex flex-col items-center gap-3">
-        <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Recent Name Changes</h1>
-        <p className="text-muted-foreground text-center text-sm">
-          Recent Minecraft username changes tracked by MC Utils
+    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
+      <header className="w-full max-w-6xl">
+        <h1 className="text-foreground text-4xl font-bold tracking-tight">Recent Name Changes</h1>
+        <p className="text-muted-foreground mt-2 text-sm">
+          Recent Minecraft username changes across all players tracked by MC Utils.
         </p>
       </header>
 
@@ -38,16 +38,13 @@ export default async function NamesPage() {
       )}
 
       {nameChanges && nameChanges.length > 0 && (
-        <Card className="w-full max-w-2xl overflow-hidden p-0">
+        <Card className="w-full max-w-6xl overflow-hidden p-0">
           <CardHeader>Name Changes</CardHeader>
           <CardContent className="p-0">
             <div className="divide-border/60 divide-y">
               {nameChanges.map(change => (
-                <div key={change.playerId} className="flex items-center gap-2 px-3 py-1.5">
-                  <SimpleLink
-                    href={`/player/${change.newUsername}`}
-                    className="bg-muted/40 shrink-0 rounded-lg p-1"
-                  >
+                <div key={change.playerId} className="flex items-center gap-2 px-3 py-2">
+                  <SimpleLink href={`/player/${change.newUsername}`}>
                     <Image
                       src={`${env.NEXT_PUBLIC_API_URL}/skins/${change.newUsername}/face.png`}
                       alt={change.newUsername}
