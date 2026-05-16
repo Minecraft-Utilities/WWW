@@ -22,7 +22,10 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
         <span>Details</span>
         <SimpleTooltip display={showDebug ? "Hide hidden details" : "Show hidden details"}>
           <BugIcon
-            className={cn("size-4", showDebug ? "text-primary" : "text-muted-foreground")}
+            className={cn(
+              "hover:text-primary size-4 cursor-pointer transition-colors duration-200",
+              showDebug ? "text-primary" : "text-muted-foreground"
+            )}
             onClick={() => setShowDebug(!showDebug)}
           />
         </SimpleTooltip>
