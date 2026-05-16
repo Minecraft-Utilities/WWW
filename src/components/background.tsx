@@ -26,10 +26,10 @@ export default function Background({ url }: BackgroundProps) {
         width={1920}
         height={height}
         sizes="100vw"
-        fetchPriority="high"
         className={`h-full w-full object-cover blur-xs brightness-80 transition-opacity duration-500 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
+        fetchPriority="high"
         priority
         onLoad={() => setLoaded(true)}
       />
