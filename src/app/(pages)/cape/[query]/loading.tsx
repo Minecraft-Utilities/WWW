@@ -16,7 +16,7 @@ export default function CapeLoading() {
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <Card className="h-fit w-full">
             <CardContent className="flex items-center justify-center p-4">
-              <Skeleton className="h-60 w-33.25 rounded-lg" />
+              <div className="h-96" />
             </CardContent>
           </Card>
 

@@ -16,11 +16,8 @@ export default function SkinLoading() {
         {/* Left */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <Card className="h-fit w-full">
-            <CardHeader>
-              <p>Skin</p>
-            </CardHeader>
             <CardContent className="flex items-center justify-center">
-              <Skeleton className="h-80 w-[188px] rounded-lg" />
+              <div className="h-96" />
             </CardContent>
           </Card>
 

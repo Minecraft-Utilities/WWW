@@ -12,14 +12,16 @@ export default function PlayerLoading() {
         <PlayerHeaderSkeleton />
 
         <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
-          <section className="flex w-full flex-col gap-4 md:max-w-88">
+          <section className="flex w-full flex-col gap-4 md:max-w-88 md:[&_>div]:border-r-0">
             <PlayerSkinCardSkeleton />
             <PlayerSkinsCardSkeleton />
             <PlayerCapesCardSkeleton />
           </section>
 
-          <PlayerDetailsSkeleton />
-          <PlayerUsernameHistorySkeleton />
+          <div className="flex min-w-0 flex-1 flex-col gap-4 md:[&_>div]:border-l-0">
+            <PlayerDetailsSkeleton />
+            <PlayerUsernameHistorySkeleton />
+          </div>
         </div>
       </div>
     </div>

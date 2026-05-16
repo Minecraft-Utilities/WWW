@@ -74,7 +74,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
 
           <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
             {/* Skin and Cape */}
-            <section className="flex w-full flex-col gap-4 md:max-w-90">
+            <section className="flex w-full flex-col gap-4 md:max-w-90 md:[&_>div]:border-r-0">
               <SelectedCapeProvider initialCape={player.cape ?? null}>
                 <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
                   <PlayerSkin player={player} />
@@ -85,7 +85,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
             </section>
 
             {/* Player Details */}
-            <div className="flex min-w-0 flex-1 flex-col gap-4">
+            <div className="flex min-w-0 flex-1 flex-col gap-4 md:[&_>div]:border-l-0">
               <PlayerDetails player={player} />
               <PlayerUsernameHistory player={player} />
             </div>
