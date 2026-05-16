@@ -1,5 +1,8 @@
 import SkinCardSkeleton from "@/components/skeleton/skins/skin-card-skeleton";
 import PaginationSkeleton from "@/components/skeleton/ui/pagination-skeleton";
+import { Button } from "@/components/ui/button";
+
+const SORT_LABELS = ["Trending", "Top", "Latest"] as const;
 
 export default function SkinsLoading() {
   return (
@@ -13,6 +16,13 @@ export default function SkinsLoading() {
         <p className="text-muted-foreground text-center text-sm">The list of all seen skins for players</p>
       </header>
       <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          {SORT_LABELS.map(label => (
+            <Button key={label} size="sm" variant="secondary" disabled className="min-w-24">
+              {label}
+            </Button>
+          ))}
+        </div>
         <PaginationSkeleton />
         <div className="flex flex-wrap justify-center gap-2">
           {Array.from({ length: 25 }).map((_, i) => (
