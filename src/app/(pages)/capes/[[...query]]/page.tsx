@@ -1,12 +1,9 @@
 import { mcUtilsApi } from "@/common/mc-utils";
 import { formatNumberWithCommas } from "@/common/utils";
 import SimpleLink from "@/components/simple-link";
-import SimpleTooltip from "@/components/simple-tooltip";
-import Card, { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import Pagination from "@/components/ui/pagination";
+import Card, { CardContent } from "@/components/ui/card";
 import { UserIcon } from "lucide-react";
 import { Metadata } from "next";
-import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -14,8 +11,6 @@ export const metadata: Metadata = {
   title: "Capes",
   description: "A list of all known capes in Minecraft",
 };
-
-const CAPE_ASPECT_RATIO = 480 / 768;
 
 export default async function CapesPage({ params }: PageProps<"/capes/[[...query]]">) {
   const { query } = await params;
@@ -26,10 +21,12 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
   const isEmpty = !capes || capes.items.length === 0;
 
   return (
-    <div className="mt-16 flex w-full flex-col items-center justify-center gap-16">
-      <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-        <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Capes</h1>
-        <p className="text-muted-foreground text-center text-sm">A list of all known capes in Minecraft</p>
+    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
+      <header className="w-full max-w-6xl">
+        <h1 className="text-foreground text-4xl font-bold tracking-tight">Minecraft Capes</h1>
+        <p className="text-muted-foreground mt-2 text-sm">
+          A list of all official Minecraft capes and which players own and have used them
+        </p>
       </header>
 
       {isEmpty ? (
@@ -39,58 +36,36 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
           </CardContent>
         </Card>
       ) : (
-        <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
-          {capes.totalPages > 1 && (
-            <Pagination
-              page={page}
-              totalItems={capes.totalItems ?? 0}
-              itemsPerPage={capes.itemsPerPage ?? 0}
-              basePath="/capes"
-            />
-          )}
-
-          <div className="flex flex-wrap justify-center gap-2">
+        <div className="w-full max-w-6xl">
+          <div className="xs:grid-cols-2 grid gap-4 sm:grid-cols-3 xl:grid-cols-5">
             {capes.items.map(cape => (
-              <Card key={cape.id} className="w-44 shrink-0 md:w-50">
-                <CardHeader className="shrink-0">{cape.name ?? "Unknown Cape"}</CardHeader>
-                <CardContent className="flex min-h-0 flex-1 items-center justify-center p-4">
-                  <SimpleLink
-                    href={`/cape/${cape.id}`}
-                    className="block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                  >
-                    <SimpleTooltip display="Click to view the cape">
-                      <Image
-                        src={cape.parts.ISO}
-                        className="object-fit mx-auto h-30"
+              <SimpleLink key={cape.id} href={`/cape/${cape.id}`} className="group block w-full">
+                <Card className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5">
+                  <CardContent className="relative flex min-h-0 flex-1 flex-col items-center justify-center p-0">
+                    <div className="flex items-center justify-center px-4 pt-4 pb-10">
+                      <img
+                        src={`https://mc.fascinated.cc/api/skins/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b/fullbody_iso_back.png?capeId=${cape.id}`}
+                        className="object-fit mx-auto h-46"
                         alt={`Cape ${cape.id}`}
-                        width={120 * CAPE_ASPECT_RATIO}
-                        height={96}
                         sizes="(max-width: 640px) 50vw, 120px"
-                        priority
                       />
-                    </SimpleTooltip>
-                  </SimpleLink>
-                </CardContent>
-                <CardFooter className="flex items-center gap-2">
-                  <UserIcon className="size-4" />
-                  <SimpleTooltip display="The amount of accounts that have this cape">
-                    <span className="text-muted-foreground text-sm">
-                      {formatNumberWithCommas(cape.uniqueOwners)}
-                    </span>
-                  </SimpleTooltip>
-                </CardFooter>
-              </Card>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-0.5 bg-linear-to-t from-black/70 to-transparent px-3 pt-8 pb-3">
+                      <p className="w-full truncate text-center text-sm font-medium text-white">
+                        {cape.name ?? "Unknown Cape"}
+                      </p>
+                      <div className="flex items-center gap-1">
+                        <UserIcon className="size-3.5 text-white/60" />
+                        <span className="text-xs text-white/60">
+                          {formatNumberWithCommas(cape.uniqueOwners)}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </SimpleLink>
             ))}
           </div>
-
-          {capes.totalPages > 1 && (
-            <Pagination
-              page={page}
-              totalItems={capes.totalItems ?? 0}
-              itemsPerPage={capes.itemsPerPage ?? 0}
-              basePath="/capes"
-            />
-          )}
         </div>
       )}
     </div>

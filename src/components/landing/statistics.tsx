@@ -14,7 +14,7 @@ export default function Statistics() {
   const statistics = lastJsonMessage as { playersTracked: number; trackedSkins: number };
 
   return (
-    <div className="mt-8 flex w-full flex-row gap-4">
+    <div className="mt-8 flex w-full max-w-2xl flex-row gap-4">
       <Card className="w-full">
         <CardHeader>Stored Minecraft Profiles</CardHeader>
         <CardContent className="text-xl">

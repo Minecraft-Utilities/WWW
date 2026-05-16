@@ -1,35 +1,41 @@
 import SkinCardSkeleton from "@/components/skeleton/skins/skin-card-skeleton";
 import PaginationSkeleton from "@/components/skeleton/ui/pagination-skeleton";
 import { Button } from "@/components/ui/button";
-
-const SORT_LABELS = ["Trending", "Top", "Latest"] as const;
+import { SKIN_SORT_OPTIONS } from "./page";
 
 export default function SkinsLoading() {
   return (
     <div
-      className="mt-16 flex w-full flex-col items-center justify-center gap-16"
+      className="mt-10 flex w-full flex-col items-center justify-center gap-10"
       aria-live="polite"
       aria-busy="true"
     >
-      <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-        <h1 className="text-foreground text-center text-4xl font-bold tracking-tight">Skins</h1>
-        <p className="text-muted-foreground text-center text-sm">The list of all seen skins for players</p>
+      <header className="w-full max-w-6xl">
+        <h1 className="text-foreground text-4xl font-bold tracking-tight">Minecraft Skins</h1>
+        <p className="text-muted-foreground mt-2 text-sm">Discover thousands of Minecraft skins</p>
       </header>
-      <div className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {SORT_LABELS.map(label => (
-            <Button key={label} size="sm" variant="secondary" disabled className="min-w-24">
-              {label}
-            </Button>
-          ))}
+
+      <div className="w-full max-w-6xl">
+        <div className="mb-6 flex flex-col justify-end gap-4 sm:flex-row">
+          <div className="border-border bg-background/60 flex flex-wrap items-center justify-end gap-2 rounded-md border px-3 py-2 shadow-sm">
+            {Object.entries(SKIN_SORT_OPTIONS).map(([key, label]) => (
+              <Button key={key} variant="secondary" disabled>
+                {label.icon}
+                {label.label}
+              </Button>
+            ))}
+          </div>
         </div>
-        <PaginationSkeleton />
-        <div className="flex flex-wrap justify-center gap-2">
+
+        <div className="xs:grid-cols-2 grid gap-4 sm:grid-cols-3 xl:grid-cols-5">
           {Array.from({ length: 25 }).map((_, i) => (
             <SkinCardSkeleton key={i} />
           ))}
         </div>
-        <PaginationSkeleton />
+
+        <div className="mt-6 flex justify-center">
+          <PaginationSkeleton />
+        </div>
       </div>
     </div>
   );

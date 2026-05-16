@@ -1,9 +1,14 @@
 import { env } from "@/common/env";
-import LandingPlayerExamples from "@/components/landing/landing-player-examples";
+import { mcUtilsApi } from "@/common/mc-utils";
+import { formatNumberWithCommas } from "@/common/utils";
 import LandingQuerySearch from "@/components/landing/landing-query-search";
-import LandingServerExamples from "@/components/landing/landing-server-examples";
 import Statistics from "@/components/landing/statistics";
+import { Button } from "@/components/ui/button";
+import Card from "@/components/ui/card";
+import { ArrowRightIcon, UserIcon } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import Script from "next/script";
 
 export const dynamic = "force-dynamic";
@@ -36,7 +41,9 @@ const jsonLd = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { skins: trendingSkins } = await mcUtilsApi.fetchSkins(1, "trending");
+
   return (
     <>
       <Script
@@ -44,7 +51,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto mt-16 flex w-full max-w-3xl flex-col items-center gap-16">
+      <div className="mx-auto mt-16 flex w-full max-w-5xl flex-col items-center gap-16">
         <header className="flex flex-col items-center gap-4 text-center">
           <h1 className="text-foreground text-3xl font-semibold tracking-tight sm:text-4xl">
             Minecraft Player & Server Lookup
@@ -54,13 +61,46 @@ export default function HomePage() {
           </p>
         </header>
 
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col items-center gap-20">
           <LandingQuerySearch />
 
-          <div className="mt-20 flex w-full flex-col gap-4">
-            <LandingPlayerExamples />
-            <LandingServerExamples />
-          </div>
+          {trendingSkins && trendingSkins.items.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-foreground text-xl font-bold tracking-tight">Trending Skins</h2>
+                <Button variant="secondary" className="hover:bg-secondary">
+                  <Link href="/skins/trending" className="flex items-center gap-1">
+                    View All
+                    <ArrowRightIcon className="size-4" />
+                  </Link>
+                </Button>
+              </div>
+              <div className="grid grid-cols-6 gap-4">
+                {trendingSkins.items.slice(0, 12).map(skin => (
+                  <Card key={skin.id} className="transition-transform duration-200 hover:-translate-y-0.5">
+                    <Link
+                      href={`/skin/${skin.id}`}
+                      className="flex flex-col items-center justify-center gap-2 p-2"
+                    >
+                      <Image
+                        src={`${skin.parts.FULLBODY_ISO_FRONT}`}
+                        alt={`Trending skin ${skin.id}`}
+                        width={128}
+                        height={128}
+                        className="max-h-full max-w-full object-contain p-1"
+                      />
+                      <div className="flex items-center gap-1">
+                        <UserIcon className="text-muted-foreground size-4" />
+                        <p className="text-foreground text-center text-sm">
+                          {formatNumberWithCommas(skin.uniqueOwners)}
+                        </p>
+                      </div>
+                    </Link>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
 
           <Statistics />
         </div>

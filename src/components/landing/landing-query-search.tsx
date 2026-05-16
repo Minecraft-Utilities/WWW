@@ -9,7 +9,7 @@ export default function LandingQuerySearch() {
   const [queryError, setQueryError] = useState<ErrorResponse | undefined>(undefined);
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full max-w-xl flex-col">
       <Card className="w-full">
         <CardContent>
           <QuerySearch landingPage setQueryError={setQueryError} />
