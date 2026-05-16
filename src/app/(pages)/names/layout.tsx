@@ -1,9 +1,9 @@
 import Background from "@/components/background";
 
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
+export default function NamesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Background url="https://cdn.fascinated.cc/36AYDegM.png" />
+      <Background url="/media/backgrounds/names.webp" />
       {children}
     </>
   );

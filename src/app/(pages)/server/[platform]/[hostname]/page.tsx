@@ -61,7 +61,7 @@ export default async function ServerPage({ params }: PageProps<"/server/[platfor
   const { server, error, edition } = await getServer(platform, hostname);
   const serverBackground = server?.registryEntry
     ? server.registryEntry.backgroundImageUrl
-    : "https://cdn.fascinated.cc/wjLURHpJ.jpg";
+    : "/media/backgrounds/server.webp";
 
   return (
     <>

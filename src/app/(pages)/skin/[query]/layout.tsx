@@ -1,9 +1,9 @@
 import Background from "@/components/background";
 
-export default function CapesLayout({ children }: { children: React.ReactNode }) {
+export default function SkinLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Background url="https://cdn.fascinated.cc/MB41Oc3y.jpg" />
+      <Background url="/media/backgrounds/skin.webp" />
       {children}
     </>
   );
