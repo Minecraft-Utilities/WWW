@@ -58,7 +58,7 @@ function NavLink({ name, icon, href, className }: NavLinkProps) {
   return (
     <SimpleLink
       className={cn(
-        "group relative flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors duration-150",
+        "group relative flex h-9 items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors duration-150",
         isActive
           ? "bg-primary/10 text-primary border-primary/20 border"
           : "text-muted-foreground hover:text-primary hover:bg-primary/5",
