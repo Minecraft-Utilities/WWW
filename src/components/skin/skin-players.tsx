@@ -1,6 +1,7 @@
 import { formatNumberWithCommas } from "@/common/utils";
 import { Skin } from "mcutils-js-api/dist/types/player/skin/skin";
 import OwnerCount from "../owner-count";
+import PlayerPreview from "../player/player-preview";
 import SimpleLink from "../simple-link";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
@@ -17,9 +18,14 @@ export default function SkinPlayers({ skin }: SkinPlayersProps) {
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
         {skin.accountsSeenUsing?.map(account => (
           <div key={account} className="flex items-center">
-            <SimpleLink href={`/player/${account}`}>
-              <p>{account}</p>
-            </SimpleLink>
+            <PlayerPreview
+              nameOrUuid={account}
+              trigger={
+                <SimpleLink href={`/player/${account}`}>
+                  <p>{account}</p>
+                </SimpleLink>
+              }
+            />
             <p className="text-muted-foreground">,</p>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import { formatNumberWithCommas } from "@/common/utils";
 import { Cape } from "mcutils-js-api/dist/types/player/cape/cape";
 import OwnerCount from "../owner-count";
+import PlayerPreview from "../player/player-preview";
 import SimpleLink from "../simple-link";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
@@ -17,9 +18,14 @@ export default function CapePlayers({ cape }: CapePlayersProps) {
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
         {cape.accountsSeenOwning?.map(account => (
           <div key={account} className="flex items-center">
-            <SimpleLink href={`/player/${account}`}>
-              <p>{account}</p>
-            </SimpleLink>
+            <PlayerPreview
+              nameOrUuid={account}
+              trigger={
+                <SimpleLink href={`/player/${account}`}>
+                  <p>{account}</p>
+                </SimpleLink>
+              }
+            />
             <p className="text-muted-foreground">,</p>
           </div>
         ))}
