@@ -3,6 +3,7 @@ import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
 import PlayerUsernameHistory from "@/components/player/player-username-history";
+import PlayerViewsCounter from "@/components/player/player-view-counter";
 import PlayerSkin from "@/components/player/skin/player-skin";
 import PlayerSkins from "@/components/player/skin/player-skins";
 import { SelectedCapeProvider } from "@/components/provider/selected-cape-provider";
@@ -68,29 +69,32 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
       )}
 
       {player && (
-        <div className="flex w-full flex-col items-center gap-16">
-          {/* Player Header */}
-          <PlayerHeader player={player} />
+        <>
+          <PlayerViewsCounter />
+          <div className="flex w-full flex-col items-center gap-16">
+            {/* Player Header */}
+            <PlayerHeader player={player} />
 
-          <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
-            {/* Skin and Cape */}
-            <section className="flex w-full flex-col gap-4 md:max-w-90 md:[&_>div]:border-r-0">
-              <SelectedCapeProvider initialCape={player.cape ?? null}>
-                <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
-                  <PlayerSkin player={player} />
-                  <PlayerSkins player={player} />
-                </SelectedSkinProvider>
-                <PlayerCapes player={player} />
-              </SelectedCapeProvider>
-            </section>
+            <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
+              {/* Skin and Cape */}
+              <section className="flex w-full flex-col gap-4 md:max-w-90 md:[&_>div]:border-r-0">
+                <SelectedCapeProvider initialCape={player.cape ?? null}>
+                  <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
+                    <PlayerSkin player={player} />
+                    <PlayerSkins player={player} />
+                  </SelectedSkinProvider>
+                  <PlayerCapes player={player} />
+                </SelectedCapeProvider>
+              </section>
 
-            {/* Player Details */}
-            <div className="flex min-w-0 flex-1 flex-col gap-4 md:[&_>div]:border-l-0">
-              <PlayerDetails player={player} />
-              <PlayerUsernameHistory player={player} />
+              {/* Player Details */}
+              <div className="flex min-w-0 flex-1 flex-col gap-4 md:[&_>div]:border-l-0">
+                <PlayerDetails player={player} />
+                <PlayerUsernameHistory player={player} />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
