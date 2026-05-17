@@ -51,7 +51,7 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
   }
 
   return (
-    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
+    <div className="flex w-full flex-col items-center justify-center gap-10">
       <header className="w-full max-w-6xl text-left">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">
           <span className="block sm:inline">

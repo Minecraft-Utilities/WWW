@@ -58,7 +58,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
   const { player, error } = await getPlayer(query);
 
   return (
-    <div className="mt-16 flex w-full flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-10">
       {error && (
         <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
           <CardHeader variant="destructive">Error</CardHeader>
@@ -71,13 +71,11 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
       {player && (
         <>
           <PlayerViewsCounter playerQuery={player.uniqueId} />
-          <div className="flex w-full flex-col items-center gap-16">
-            {/* Player Header */}
+          <div className="flex w-full max-w-6xl flex-col gap-10">
             <PlayerHeader player={player} />
 
-            <div className="flex w-full max-w-4xl flex-col gap-4 md:flex-row">
-              {/* Skin and Cape */}
-              <section className="flex w-full flex-col gap-4 md:max-w-90 md:[&_>div]:border-r-0">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
+              <section className="flex w-full flex-col gap-4 lg:w-90 lg:shrink-0">
                 <SelectedCapeProvider initialCape={player.cape ?? null}>
                   <SelectedSkinProvider key={player.skin.textureId} initialSkin={player.skin}>
                     <PlayerSkin player={player} />
@@ -87,11 +85,10 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
                 </SelectedCapeProvider>
               </section>
 
-              {/* Player Details */}
-              <div className="flex min-w-0 flex-1 flex-col gap-4 md:[&_>div]:border-l-0">
+              <aside className="flex min-w-0 flex-1 flex-col gap-4">
                 <PlayerDetails player={player} />
                 <PlayerUsernameHistory player={player} />
-              </div>
+              </aside>
             </div>
           </div>
         </>

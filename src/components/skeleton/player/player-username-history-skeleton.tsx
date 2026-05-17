@@ -13,6 +13,7 @@ export default function PlayerUsernameHistorySkeleton() {
               <Skeleton className="h-3 w-3 rounded-full" />
               <Skeleton className="h-4 min-w-0 flex-1 rounded" />
               <Skeleton className="h-3 w-10 rounded" />
+              <Skeleton className="h-4 w-9 shrink-0 rounded" />
             </div>
           ))}
         </div>

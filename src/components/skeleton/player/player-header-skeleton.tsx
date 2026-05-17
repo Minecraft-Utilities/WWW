@@ -2,14 +2,13 @@ import Skeleton from "@/components/skeleton/ui/skeleton";
 
 export default function PlayerHeaderSkeleton() {
   return (
-    <header className="flex min-w-0 flex-1 flex-col items-center gap-4">
-      <div className="flex flex-col items-center gap-4 md:flex-row">
-        <Skeleton className="size-16" />
-        <Skeleton className="h-9 w-48 rounded-md md:h-10 md:w-64" />
-      </div>
-      <div className="border-border bg-muted/30 flex w-full min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-1.5">
-        <Skeleton className="h-5 max-w-xs min-w-0 flex-1 rounded" />
-        <Skeleton className="size-6 shrink-0 rounded-md" />
+    <header className="w-full text-left">
+      <div className="flex items-center gap-3 sm:gap-4">
+        <Skeleton className="size-14 shrink-0 rounded-md" />
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <Skeleton className="h-9 w-48 rounded-md sm:h-10 sm:w-64" />
+          <Skeleton className="h-4 w-56 rounded-md sm:w-72" />
+        </div>
       </div>
     </header>
   );

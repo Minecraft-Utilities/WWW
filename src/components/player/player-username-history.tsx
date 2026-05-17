@@ -1,4 +1,5 @@
 import { formatDate } from "@/common/time-utils";
+import CopyLink from "@/components/copy-link";
 import SimpleTooltip from "@/components/simple-tooltip";
 import TimeAgo from "@/components/time-ago";
 import Card, { CardContent, CardHeader } from "@/components/ui/card";
@@ -37,6 +38,7 @@ export default function PlayerUsernameHistory({ player }: PlayerUsernameHistoryP
                   </span>
                 </SimpleTooltip>
               )}
+              <CopyLink text={entry.newUsername} />
             </div>
           ))}
         </div>
