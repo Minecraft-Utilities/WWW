@@ -45,7 +45,7 @@ export default function NameChanges({
             <div key={change.playerId} className="flex items-center gap-2 px-3 py-2">
               <SimpleLink href={`/player/${change.newUsername}`}>
                 <Image
-                  src={`${env.NEXT_PUBLIC_API_URL}/skins/${change.newUsername}/face.png`}
+                  src={`${env.NEXT_PUBLIC_API_URL}/skins/${change.playerId}/face.png`}
                   alt={change.newUsername}
                   width={22}
                   height={22}
