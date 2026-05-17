@@ -16,9 +16,12 @@ export default function SkinPlayers({ skin }: SkinPlayersProps) {
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
         {skin.accountsSeenUsing?.map(account => (
-          <SimpleLink key={account} href={`/player/${account}`}>
-            <p>{account}</p>
-          </SimpleLink>
+          <div key={account} className="flex items-center">
+            <SimpleLink href={`/player/${account}`}>
+              <p>{account}</p>
+            </SimpleLink>
+            <p className="text-muted-foreground">,</p>
+          </div>
         ))}
         {skin.accountsSeenUsing && skin.accountsSeenUsing.length < skin.uniqueOwners && (
           <p className="text-muted-foreground">

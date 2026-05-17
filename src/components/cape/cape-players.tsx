@@ -16,9 +16,12 @@ export default function CapePlayers({ cape }: CapePlayersProps) {
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
         {cape.accountsSeenOwning?.map(account => (
-          <SimpleLink key={account} href={`/player/${account}`}>
-            <p>{account}</p>
-          </SimpleLink>
+          <div key={account} className="flex items-center">
+            <SimpleLink href={`/player/${account}`}>
+              <p>{account}</p>
+            </SimpleLink>
+            <p className="text-muted-foreground">,</p>
+          </div>
         ))}
         {cape.accountsSeenOwning && cape.accountsSeenOwning.length < cape.uniqueOwners && (
           <p className="text-muted-foreground">
