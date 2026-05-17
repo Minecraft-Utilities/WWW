@@ -70,7 +70,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
 
       {player && (
         <>
-          <PlayerViewsCounter />
+          <PlayerViewsCounter playerQuery={player.uniqueId} />
           <div className="flex w-full flex-col items-center gap-16">
             {/* Player Header */}
             <PlayerHeader player={player} />
