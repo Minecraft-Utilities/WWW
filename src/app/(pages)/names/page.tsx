@@ -15,7 +15,7 @@ export default async function NamesPage() {
 
   return (
     <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
-      <header className="w-full max-w-6xl">
+      <header className="w-full max-w-[980px]">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">Recent Name Changes</h1>
         <p className="text-muted-foreground mt-2 text-sm">
           Recent Minecraft username changes across all players tracked by MC Utils.

@@ -37,7 +37,7 @@ export default function NameChanges({
   }, [lastJsonMessage]);
 
   return (
-    <Card className="w-full max-w-6xl overflow-hidden p-0">
+    <Card className="w-full max-w-[980px] overflow-hidden p-0">
       <CardHeader>Name Changes</CardHeader>
       <CardContent className="p-0">
         <div className="divide-border/60 divide-y">

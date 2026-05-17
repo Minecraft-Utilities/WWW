@@ -37,7 +37,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
 
   return (
     <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
-      <header className="w-full max-w-6xl">
+      <header className="w-full max-w-[980px]">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">Minecraft Skins</h1>
         <p className="text-muted-foreground mt-2 text-sm">Discover thousands of Minecraft skins</p>
       </header>
@@ -49,7 +49,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
           </CardContent>
         </Card>
       ) : (
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-[980px]">
           <div className="mb-6 flex flex-row justify-center gap-4 sm:justify-end">
             <div className="border-border bg-background/60 flex flex-wrap items-center justify-end gap-2 rounded-md border px-3 py-2 shadow-sm">
               {Object.entries(SKIN_SORT_OPTIONS).map(([key, label]) => (

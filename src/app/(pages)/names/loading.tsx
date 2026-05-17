@@ -8,14 +8,14 @@ export default function NamesLoading() {
       aria-live="polite"
       aria-busy="true"
     >
-      <header className="w-full max-w-6xl">
+      <header className="w-full max-w-[980px]">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">Recent Name Changes</h1>
         <p className="text-muted-foreground mt-2 text-sm">
           Recent Minecraft username changes across all players tracked by MC Utils.
         </p>
       </header>
 
-      <Card className="w-full max-w-6xl overflow-hidden p-0">
+      <Card className="w-full max-w-[980px] overflow-hidden p-0">
         <CardHeader>Name Changes</CardHeader>
         <CardContent className="p-0">
           <div className="divide-border/60 divide-y">

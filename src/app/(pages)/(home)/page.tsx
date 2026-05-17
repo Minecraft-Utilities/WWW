@@ -51,7 +51,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto mt-16 flex w-full max-w-5xl flex-col items-center gap-16">
+      <div className="mx-auto mt-16 flex w-full max-w-[980px] flex-col items-center gap-16">
         <header className="flex flex-col items-center gap-4 text-center">
           <h1 className="text-foreground text-3xl font-semibold tracking-tight sm:text-4xl">
             Minecraft Player & Server Lookup

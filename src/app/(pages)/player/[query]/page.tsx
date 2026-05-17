@@ -1,4 +1,5 @@
 import { mcUtilsApi } from "@/common/mc-utils";
+import { isProduction } from "@/common/utils";
 import PlayerCapes from "@/components/player/player-capes";
 import PlayerDetails from "@/components/player/player-details";
 import PlayerHeader from "@/components/player/player-header";
@@ -58,7 +59,7 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
   const { player, error } = await getPlayer(query);
 
   return (
-    <div className="flex w-full flex-col items-center gap-10">
+    <div className="mt-10 flex w-full flex-col items-center gap-10">
       {error && (
         <Card className="border-destructive/50 bg-destructive/10 w-full max-w-xl overflow-hidden p-0">
           <CardHeader variant="destructive">Error</CardHeader>
@@ -70,8 +71,8 @@ export default async function PlayerPage({ params }: PageProps<"/player/[query]"
 
       {player && (
         <>
-          <PlayerViewsCounter playerQuery={player.uniqueId} />
-          <div className="flex w-full max-w-6xl flex-col gap-10">
+          {isProduction() && <PlayerViewsCounter playerQuery={player.uniqueId} />}
+          <div className="flex w-full max-w-[980px] flex-col gap-10">
             <PlayerHeader player={player} />
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start">

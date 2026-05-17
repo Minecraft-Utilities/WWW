@@ -21,7 +21,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
 
   return (
     <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
-      <header className="w-full max-w-6xl">
+      <header className="w-full max-w-[980px]">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">Minecraft Capes</h1>
         <p className="text-muted-foreground mt-2 text-sm">
           A list of all official Minecraft capes and which players own and have used them
@@ -35,7 +35,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
           </CardContent>
         </Card>
       ) : (
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-[980px]">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
             {capes.items.map(cape => (
               <SimpleLink key={cape.id} href={`/cape/${cape.id}`} className="group block w-full">

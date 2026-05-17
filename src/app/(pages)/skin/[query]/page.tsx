@@ -52,7 +52,7 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
 
   return (
     <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
-      <header className="w-full max-w-6xl text-left">
+      <header className="w-full max-w-[980px] text-left">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">
           <span className="block sm:inline">
             <SimpleLink href={`/player/${skin.firstSeenUsing}`}>{skin.firstSeenUsing}'s Skin</SimpleLink>
@@ -63,7 +63,7 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
         </p>
       </header>
 
-      <div className="flex w-full max-w-6xl flex-col gap-4 lg:flex-row">
+      <div className="flex w-full max-w-[980px] flex-col gap-4 lg:flex-row">
         {/* Left — preview + details */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <SkinPreview skin={skin} />
