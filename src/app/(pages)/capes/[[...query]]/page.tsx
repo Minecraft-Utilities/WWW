@@ -37,7 +37,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
         </Card>
       ) : (
         <div className="w-full max-w-6xl">
-          <div className="xs:grid-cols-2 grid gap-4 sm:grid-cols-3 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
             {capes.items.map(cape => (
               <SimpleLink key={cape.id} href={`/cape/${cape.id}`} className="group block w-full">
                 <Card className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5">

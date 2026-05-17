@@ -16,7 +16,7 @@ export default function SkinsLoading() {
       </header>
 
       <div className="w-full max-w-6xl">
-        <div className="mb-6 flex flex-col justify-end gap-4 sm:flex-row">
+        <div className="mb-6 flex flex-row justify-center gap-4 sm:justify-end">
           <div className="border-border bg-background/60 flex flex-wrap items-center justify-end gap-2 rounded-md border px-3 py-2 shadow-sm">
             {Object.entries(SKIN_SORT_OPTIONS).map(([key, label]) => (
               <Button key={key} variant="secondary" disabled>
@@ -27,7 +27,7 @@ export default function SkinsLoading() {
           </div>
         </div>
 
-        <div className="xs:grid-cols-2 grid gap-4 sm:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
           {Array.from({ length: 25 }).map((_, i) => (
             <SkinCardSkeleton key={i} />
           ))}

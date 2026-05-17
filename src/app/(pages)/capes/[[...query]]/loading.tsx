@@ -15,7 +15,7 @@ export default function CapesLoading() {
       </header>
 
       <div className="w-full max-w-6xl">
-        <div className="xs:grid-cols-2 grid gap-4 sm:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
           {Array.from({ length: 25 }).map((_, i) => (
             <CapeCardSkeleton key={i} />
           ))}
