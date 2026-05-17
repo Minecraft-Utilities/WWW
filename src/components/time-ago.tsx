@@ -8,9 +8,10 @@ interface TimeAgoProps {
 }
 
 export default function TimeAgo({ date }: TimeAgoProps) {
-  const [text, setText] = useState(() => timeAgo(date));
+  const [text, setText] = useState<string>("");
 
   useEffect(() => {
+    setText(timeAgo(date));
     const id = setInterval(() => setText(timeAgo(date)), 1000);
     return () => clearInterval(id);
   }, [date]);
