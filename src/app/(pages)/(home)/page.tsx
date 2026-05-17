@@ -1,11 +1,11 @@
 import { env } from "@/common/env";
 import { mcUtilsApi } from "@/common/mc-utils";
-import { formatNumberWithCommas } from "@/common/utils";
 import LandingQuerySearch from "@/components/landing/landing-query-search";
 import Statistics from "@/components/landing/statistics";
+import OwnerCount from "@/components/owner-count";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
-import { ArrowRightIcon, UserIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,7 +75,7 @@ export default async function HomePage() {
                   </Link>
                 </Button>
               </div>
-              <div className="grid grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
                 {trendingSkins.items.slice(0, 12).map(skin => (
                   <Card key={skin.id} className="transition-transform duration-200 hover:-translate-y-0.5">
                     <Link
@@ -89,12 +89,7 @@ export default async function HomePage() {
                         height={128}
                         className="max-h-full max-w-full object-contain p-1"
                       />
-                      <div className="flex items-center gap-1">
-                        <UserIcon className="text-muted-foreground size-4" />
-                        <p className="text-foreground text-center text-sm">
-                          {formatNumberWithCommas(skin.uniqueOwners)}
-                        </p>
-                      </div>
+                      <OwnerCount count={skin.uniqueOwners} />
                     </Link>
                   </Card>
                 ))}
