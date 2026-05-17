@@ -2,11 +2,9 @@ import Skeleton from "@/components/skeleton/ui/skeleton";
 
 export default function SkinHeaderSkeleton() {
   return (
-    <header className="flex min-w-0 flex-1 flex-col items-center gap-4 px-4">
-      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-5">
-        <Skeleton className="h-7 w-32 rounded-md sm:h-9 sm:w-40" />
-        <Skeleton className="h-7 w-40 rounded-md sm:h-9 sm:w-48" />
-      </div>
+    <header className="w-full max-w-6xl text-left">
+      <Skeleton className="h-9 w-72 rounded-md sm:h-10 sm:w-96" />
+      <Skeleton className="mt-2 h-5 w-64 rounded-md sm:w-72" />
     </header>
   );
 }

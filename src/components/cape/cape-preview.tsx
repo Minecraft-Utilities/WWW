@@ -9,7 +9,7 @@ interface CapePreviewProps {
 
 export default function CapePreview({ cape }: CapePreviewProps) {
   return (
-    <Card className="h-fit w-full">
+    <Card className="h-105 w-full">
       <CardContent className="group relative flex items-center justify-center p-4">
         <img
           src={`https://mc.fascinated.cc/api/skins/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b/fullbody_iso_back.png?capeId=${cape.id}`}

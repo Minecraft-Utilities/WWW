@@ -1,5 +1,6 @@
 import { formatNumberWithCommas } from "@/common/utils";
 import { Cape } from "mcutils-js-api/dist/types/player/cape/cape";
+import OwnerCount from "../owner-count";
 import SimpleLink from "../simple-link";
 import Card, { CardContent, CardHeader } from "../ui/card";
 
@@ -9,18 +10,20 @@ interface CapePlayersProps {
 
 export default function CapePlayers({ cape }: CapePlayersProps) {
   return (
-    <Card className="h-fit w-full text-sm">
+    <Card className="h-105 w-full text-sm">
       <CardHeader>
-        <p>Players ({formatNumberWithCommas(cape.uniqueOwners)})</p>
+        <OwnerCount count={cape.uniqueOwners} name="Owners" />
       </CardHeader>
-      <CardContent className="flex h-64 flex-wrap gap-2 overflow-y-auto">
+      <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
         {cape.accountsSeenOwning?.map(account => (
           <SimpleLink key={account} href={`/player/${account}`}>
             <p>{account}</p>
           </SimpleLink>
         ))}
         {cape.accountsSeenOwning && cape.accountsSeenOwning.length < cape.uniqueOwners && (
-          <p>+ {formatNumberWithCommas(cape.uniqueOwners - cape.accountsSeenOwning.length)} more...</p>
+          <p className="text-muted-foreground">
+            + {formatNumberWithCommas(cape.uniqueOwners - cape.accountsSeenOwning.length)} more...
+          </p>
         )}
       </CardContent>
     </Card>

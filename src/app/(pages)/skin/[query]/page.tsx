@@ -51,24 +51,28 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
   }
 
   return (
-    <div className="mt-16 flex w-full flex-col items-center justify-center gap-16">
-      <header className="flex min-w-0 flex-1 flex-col items-center gap-4 px-4">
-        <h1 className="text-foreground flex flex-col items-center gap-1 text-center text-2xl font-bold tracking-tight sm:flex-row sm:gap-5 sm:text-4xl">
-          <SimpleLink href={`/player/${skin.firstSeenUsing}`}>{skin.firstSeenUsing}</SimpleLink>
-          <span className="whitespace-nowrap">Minecraft Skin</span>
+    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
+      <header className="w-full max-w-6xl text-left">
+        <h1 className="text-foreground text-4xl font-bold tracking-tight">
+          <span className="block sm:inline">
+            <SimpleLink href={`/player/${skin.firstSeenUsing}`}>{skin.firstSeenUsing}'s Skin</SimpleLink>
+          </span>
         </h1>
+        <p className="text-muted-foreground mt-2 text-sm">
+          Preview the full skin, download it, and see which players have worn it.
+        </p>
       </header>
 
-      <div className="flex w-full max-w-5xl flex-col gap-4 md:flex-row">
-        {/* Left */}
+      <div className="flex w-full max-w-6xl flex-col gap-4 lg:flex-row">
+        {/* Left — preview + details */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <SkinPreview skin={skin} />
-          <SkinPlayers skin={skin} />
+          <SkinDetails skin={skin} />
         </div>
 
-        {/* Right */}
-        <div className="flex w-full min-w-0 flex-col gap-4 md:max-w-sm">
-          <SkinDetails skin={skin} />
+        {/* Right — players + commands */}
+        <div className="flex w-full min-w-0 flex-col gap-4 lg:max-w-xl">
+          <SkinPlayers skin={skin} />
           <SkinHeadCommands skin={skin} />
         </div>
       </div>
