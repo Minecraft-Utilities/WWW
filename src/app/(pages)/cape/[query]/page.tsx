@@ -32,7 +32,7 @@ export async function generateMetadata(props: PageProps<"/cape/[query]">): Promi
       description: `View the ${capeName} Minecraft cape on MC Utils — preview the design, see current wearers, and explore cape details.`,
       images: [
         {
-          url: cape.parts.FRONT,
+          url: `https://mc.fascinated.cc/api/skins/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b/fullbody_iso_back.png?capeId=${cape.id}`,
         },
       ],
     },
