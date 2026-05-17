@@ -33,7 +33,7 @@ export async function generateMetadata(props: PageProps<"/player/[query]">): Pro
       },
     };
   }
-  const skullUrl = player.skin.parts.HEAD_ISO;
+  const image = player.skin.parts.FULLBODY_ISO_FRONT;
   return {
     title: `${player.username} — Minecraft Profile, Skin & UUID`,
     description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
@@ -42,12 +42,12 @@ export async function generateMetadata(props: PageProps<"/player/[query]">): Pro
       description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
       images: [
         {
-          url: skullUrl,
+          url: image,
         },
       ],
     },
     icons: {
-      icon: skullUrl,
+      icon: image,
     },
   };
 }
