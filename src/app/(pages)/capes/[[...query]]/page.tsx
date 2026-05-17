@@ -1,8 +1,7 @@
 import { mcUtilsApi } from "@/common/mc-utils";
-import { formatNumberWithCommas } from "@/common/utils";
+import OwnerCount from "@/components/owner-count";
 import SimpleLink from "@/components/simple-link";
 import Card, { CardContent } from "@/components/ui/card";
-import { UserIcon } from "lucide-react";
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -54,12 +53,7 @@ export default async function CapesPage({ params }: PageProps<"/capes/[[...query
                       <p className="w-full truncate text-center text-sm font-medium text-white">
                         {cape.name ?? "Unknown Cape"}
                       </p>
-                      <div className="flex items-center gap-1">
-                        <UserIcon className="size-3.5 text-white/60" />
-                        <span className="text-xs text-white/60">
-                          {formatNumberWithCommas(cape.uniqueOwners)}
-                        </span>
-                      </div>
+                      <OwnerCount count={cape.uniqueOwners} />
                     </div>
                   </CardContent>
                 </Card>

@@ -1,10 +1,10 @@
 import { mcUtilsApi } from "@/common/mc-utils";
-import { formatNumberWithCommas } from "@/common/utils";
+import OwnerCount from "@/components/owner-count";
 import SimpleLink from "@/components/simple-link";
 import { Button } from "@/components/ui/button";
 import Card, { CardContent } from "@/components/ui/card";
 import Pagination from "@/components/ui/pagination";
-import { Award, Clock, TrendingUpIcon, UserIcon } from "lucide-react";
+import { Award, Clock, TrendingUpIcon } from "lucide-react";
 import { SkinLookupSort } from "mcutils-js-api/dist/types/player/skin/skin-lookup-sort";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -82,12 +82,7 @@ export default async function SkinsPage({ params }: PageProps<"/skins/[[...query
                       />
                     </div>
                     <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-0.5 bg-linear-to-t from-black/70 to-transparent px-3 pt-8 pb-3">
-                      <div className="flex items-center gap-1">
-                        <UserIcon className="size-3.5 text-white/60" />
-                        <span className="text-xs text-white/60">
-                          {formatNumberWithCommas(skin.uniqueOwners)}
-                        </span>
-                      </div>
+                      <OwnerCount count={skin.uniqueOwners} />
                     </div>
                   </CardContent>
                 </Card>
