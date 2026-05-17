@@ -18,7 +18,7 @@ export default function PlayerPreview({ nameOrUuid, trigger }: { nameOrUuid: str
     <HoverCard openDelay={200} closeDelay={200} onOpenChange={setOpen} open={open && !!data}>
       <HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
       {player && (
-        <HoverCardContent className="flex w-85 flex-col gap-4">
+        <HoverCardContent className="flex w-85 flex-col gap-4 rounded-xl">
           <img src={player.skin.parts.FACE} className="size-14" />
 
           <div className="gap-05 flex flex-col">
