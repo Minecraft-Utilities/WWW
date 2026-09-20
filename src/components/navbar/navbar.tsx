@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/common/utils";
-import { AtSignIcon, ScanFaceIcon, ShirtIcon } from "lucide-react";
+import { AtSignIcon, ScanFaceIcon, ServerIcon, ShirtIcon } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
@@ -19,6 +19,7 @@ const links = [
   <NavLink key="capes" name="Capes" icon={<ShirtIcon className="size-5" />} href="/capes" />,
   <NavLink key="skins" name="Skins" icon={<ScanFaceIcon className="size-5" />} href="/skins" />,
   <NavLink key="names" name="Names" icon={<AtSignIcon className="size-5" />} href="/names" />,
+  <NavLink key="servers" name="Servers" icon={<ServerIcon className="size-5" />} href="/servers" />,
 ];
 
 export default function Navbar() {
