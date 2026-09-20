@@ -33,8 +33,7 @@ export default function TrackerStatsLoading() {
       <header className="w-full max-w-[980px]">
         <h1 className="text-foreground text-4xl font-bold tracking-tight">Server Tracker Stats</h1>
         <p className="text-muted-foreground mt-2 text-sm">
-          Live statistics of the internet server tracker: the public Java servers MC Utils continuously
-          scans, and the platforms, versions, and locations it has discovered.
+          Live statistics of the Minecraft servers we track: their software, versions, and locations.
         </p>
       </header>
 

@@ -105,8 +105,7 @@ export default function TrackerStatsDashboard({ initialStats }: { initialStats: 
       </div>
 
       <p className="text-muted-foreground mt-4 text-center text-xs">
-        Last updated {updatedText}. Statistics are refreshed from the tracker every minute, and
-        locations and server software are resolved as servers are scanned.
+        Last updated {updatedText} · refreshed from the tracker every minute.
       </p>
     </div>
   );
