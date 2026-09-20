@@ -37,7 +37,7 @@ export default function ServerDnsRecords({ records }: ServerDnsRecordsProps) {
                       return (
                         <tr key={rowKey} className="border-border/50 border-b last:border-0">
                           <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
-                            {isSrvRecord(record) ? record.name : (record.name ?? "—")}
+                            {isSrvRecord(record) ? record.name : (record.name ?? "Unknown")}
                           </td>
                           <td className="text-foreground px-3 py-2 font-mono whitespace-nowrap">
                             {record.type}
@@ -45,7 +45,7 @@ export default function ServerDnsRecords({ records }: ServerDnsRecordsProps) {
                           <td className="text-muted-foreground px-3 py-2 font-mono whitespace-nowrap">
                             {isSrvRecord(record)
                               ? `${record.priority} ${record.weight} ${record.port} ${record.target}`
-                              : (record.address ?? "—")}
+                              : (record.address ?? "Unknown")}
                           </td>
                         </tr>
                       );

@@ -43,13 +43,13 @@ export async function generateMetadata(props: PageProps<"/server/[platform]/[hos
   const editionLabel = capitalize(edition!);
 
   return {
-    title: `${serverName} — ${editionLabel} Minecraft Server`,
+    title: `${serverName}: ${editionLabel} Minecraft Server`,
     description: `${serverName} has ${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online. View server status, MOTD, and details on MC Utils.`,
     icons: {
       ...(favicon ? { icon: favicon } : {}),
     },
     openGraph: {
-      title: `${serverName} — ${editionLabel} Minecraft Server`,
+      title: `${serverName}: ${editionLabel} Minecraft Server`,
       description: `${serverName} has ${formatNumberWithCommas(players.online)}/${formatNumberWithCommas(players.max)} players online. View server status, MOTD, and details on MC Utils.`,
       ...(favicon ? { images: [{ url: favicon }] } : {}),
     },

@@ -25,11 +25,11 @@ export async function generateMetadata(props: PageProps<"/cape/[query]">): Promi
 
   const capeName = cape.name ?? "Minecraft Cape";
   return {
-    title: `${capeName} — Minecraft Cape`,
-    description: `View the ${capeName} Minecraft cape on MC Utils — preview the design, see current wearers, and explore cape details.`,
+    title: `${capeName}: Minecraft Cape`,
+    description: `View the ${capeName} Minecraft cape on MC Utils: preview the design, see current wearers, and explore cape details.`,
     openGraph: {
-      title: `${capeName} — Minecraft Cape`,
-      description: `View the ${capeName} Minecraft cape on MC Utils — preview the design, see current wearers, and explore cape details.`,
+      title: `${capeName}: Minecraft Cape`,
+      description: `View the ${capeName} Minecraft cape on MC Utils: preview the design, see current wearers, and explore cape details.`,
       images: [
         {
           url: `https://mc.fascinated.cc/api/skins/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b/fullbody_iso_back.png?capeId=${cape.id}`,
@@ -59,13 +59,13 @@ export default async function CapePage({ params }: PageProps<"/cape/[query]">) {
       </header>
 
       <div className="flex w-full max-w-[980px] flex-col gap-4 lg:flex-row">
-        {/* Left — cape + players */}
+        {/* Left: cape + players */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <CapePreview cape={cape} />
           <CapeDetails cape={cape} />
         </div>
 
-        {/* Right — details */}
+        {/* Right: details */}
         <div className="flex w-full min-w-0 flex-col gap-4 lg:max-w-xl">
           <CapePlayers cape={cape} />
         </div>

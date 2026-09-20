@@ -27,10 +27,10 @@ export async function generateMetadata(props: PageProps<"/skin/[query]">): Promi
 
   return {
     title: `${skin.firstSeenUsing}'s Minecraft Skin`,
-    description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils — preview the full body, download, and see which players have used it.`,
+    description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils: preview the full body, download, and see which players have used it.`,
     openGraph: {
       title: `${skin.firstSeenUsing}'s Minecraft Skin`,
-      description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils — preview the full body, download, and see which players have used it.`,
+      description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils: preview the full body, download, and see which players have used it.`,
       images: [
         {
           url: skin.parts.HEAD_ISO,
@@ -64,13 +64,13 @@ export default async function SkinsPage({ params }: PageProps<"/skin/[query]">) 
       </header>
 
       <div className="flex w-full max-w-[980px] flex-col gap-4 lg:flex-row">
-        {/* Left — preview + details */}
+        {/* Left: preview + details */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <SkinPreview skin={skin} />
           <SkinDetails skin={skin} />
         </div>
 
-        {/* Right — players + commands */}
+        {/* Right: players + commands */}
         <div className="flex w-full min-w-0 flex-col gap-4 lg:max-w-xl">
           <SkinPlayers skin={skin} />
           <SkinHeadCommands skin={skin} />

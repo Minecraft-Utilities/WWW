@@ -12,7 +12,7 @@ export default function CapeLoading() {
       <CapeHeaderSkeleton />
 
       <div className="flex w-full max-w-[980px] flex-col gap-4 lg:flex-row">
-        {/* Left — preview + details */}
+        {/* Left: preview + details */}
         <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
           <Card className="h-fit w-full">
             <CardContent className="flex items-center justify-center p-4">
@@ -30,7 +30,7 @@ export default function CapeLoading() {
           </Card>
         </div>
 
-        {/* Right — players */}
+        {/* Right: players */}
         <div className="flex w-full min-w-0 flex-col gap-4 lg:max-w-xl">
           <Card className="h-fit w-full text-sm">
             <CardHeader>

@@ -14,14 +14,14 @@ import Script from "next/script";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "MC Utils — Minecraft Player & Server Lookup",
+  title: "MC Utils: Minecraft Player & Server Lookup",
   description:
-    "Look up any Minecraft player by username or UUID — view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
+    "Look up any Minecraft player by username or UUID: view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
   openGraph: {
     url: env.NEXT_PUBLIC_BASE_URL,
-    title: "MC Utils — Minecraft Player & Server Lookup",
+    title: "MC Utils: Minecraft Player & Server Lookup",
     description:
-      "Look up any Minecraft player by username or UUID — view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
+      "Look up any Minecraft player by username or UUID: view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
   },
 };
 
@@ -33,7 +33,7 @@ const jsonLd = {
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "All",
   description:
-    "Look up any Minecraft player by username or UUID — view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
+    "Look up any Minecraft player by username or UUID: view their skin, cape, and profile history. Check Java and Bedrock server status, player counts, MOTD, and more.",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -104,7 +104,7 @@ export default async function HomePage() {
           <p>
             MC Utils is a free Minecraft lookup tool. Search any player to view their current skin, cape,
             UUID, and name history. Paste a Java or Bedrock server address to instantly check whether
-            it&apos;s online, see its MOTD, and monitor live player counts — no login required.
+            it&apos;s online, see its MOTD, and monitor live player counts: no login required.
           </p>
         </section>
       </div>

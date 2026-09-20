@@ -18,11 +18,11 @@ const siteFont = localFont({
 export const viewport: Viewport = { themeColor: "#9770FF" };
 export const metadata: Metadata = {
   title: {
-    default: "MC Utils — Minecraft Player & Server Lookup",
+    default: "MC Utils: Minecraft Player & Server Lookup",
     template: "%s | MC Utils",
   },
   description:
-    "Look up any Minecraft player by username or UUID — view skins, capes, and profile history. Check Java and Bedrock server status, player counts, and more.",
+    "Look up any Minecraft player by username or UUID: view skins, capes, and profile history. Check Java and Bedrock server status, player counts, and more.",
   keywords: [
     "Minecraft player lookup",
     "Minecraft skin viewer",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Bedrock server status",
   ],
   openGraph: {
-    title: "MC Utils — Minecraft Player & Server Lookup",
+    title: "MC Utils: Minecraft Player & Server Lookup",
     siteName: "MC Utils",
     images: [
       {

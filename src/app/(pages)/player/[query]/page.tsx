@@ -37,10 +37,10 @@ export async function generateMetadata(props: PageProps<"/player/[query]">): Pro
   }
   const image = player.skin.parts.FULLBODY_ISO_FRONT;
   return {
-    title: `${player.username} — Minecraft Profile, Skin & UUID`,
+    title: `${player.username}: Minecraft Profile, Skin & UUID`,
     description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
     openGraph: {
-      title: `${player.username} — Minecraft Profile, Skin & UUID`,
+      title: `${player.username}: Minecraft Profile, Skin & UUID`,
       description: `View ${player.username}'s Minecraft skin, cape, UUID, and profile history on MC Utils.`,
       images: [
         {
