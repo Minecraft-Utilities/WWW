@@ -55,6 +55,7 @@ export default function PieBreakdown({
         <ChartContainer config={config} className="absolute inset-0 aspect-auto">
           <PieChart>
             <ChartTooltip
+              wrapperStyle={{ zIndex: 10 }}
               content={props => (
                 <ChartTooltipContent
                   {...props}
