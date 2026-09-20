@@ -1,7 +1,7 @@
 "use client";
 
 import { formatNumberWithCommas } from "@/common/utils";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { Cell, Pie, PieChart } from "recharts";
 import { colorFor, formatPercent } from "./chart-utils";
 
@@ -14,8 +14,54 @@ interface PieBreakdownProps {
   centerLabel: string;
   /** Message shown when the breakdown is empty. */
   emptyMessage: string;
-  /** `protocol` renders the tooltip title as "Protocol <key> (Minecraft <label>)". */
-  tooltipMode?: "default" | "protocol";
+  /**
+   * The total the breakdown is a subset of. When provided, the donut center reads
+   * "<shown> of <grandTotal> <centerLabel>", a remainder row ("everything else") is
+   * appended, and counts/percentages are measured against the grand total.
+   */
+  grandTotal?: number;
+  /** Label of the remainder row (eg: "Other countries"). Defaults to "Other". */
+  remainderLabel?: string;
+}
+
+interface BreakdownTooltipProps {
+  active?: boolean;
+  payload?: ReadonlyArray<{
+    name?: unknown;
+    value?: unknown;
+    payload?: { fill?: string };
+  }>;
+  labels: Record<string, string>;
+  unit: string;
+  total: number;
+}
+
+function BreakdownTooltip({ active, payload, labels, unit, total }: BreakdownTooltipProps) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const [item] = payload;
+  const name = String(item.name ?? "");
+  const count = Number(item.value ?? 0);
+  const displayName = labels[name] ?? name;
+  const fill = item.payload?.fill ?? colorFor(name, 0);
+
+  return (
+    <div className="border-border/50 bg-background min-w-[15rem] rounded-lg border px-2.5 py-2 text-xs shadow-xl">
+      <div className="flex items-center gap-1.5 font-medium">
+        <span className="size-2.5 shrink-0 rounded-full" style={{ backgroundColor: fill }} />
+        <span className="whitespace-nowrap">{displayName}</span>
+      </div>
+      <div className="mt-1 flex items-baseline gap-1">
+        <span className="text-foreground text-sm font-semibold tabular-nums">
+          {formatNumberWithCommas(count)}
+        </span>
+        <span className="text-muted-foreground">{unit}</span>
+        <span className="text-muted-foreground ml-auto tabular-nums">{formatPercent(count, total)}</span>
+      </div>
+    </div>
+  );
 }
 
 export default function PieBreakdown({
@@ -23,7 +69,8 @@ export default function PieBreakdown({
   labels,
   centerLabel,
   emptyMessage,
-  tooltipMode = "default",
+  grandTotal,
+  remainderLabel = "Other",
 }: PieBreakdownProps) {
   const entries = Object.entries(data)
     .filter(([, count]) => count > 0)
@@ -36,6 +83,12 @@ export default function PieBreakdown({
       <p className="text-muted-foreground flex h-48 items-center justify-center text-sm">{emptyMessage}</p>
     );
   }
+
+  // Shares are measured against the grand total when the breakdown is a subset of one,
+  // otherwise against the listed entries.
+  const totalForPercent = grandTotal ?? total;
+  const remainder = Math.max(grandTotal !== undefined ? grandTotal - total : 0, 0);
+  const showRemainder = grandTotal !== undefined && remainder > 0;
 
   const chartData = entries.map(([name, count]) => ({ name, count }));
   const config: ChartConfig = {};
@@ -56,24 +109,13 @@ export default function PieBreakdown({
           <PieChart>
             <ChartTooltip
               wrapperStyle={{ zIndex: 10 }}
-              content={props => (
-                <ChartTooltipContent
-                  {...props}
-                  hideLabel={tooltipMode !== "protocol"}
-                  labelFormatter={
-                    tooltipMode === "protocol"
-                      ? (label, payload) => {
-                          const name = String(payload?.[0]?.name ?? label ?? "");
-                          const version = displayName(name);
-                          return version === name
-                            ? `Protocol ${name}`
-                            : `Protocol ${name} (Minecraft ${version})`;
-                        }
-                      : undefined
-                  }
-                  formatter={value =>
-                    `${formatNumberWithCommas(Number(value))} servers (${formatPercent(Number(value), total)})`
-                  }
+              content={({ active, payload }) => (
+                <BreakdownTooltip
+                  active={active}
+                  payload={payload}
+                  labels={labels}
+                  unit={centerLabel}
+                  total={totalForPercent}
                 />
               )}
             />
@@ -92,29 +134,36 @@ export default function PieBreakdown({
             </Pie>
           </PieChart>
         </ChartContainer>
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-foreground text-2xl font-semibold tabular-nums">
-            {formatNumberWithCommas(total)}
-          </p>
-          <p className="text-muted-foreground text-[10px]">{centerLabel}</p>
-        </div>
       </div>
 
-      <ul className="flex w-full min-w-0 flex-col gap-1.5">
-        {entries.map(([name, count], index) => (
-          <li key={name} className="flex items-center gap-2 text-sm">
-            <span
-              className="size-2.5 shrink-0 rounded-full"
-              style={{ backgroundColor: colorFor(name, index) }}
-            />
-            <span className="text-muted-foreground min-w-0 flex-1 truncate">{displayName(name)}</span>
-            <span className="tabular-nums">{formatNumberWithCommas(count)}</span>
-            <span className="text-muted-foreground w-12 shrink-0 text-right text-xs tabular-nums">
-              {formatPercent(count, total)}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="flex w-full min-w-0 flex-col gap-4">
+        <ul className="flex w-full min-w-0 flex-col gap-1.5">
+          {entries.map(([name, count], index) => (
+            <li key={name} className="flex items-center gap-2 text-sm">
+              <span
+                className="size-2.5 shrink-0 rounded-full"
+                style={{ backgroundColor: colorFor(name, index) }}
+              />
+              <span className="text-muted-foreground min-w-0 flex-1 truncate">{displayName(name)}</span>
+              <span className="tabular-nums">{formatNumberWithCommas(count)}</span>
+              <span className="text-muted-foreground w-12 shrink-0 text-right text-xs tabular-nums">
+                {formatPercent(count, totalForPercent)}
+              </span>
+            </li>
+          ))}
+
+          {showRemainder && (
+            <li className="flex items-center gap-2 text-sm">
+              <span className="bg-muted size-2.5 shrink-0 rounded-full" />
+              <span className="text-muted-foreground/70 min-w-0 flex-1 truncate">{remainderLabel}</span>
+              <span className="tabular-nums">{formatNumberWithCommas(remainder)}</span>
+              <span className="text-muted-foreground w-12 shrink-0 text-right text-xs tabular-nums">
+                {formatPercent(remainder, totalForPercent)}
+              </span>
+            </li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }

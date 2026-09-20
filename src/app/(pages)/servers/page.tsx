@@ -22,11 +22,6 @@ export default async function TrackerStatsPage() {
       </header>
 
       <TrackerStatsDashboard initialStats={stats} />
-
-      <p className="text-muted-foreground text-center text-xs">
-        Statistics are refreshed from the tracker every minute. Locations and server software are resolved as
-        servers are scanned.
-      </p>
     </div>
   );
 }
