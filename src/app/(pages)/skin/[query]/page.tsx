@@ -25,15 +25,19 @@ export async function generateMetadata(props: PageProps<"/skin/[query]">): Promi
     };
   }
 
+  const favicon = skin.parts.HEAD_ISO;
   return {
     title: `${skin.firstSeenUsing}'s Minecraft Skin`,
     description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils: preview the full body, download, and see which players have used it.`,
+    icons: {
+      icon: favicon,
+    },
     openGraph: {
       title: `${skin.firstSeenUsing}'s Minecraft Skin`,
       description: `View ${skin.firstSeenUsing}'s Minecraft skin on MC Utils: preview the full body, download, and see which players have used it.`,
       images: [
         {
-          url: skin.parts.HEAD_ISO,
+          url: favicon,
         },
       ],
     },
