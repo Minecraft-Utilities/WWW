@@ -16,7 +16,7 @@ export default function SkinPlayers({ skin }: SkinPlayersProps) {
         <OwnerCount count={skin.uniqueOwners} name="Owners" />
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
-        {skin.accountsSeenUsing?.map(account => (
+        {skin.accountsSeenUsing?.map((account, index, accounts) => (
           <div key={account} className="flex items-center">
             <PlayerPreview
               nameOrUuid={account}
@@ -26,7 +26,7 @@ export default function SkinPlayers({ skin }: SkinPlayersProps) {
                 </SimpleLink>
               }
             />
-            <p className="text-muted-foreground">,</p>
+            {index !== accounts.length - 1 && <p className="text-muted-foreground">,</p>}
           </div>
         ))}
         {skin.accountsSeenUsing && skin.accountsSeenUsing.length < skin.uniqueOwners && (

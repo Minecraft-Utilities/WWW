@@ -16,7 +16,7 @@ export default function CapePlayers({ cape }: CapePlayersProps) {
         <OwnerCount count={cape.uniqueOwners} name="Owners" />
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2 overflow-y-auto">
-        {cape.accountsSeenOwning?.map(account => (
+        {cape.accountsSeenOwning?.map((account, index, accounts) => (
           <div key={account} className="flex items-center">
             <PlayerPreview
               nameOrUuid={account}
@@ -26,7 +26,7 @@ export default function CapePlayers({ cape }: CapePlayersProps) {
                 </SimpleLink>
               }
             />
-            <p className="text-muted-foreground">,</p>
+            {index !== accounts.length - 1 && <p className="text-muted-foreground">,</p>}
           </div>
         ))}
         {cape.accountsSeenOwning && cape.accountsSeenOwning.length < cape.uniqueOwners && (
