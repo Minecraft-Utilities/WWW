@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   icons: {
     icon: `${env.NEXT_PUBLIC_BASE_URL}/media/logo/logo.png`,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary" },
 };
 
 export interface RootLayoutProps {
