@@ -34,7 +34,7 @@ export default function PlayerSkins({ player }: PlayerSkinsProps) {
   return (
     <Card className="h-fit min-w-48 overflow-hidden p-0">
       <CardHeader>Skins ({skins.length})</CardHeader>
-      <CardContent className="flex h-full items-center justify-center gap-2">
+      <CardContent className="flex h-full flex-wrap items-center justify-center gap-2">
         {skins.map(skin => {
           const isSelected = selectedSkin?.textureId === skin.textureId;
           const isCurrent = player.skin.textureId === skin.textureId;
